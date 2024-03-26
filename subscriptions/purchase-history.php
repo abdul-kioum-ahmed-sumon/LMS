@@ -101,13 +101,13 @@ include_once(DIR_URL . "include/sidebar.php");
                                     if ($purchaseHistory->num_rows > 0) {
                                         $i = 1;
                                         while ($row = $purchaseHistory->fetch_assoc()) {
-                                            ?>
+                                    ?>
                                             <tr>
                                                 <th scope="row"><?php echo $i++ ?></th>
                                                 <td><?php echo $row['student_name'] ?></td>
                                                 <td>
                                                     <span class="badge text-bg-info me-1"><?php echo $row['plan_name'] ?></span>
-                                                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                                                    <i class="fa-solid fa-bangladeshi-taka-sign "></i>
                                                     <?php echo $row['amount'] ?>
                                                 </td>
                                                 <td><?php echo date("d-m-Y", strtotime($row['start_date'])) ?></td>
@@ -122,8 +122,8 @@ include_once(DIR_URL . "include/sidebar.php");
                                                     ?>
                                                 </td>
                                             </tr>
-                                        <?php }
-                                } ?>
+                                    <?php }
+                                    } ?>
 
                                 </tbody>
                             </table>

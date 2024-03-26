@@ -118,12 +118,12 @@ include_once(DIR_URL . "include/sidebar.php");
                                     if ($plans->num_rows > 0) {
                                         $i = 1;
                                         while ($row = $plans->fetch_assoc()) {
-                                            ?>
+                                    ?>
                                             <tr>
                                                 <th scope="row"><?php echo $i++ ?></th>
                                                 <td><?php echo $row['title'] ?></td>
                                                 <td>
-                                                    <i class="fa-solid fa-indian-rupee-sign me-1"></i> <?php echo $row['amount'] ?>
+                                                    <i class="fa-solid fa-bangladeshi-taka-sign"></i> <?php echo $row['amount'] ?>
                                                 </td>
                                                 <td><?php echo $row['duration'] ?> month</td>
                                                 <td>
@@ -147,7 +147,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                                             Inactive
                                                         </a>
                                                     <?php }
-                                                if ($row['status'] == 0) {  ?>
+                                                    if ($row['status'] == 0) {  ?>
 
                                                         <a href="<?php echo BASE_URL ?>subscriptions?action=status&id=<?php echo $row['id'] ?>&status=1" class="btn btn-success btn-sm">
                                                             Active
@@ -155,8 +155,8 @@ include_once(DIR_URL . "include/sidebar.php");
                                                     <?php } ?>
                                                 </td>
                                             </tr>
-                                        <?php }
-                                } ?>
+                                    <?php }
+                                    } ?>
 
                                 </tbody>
                             </table>
@@ -198,7 +198,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                                 $selected = "";
                                                 if ($i == $plan['duration'])
                                                     $selected = "selected";
-                                                ?>
+                                            ?>
                                                 <option <?php echo $selected ?> value="<?php echo $i ?>"><?php echo $i ?> month(s)</option>
                                             <?php } ?>
 

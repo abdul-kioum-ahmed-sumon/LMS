@@ -53,7 +53,8 @@ include_once(DIR_URL . "include/sidebar.php");
                             Total Revenue
                         </h6>
                         <p class="h1 fw-bold">
-                            <i class="fa-solid fa-indian-rupee-sign"></i> <?php echo number_format($counts['total_revenue']) ?></p>
+                            <i class="fa-solid fa-bangladeshi-taka-sign "></i> <?php echo number_format($counts['total_revenue']) ?>
+                        </p>
                         </p>
                         <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="card-link link-underline-light">View more
                         </a>
@@ -111,7 +112,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <?php
                                     $i = 1;
                                     foreach ($tabs['students'] as $st) {
-                                        ?>
+                                    ?>
                                         <tr>
                                             <th><?php echo $i++ ?></th>
                                             <td><?php echo $st['name'] ?></td>
@@ -149,7 +150,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <?php
                                     $i = 1;
                                     foreach ($tabs['loans'] as $l) {
-                                        ?>
+                                    ?>
                                         <tr>
                                             <th><?php echo $i++ ?></th>
                                             <td><?php echo $l['book_title'] ?></td>
@@ -188,13 +189,13 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <?php
                                     $i = 1;
                                     foreach ($tabs['subscriptions'] as $s) {
-                                        ?>
+                                    ?>
                                         <tr>
                                             <th><?php echo $i++ ?></th>
                                             <td><?php echo $s['student_name'] ?></td>
                                             <td>
                                                 <span class="badge text-bg-info me-1"><?php echo $s['plan_name'] ?></span>
-                                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                                                <i class="fa-solid fa-bangladeshi-taka-sign"></i>
                                                 <?php echo $s['amount'] ?>
                                             </td>
                                             <td><?php echo date("d-m-Y", strtotime($s['start_date'])) ?></td>

@@ -96,8 +96,8 @@
 
                 <li class="nav-item">
                     <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#subscriptionManagement" role="button" aria-expanded="false" aria-controls="subscriptionManagement">
-                        <i class="fa-solid fa-indian-rupee-sign me-2"></i>
-                        Subscription
+                        <i class="fa-solid fa-bangladeshi-taka-sign me-2"></i>
+                         Subscription
                         <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
 
