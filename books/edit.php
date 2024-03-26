@@ -79,6 +79,12 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <input type="number" name="publication_year" class="form-control" required value="<?php echo $book['publication_year'] ?>" />
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Shelf Number</label>
+                                        <input type="text" name="shelf_number" class="form-control" required value="<?php echo $book['shelf_no'] ?>" />
+                                    </div>
+                                </div>
 
                                 <div class="col-md-6">
                                     <div class="mb-3">

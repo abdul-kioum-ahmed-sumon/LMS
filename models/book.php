@@ -19,8 +19,8 @@ function storeBook($conn, $param)
     ## Validation end
 
     $datetime = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO books (title, author, publication_year, isbn, category_id, created_at)
-        VALUES ('$title', '$author', '$publication_year', '$isbn', $category_id, '$datetime')";
+    $sql = "INSERT INTO books (title, author, publication_year, isbn, category_id, created_at ,shelf_no)
+        VALUES ('$title', '$author', '$publication_year', '$isbn', $category_id, '$datetime' ,'$shelf_number')";
     $result['success'] = $conn->query($sql);
     return $result;
 }
@@ -29,7 +29,7 @@ function storeBook($conn, $param)
 function getBooks($conn)
 {
     $sql = "select b.*, c.name as cat_name from books b 
-        left join categories c on c.id = b.category_id 
+        inner join categories c on c.id = b.category_id 
         order by id desc";
     $result = $conn->query($sql);
     return $result;
@@ -82,6 +82,7 @@ function updateBook($conn, $param)
         author = '$author', 
         publication_year = '$publication_year',
         isbn = '$isbn',
+        shelf_no = '$shelf_number',
         category_id = $category_id,
         updated_at = '$datetime'
         WHERE id = $id;

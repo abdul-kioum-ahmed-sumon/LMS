@@ -69,6 +69,13 @@ include_once(DIR_URL . "include/sidebar.php");
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
+                                        <label class="form-label">Shelf Number</label>
+                                        <input type="text" name="shelf_number" class="form-control"  />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
                                         <label class="form-label">Category</label>
                                         <?php
                                         $cats = getCategories($conn);

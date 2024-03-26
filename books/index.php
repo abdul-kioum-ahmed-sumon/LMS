@@ -72,6 +72,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <th scope="col">Author Name</th>
                                         <th scope="col">ISBN No</th>
                                         <th scope="col">Cat Name</th>
+                                        <th scope="col">Shelf Number</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Created At</th>
                                         <th scope="col">Action</th>
@@ -90,6 +91,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                                 <td><?php echo $row['author'] ?></td>
                                                 <td><?php echo $row['isbn'] ?></td>
                                                 <td><?php echo $row['cat_name'] ?></td>
+                                                <td><?php echo $row['shelf_no'] ?></td>
                                                 <td>
                                                     <?php
                                                     if ($row['status'] == 1)
