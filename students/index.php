@@ -68,6 +68,8 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">ID Number</th>
+                                        <th scope="col">Department</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone No</th>
                                         <th scope="col">Status</th>
@@ -84,6 +86,8 @@ include_once(DIR_URL . "include/sidebar.php");
                                             <tr>
                                                 <th scope="row"><?php echo $i++ ?></th>
                                                 <td><?php echo $row['name'] ?></td>
+                                                <td><?php echo $row['dept_id'] ?></td>
+                                                <td><?php echo $row['dept'] ?></td>
                                                 <td><?php echo $row['email'] ?></td>
                                                 <td><?php echo $row['phone_no'] ?></td>
 

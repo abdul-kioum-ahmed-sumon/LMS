@@ -59,6 +59,22 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <input type="text" class="form-control" name="name" value="<?php echo $student['name'] ?>" />
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">ID Number</label>
+                                        <input type="text" class="form-control" name="dept_id" value="<?php echo $student['dept_id'] ?>" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Department</label>
+                                        <input type="text" class="form-control" name="dept" value="<?php echo $student['dept'] ?>" />
+                                    </div>
+                                </div>
+
+
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>

@@ -21,15 +21,15 @@ function create($conn, $param)
     } else if (isPhoneUnique($conn, $phone_no)) {
         $result = array("error" => "Phone no is already registered");
         return $result;
-    } else if (isPhoneValid($phone_no)) {
-        $result = array("error" => "Phone no is not valid");
-        return $result;
-    }
+     } //else if (isPhoneValid($phone_no)) {
+    //     $result = array("error" => "Phone no is not valid");
+    //     return $result;
+    // }
     ## Validation end
 
     $datetime = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO students (name, phone_no, email, address, created_at)
-        VALUES ('$name', '$phone_no', '$email', '$addres', '$datetime')";
+    $sql = "INSERT INTO students (name, phone_no, email, address, created_at , dept ,dept_id)
+        VALUES ('$name', '$phone_no', '$email', '$address', '$datetime' ,'$dept','$dept_id')";
     $result['success'] = $conn->query($sql);
     return $result;
 }
@@ -86,21 +86,25 @@ function update($conn, $param)
     } else if (isPhoneUnique($conn, $phone_no, $id)) {
         $result = array("error" => "Phone no is already registered");
         return $result;
-    } else if (isPhoneValid($phone_no)) {
-        $result = array("error" => "Phone no is not valid");
-        return $result;
-    }
+   }  // else if (isPhoneValid($phone_no)) {
+    //     $result = array("error" => "Phone no is not valid");
+    //     return $result;
+    // }
     ## Validation end
 
     $datetime = date("Y-m-d H:i:s");
+
     $sql = "UPDATE students SET 
         name = '$name', 
         email = '$email', 
         phone_no = '$phone_no',
         address = '$address',
-        updated_at = '$datetime'
+        updated_at = '$datetime',
+        dept = '$dept',
+        dept_id = '$dept_id'
         WHERE id = $id;
         ";
+
     $result['success'] = $conn->query($sql);
     return $result;
 }
@@ -141,9 +145,9 @@ function isPhoneUnique($conn, $phone_no, $id = NULL)
 
 
 // Function to check valid phone no
-function isPhoneValid($phone_no)
-{
-    if (is_numeric($phone_no) && strlen($phone_no) == 10)
-        return false;
-    else return true;
-}
+// function isPhoneValid($phone_no)
+// {
+//     if (is_numeric($phone_no) && strlen($phone_no) == 10)
+//         return false;
+//     else return true;
+// }
