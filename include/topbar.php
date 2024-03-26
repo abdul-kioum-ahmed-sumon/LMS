@@ -6,7 +6,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!--offcanvar trigger start-->
-        <img src="assets/images/BAUST_LOGO.png" alt="baust" class="baust_logo">
+        <img src="<?php echo BASE_URL ?>assets/images/BAUST_LOGO.png" alt="baust" class="baust_logo">
         <a class="navbar-brand fw-bold text-uppercase me-auto" href="#"> BAUST Library</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
