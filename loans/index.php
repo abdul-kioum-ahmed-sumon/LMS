@@ -14,7 +14,7 @@ if (!isset($loans->num_rows)) {
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     $del = delete($conn, $_GET['id']);
     if ($del) {
-        $_SESSION['success'] = "Book loan has been deleted successfully";
+        $_SESSION['success'] = "Book Issue has been deleted successfully";
     } else {
         $_SESSION['error'] = "Something went wrong";
     }

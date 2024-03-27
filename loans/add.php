@@ -8,7 +8,7 @@ include_once(DIR_URL . "models/loan.php");
 if (isset($_POST['submit'])) {
     $res = create($conn, $_POST);
     if (isset($res['success'])) {
-        $_SESSION['success'] = "Book loan has been created successfully";
+        $_SESSION['success'] = "Book Issue has been created successfully";
         header("LOCATION: " . BASE_URL . "loans");
         exit;
     } else {

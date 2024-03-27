@@ -8,7 +8,7 @@ include_once(DIR_URL . "models/loan.php");
 if (isset($_POST['submit'])) {
     $res = update($conn, $_POST);
     if (isset($res['success'])) {
-        $_SESSION['success'] = "Book loan has been updated successfully";
+        $_SESSION['success'] = "Book Issue has been updated successfully";
         header("LOCATION: " . BASE_URL . "loans");
         exit;
     } else {
