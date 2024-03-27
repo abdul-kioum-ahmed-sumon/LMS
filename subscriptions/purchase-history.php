@@ -8,7 +8,7 @@ include_once(DIR_URL . "models/subscription.php");
 if (isset($_POST['submit'])) {
     $res = createSubscription($conn, $_POST);
     if (isset($res['success'])) {
-        $_SESSION['success'] = "Subscription has been created successfully";
+        $_SESSION['success'] = "Membership has been created successfully";
         header("LOCATION: " . BASE_URL . "subscriptions/purchase-history.php");
         exit;
     } else {
@@ -44,10 +44,8 @@ include_once(DIR_URL . "include/sidebar.php");
         <div class="row dashboard-counts">
             <div class="col-md-12">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h4 class="fw-bold text-uppercase">Purchase History
-                    <button type="button" style="float:right" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#subsModal">
-                        Create Subscription
-                    </button>
+                <h4 class="fw-bold text-uppercase">Membership plan
+
                 </h4>
 
             </div>
@@ -55,13 +53,16 @@ include_once(DIR_URL . "include/sidebar.php");
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Subscription Purchase History
+                       Create Membership and Purchase History
                     </div>
                     <div class="card-body">
                         <!--Search form-->
                         <form method="get">
                             <div class="row mb-3">
                                 <div class="col-md-12">
+                                    <button type="button" style="float:leftt" class="btn btn-success mb-2 " data-bs-toggle="modal" data-bs-target="#subsModal">
+                                        Create Membership
+                                    </button>
                                     <h5 class="fw-bold text-uppercase">Search</h5>
                                 </div>
                                 <div class="col-md-3">
@@ -141,7 +142,7 @@ include_once(DIR_URL . "include/sidebar.php");
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Create Subscription</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Create Membership</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

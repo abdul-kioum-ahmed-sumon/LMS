@@ -5,12 +5,12 @@
             <ul class="navbar-nav">
                 <li>
                     <div class="text-secondary small fw-bold text-uppercase">
-                        Core
+                        General
                     </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="<?php echo BASE_URL ?>dashboard">
-                        <i class="fas fa-tachometer-alt-fast me-2"></i> Dashboard</a>
+                        <i class="fa-solid fa-display fa-fade me-2" style="color: #08bf6a;"></i> Dashboard</a>
                 </li>
                 <li class="my-0">
                     <hr />
@@ -24,7 +24,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#booksManagement" role="button" aria-expanded="false" aria-controls="booksManagement">
-                        <i class="fa-solid fa-book me-2"></i>
+                        <i class="fa-solid fa-book fa-fade me-2" style="color: #08bf6a;"></i>
                         Books Management
                         <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
@@ -33,10 +33,10 @@
                         <div>
                             <ul class="navbar-nav ps-3">
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>books/add" class="nav-link"><i class="fa-solid fa-plus me-2"></i> Add New</a>
+                                    <a href="<?php echo BASE_URL ?>books/add" class="nav-link"><i class="fa-solid fa-book-medical me-2" style="color: #FFD43B;"></i> Add New</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>books/" class="nav-link"><i class="fa-solid fa-list me-2"></i> Manage All</a>
+                                    <a href="<?php echo BASE_URL ?>books/" class="nav-link"><i class="fa-solid fa-sliders me-2" style="color: #FFD43B;"></i> Manage All</a>
                                 </li>
                             </ul>
                         </div>
@@ -45,8 +45,8 @@
 
                 <li class="nav-item">
                     <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#studentsManagement" role="button" aria-expanded="false" aria-controls="studentsManagement">
-                        <i class="fa-solid fa-users me-2"></i>
-                        Students
+                        <i class="fa-solid fa-user-graduate fa-fade me-2" style="color: #08bf6a;"></i>
+                        Students Management
                         <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
 
@@ -54,10 +54,10 @@
                         <div>
                             <ul class="navbar-nav ps-3">
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>students/add.php" class="nav-link"><i class="fa-solid fa-plus me-2"></i> Add New</a>
+                                    <a href="<?php echo BASE_URL ?>students/add.php" class="nav-link"><i class="fa-solid fa-user-plus me-2" style="color: #FFD43B;"></i> Add New</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>students" class="nav-link"><i class="fa-solid fa-list me-2"></i> Manage All</a>
+                                    <a href="<?php echo BASE_URL ?>students" class="nav-link"><i class="fa-solid fa-sliders me-2" style="color: #FFD43B;"></i> Manage All</a>
                                 </li>
                             </ul>
                         </div>
@@ -69,14 +69,14 @@
 
                 <li>
                     <div class="text-secondary small fw-bold text-uppercase">
-                        Business
+                        All Issues
                     </div>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#loanManagement" role="button" aria-expanded="false" aria-controls="loanManagement">
-                        <i class="fas fa-book-reader me-2"></i>
-                        Books Loan
+                        <i class="fa-solid fa-book-open-reader fa-fade me-2" style="color: #08bf6a;"></i>
+                        Books Issue
                         <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
 
@@ -84,10 +84,10 @@
                         <div>
                             <ul class="navbar-nav ps-3">
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>loans/add.php" class="nav-link"><i class="fa-solid fa-plus me-2"></i> Add New</a>
+                                    <a href="<?php echo BASE_URL ?>loans/add.php" class="nav-link"><i class="fa-solid fa-book-medical me-2" style="color: #FFD43B;"></i> Add New</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>loans" class="nav-link"><i class="fa-solid fa-list me-2"></i> Manage All</a>
+                                    <a href="<?php echo BASE_URL ?>loans" class="nav-link"><i class="fa-solid fa-sliders me-2" style="color: #FFD43B;"></i> Manage All</a>
                                 </li>
                             </ul>
                         </div>
@@ -96,8 +96,8 @@
 
                 <li class="nav-item">
                     <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#subscriptionManagement" role="button" aria-expanded="false" aria-controls="subscriptionManagement">
-                        <i class="fa-solid fa-bangladeshi-taka-sign me-2"></i>
-                         Subscription
+                        <i class="fa-solid fa-bangladeshi-taka-sign  fa-fade me-2" style="color: #08bf6a;"></i>
+                        Membership
                         <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
 
@@ -105,11 +105,11 @@
                         <div>
                             <ul class="navbar-nav ps-3">
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>subscriptions" class="nav-link"><i class="fa-solid fa-plus me-2"></i> Plans</a>
+                                    <a href="<?php echo BASE_URL ?>subscriptions" class="nav-link"><i class="fa-solid fa-layer-group me-2" style="color: #FFD43B;"></i> Plans</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="nav-link"><i class="fa-solid fa-list me-2"></i> Purchase
-                                        History</a>
+                                    <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="nav-link"><i class="fa-solid fa-notes-medical me-2" style="color: #FFD43B;"></i> Membership
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -118,9 +118,15 @@
                 <li class="my-0">
                     <hr />
                 </li>
-
+                <div class="text-secondary small fw-bold text-uppercase">
+                    Others
+                </div>
+                <li>
+                    <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="nav-link"><i class="fa-solid fa-gear fa-spin me-2" style="color: #08bf6a;"></i>Settings
+                    </a>
+                </li>
                 <li class="nav-item">
-                    <a href="<?php echo BASE_URL ?>logout.php" class="nav-link"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a>
+                    <a href="<?php echo BASE_URL ?>logout.php" class="nav-link"><i class="fa-solid fa-right-from-bracket me-2" style="color: #08bf6a;"></i> Logout</a>
                 </li>
             </ul>
         </nav>

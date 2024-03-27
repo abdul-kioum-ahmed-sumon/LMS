@@ -52,7 +52,7 @@ include_once(DIR_URL . "include/sidebar.php");
                         <h6 class="card-title text-uppercase text-muted">
                             Total Revenue
                         </h6>
-                        <p class="h1 fw-bold">
+                        <p class="h2 fw-bold">
                             <i class="fa-solid fa-bangladeshi-taka-sign "></i> <?php echo number_format($counts['total_revenue']) ?>
                         </p>
                         </p>
@@ -66,7 +66,7 @@ include_once(DIR_URL . "include/sidebar.php");
                 <div class="card">
                     <div class="card-body text-center">
                         <h6 class="card-title text-uppercase text-muted">
-                            Total Books Loan
+                            Total Books Issue
                         </h6>
                         <p class="h1 fw-bold"><?php echo $counts['total_loans'] ?></p>
                         <a href="<?php echo BASE_URL ?>loans" class="card-link link-underline-light">View more</a>
@@ -86,12 +86,12 @@ include_once(DIR_URL . "include/sidebar.php");
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link text-uppercase" id="recent-loans" data-bs-toggle="tab" data-bs-target="#recent-loans-pane" type="button" role="tab" aria-controls="recent-loans-pane" aria-selected="false">
-                            Recent Loans
+                            Recent Book Issue
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link text-uppercase" id="recent-subscription" data-bs-toggle="tab" data-bs-target="#recent-subscription-pane" type="button" role="tab" aria-controls="recent-subscription-pane" aria-selected="false">
-                            Recent Subscriptions
+                            Recent Membership
                         </button>
                     </li>
                 </ul>

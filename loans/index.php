@@ -53,13 +53,13 @@ include_once(DIR_URL . "include/sidebar.php");
         <div class="row dashboard-counts">
             <div class="col-md-12">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h4 class="fw-bold text-uppercase">Manage Books Loan</h4>
+                <h4 class="fw-bold text-uppercase">Manage Books Issue</h4>
             </div>
 
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        All Books Loan
+                        All Books Issue
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -69,7 +69,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <th scope="col">#</th>
                                         <th scope="col">Book Name</th>
                                         <th scope="col">Student Name</th>
-                                        <th scope="col">Loan Date</th>
+                                        <th scope="col">Issue Date</th>
                                         <th scope="col">Return Date</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Created At</th>

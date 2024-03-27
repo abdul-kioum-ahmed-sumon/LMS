@@ -30,7 +30,7 @@ include_once(DIR_URL . "include/sidebar.php");
         <div class="row">
             <div class="col-md-12">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h4 class="fw-bold text-uppercase">Add Loan</h4>
+                <h4 class="fw-bold text-uppercase">Book Issue</h4>
             </div>
 
             <div class="col-md-12">

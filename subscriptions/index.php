@@ -92,7 +92,7 @@ include_once(DIR_URL . "include/sidebar.php");
         <div class="row dashboard-counts">
             <div class="col-md-12">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h4 class="fw-bold text-uppercase">Subscription Plan</h4>
+                <h4 class="fw-bold text-uppercase">Membership Plan</h4>
             </div>
 
             <div class="col-md-8">
@@ -168,7 +168,7 @@ include_once(DIR_URL . "include/sidebar.php");
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        Add New Plan
+                        Add New Membership Plan
                     </div>
                     <div class="card-body">
                         <form method="post" action="<?php echo BASE_URL ?>subscriptions/index.php">
