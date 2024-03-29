@@ -1,6 +1,6 @@
 <!--Top Navbar Start-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
+<nav class=" navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
+    <div class="container-fluid bg-hess ">
         <!--offcanvar trigger start-->
         <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <span class="navbar-toggler-icon"></span>

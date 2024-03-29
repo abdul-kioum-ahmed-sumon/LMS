@@ -13,4 +13,4 @@
     <title>Dashboard | BAUST LIBRARY</title>
 </head>
 
-<body>
+<body class="container1">

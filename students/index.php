@@ -47,17 +47,17 @@ include_once(DIR_URL . "include/sidebar.php");
 
 ?>
 <!--Main content start-->
-<main class="mt-5 pt-3">
-    <div class="container-fluid">
+<main class="mt-5 pt-3" >
+    <div class="container-fluid" >
         <!--Cards-->
-        <div class="row dashboard-counts">
-            <div class="col-md-12">
+        <div class="row dashboard-counts ">
+            <div class="col-md-12 mb-3 mt-4">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h4 class="fw-bold text-uppercase">Manage Students</h4>
+                <h3 class="fw-bold text-uppercase">Manage Students</h3>
             </div>
 
-            <div class="col-md-12">
-                <div class="card">
+            <div class="col-md-12" >
+                <div class="card" >
                     <div class="card-header">
                         All Students
                     </div>

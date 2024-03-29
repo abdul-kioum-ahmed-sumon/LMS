@@ -14,14 +14,14 @@ include_once(DIR_URL . "include/sidebar.php");
 
 <!--Main Container Start-->
 <main class="mt-5 pt-3">
-    <div class="container-fluid">
+    <div class="container-fluid ">
         <div class="row">
-            <div class="col-md-12 my-3">
-                <h4 class="fw-bold text-uppercase">Dashboard</h4>
+            <div class="col-md-12 mt-4">
+                <h3 class="fw-bold text-uppercase">Dashboard</h3>
                 <p>Statistics of the system!</p>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 mt-4">
                 <div class="card">
                     <div class="card-body text-center">
                         <h6 class="card-title text-uppercase text-muted">
@@ -34,7 +34,7 @@ include_once(DIR_URL . "include/sidebar.php");
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 mt-4">
                 <div class="card">
                     <div class="card-body text-center">
                         <h6 class="card-title text-uppercase text-muted">
@@ -46,7 +46,7 @@ include_once(DIR_URL . "include/sidebar.php");
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 mt-4">
                 <div class="card">
                     <div class="card-body text-center">
                         <h6 class="card-title text-uppercase text-muted">
@@ -62,7 +62,7 @@ include_once(DIR_URL . "include/sidebar.php");
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 mt-4">
                 <div class="card">
                     <div class="card-body text-center">
                         <h6 class="card-title text-uppercase text-muted">
