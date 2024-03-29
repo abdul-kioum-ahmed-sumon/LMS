@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <script src="./assets/js/1c26fb5c51.js" crossorigin="anonymous"></script>
-    <title>Login | Star Library</title>
+    <title>Login | Baust Library</title>
 </head>
 
 <body style="background-color: #212529">
@@ -53,7 +53,8 @@ if (isset($_POST['submit'])) {
                         <div class="col-md-7">
                             <div class="card-body">
                                 <h1 class="card-title text-uppercase fw-bold">
-                                    star library
+                                    <img src="<?php echo BASE_URL ?>assets/images/BAUST_LOGO.png" alt="baust" class="baust_logo_index">
+                                    Baust library
                                 </h1>
                                 <p class="card-text">Enter email and password to login</p>
                                 <?php include_once(DIR_URL . "/include/alerts.php"); ?>

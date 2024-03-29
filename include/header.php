@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/style.css" />
 
     <script src="<?php echo BASE_URL ?>assets/js/1c26fb5c51.js" crossorigin="anonymous"></script>
-    <title>Dashboard | Star Library</title>
+    <title>Dashboard | BAUST LIBRARY</title>
 </head>
 
 <body>

@@ -38,7 +38,11 @@ body {
   bottom: 0px;
   border-radius: 0px 6px 6px 0;
 }
-
+.baust_logo_index
+{
+   width: 50px;
+   
+}
 @media (min-width: 992px) {
   body {
     overflow: auto !important;
