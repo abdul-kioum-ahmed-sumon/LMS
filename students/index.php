@@ -99,7 +99,7 @@ include_once(DIR_URL . "include/sidebar.php");
 
                                                     ?>
                                                 </td>
-                                                <td><?php echo date("d-m-Y h:i A", strtotime($row['created_at'])) ?></td>
+                                                <td><?php echo date("d-m-Y", strtotime($row['created_at'])) ?></td>
                                                 <td>
                                                     <a href="<?php echo BASE_URL ?>students/edit.php?id=<?php echo $row['id'] ?>" class="btn btn-primary btn-sm">
                                                         Edit

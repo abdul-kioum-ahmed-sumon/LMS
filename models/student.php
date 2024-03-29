@@ -12,16 +12,19 @@ function create($conn, $param)
     } else if (empty($email)) {
         $result = array("error" => "Email is required");
         return $result;
-    } else if (isEmailUnique($conn, $email)) {
-        $result = array("error" => "Email is already registered");
-        return $result;
-    } else if (empty($phone_no)) {
+    } 
+    // else if (isEmailUnique($conn, $email)) {
+    //     $result = array("error" => "Email is already registered");
+    //     return $result;
+    // }
+     else if (empty($phone_no)) {
         $result = array("error" => "Phone no is required");
         return $result;
-    } else if (isPhoneUnique($conn, $phone_no)) {
-        $result = array("error" => "Phone no is already registered");
-        return $result;
-     } //else if (isPhoneValid($phone_no)) {
+    } 
+    // else if (isPhoneUnique($conn, $phone_no)) {
+    //     $result = array("error" => "Phone no is already registered");
+    //     return $result;
+    //  } //else if (isPhoneValid($phone_no)) {
     //     $result = array("error" => "Phone no is not valid");
     //     return $result;
     // }
@@ -77,16 +80,19 @@ function update($conn, $param)
     } else if (empty($email)) {
         $result = array("error" => "Email is required");
         return $result;
-    } else if (isEmailUnique($conn, $email, $id)) {
-        $result = array("error" => "Email is already registered");
-        return $result;
-    } else if (empty($phone_no)) {
+    }
+    //  else if (isEmailUnique($conn, $email, $id)) {
+    //     $result = array("error" => "Email is already registered");
+    //     return $result;
+    // } 
+    else if (empty($phone_no)) {
         $result = array("error" => "Phone no is required");
         return $result;
-    } else if (isPhoneUnique($conn, $phone_no, $id)) {
-        $result = array("error" => "Phone no is already registered");
-        return $result;
-   }  // else if (isPhoneValid($phone_no)) {
+    }
+//      else if (isPhoneUnique($conn, $phone_no, $id)) {
+//         $result = array("error" => "Phone no is already registered");
+//         return $result;
+//    }  // else if (isPhoneValid($phone_no)) {
     //     $result = array("error" => "Phone no is not valid");
     //     return $result;
     // }
@@ -118,36 +124,36 @@ function getCategories($conn)
 }
 
 // Function to check email
-function isEmailUnique($conn, $email, $id = NULL)
-{
-    $sql = "select id from students where email = '$email'";
-    if ($id) {
-        $sql .= " and id != $id";
-    }
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0)
-        return true;
-    else return false;
-}
+// function isEmailUnique($conn, $email, $id = NULL)
+// {
+//     $sql = "select id from students where email = '$email'";
+//     if ($id) {
+//         $sql .= " and id != $id";
+//     }
+//     $result = $conn->query($sql);
+//     if ($result->num_rows > 0)
+//         return true;
+//     else return false;
+// }
 
 // Function to check phone no
-function isPhoneUnique($conn, $phone_no, $id = NULL)
-{
-    $sql = "select id from students where phone_no = '$phone_no'";
-    if ($id) {
-        $sql .= " and id != $id";
-    }
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0)
-        return true;
-    else return false;
-}
+// function isPhoneUnique($conn, $phone_no, $id = NULL)
+// {
+//     $sql = "select id from students where phone_no = '$phone_no'";
+//     if ($id) {
+//         $sql .= " and id != $id";
+//     }
+//     $result = $conn->query($sql);
+//     if ($result->num_rows > 0)
+//         return true;
+//     else return false;
+// }
 
 
-// Function to check valid phone no
+// // Function to check valid phone no
 // function isPhoneValid($phone_no)
 // {
-//     if (is_numeric($phone_no) && strlen($phone_no) == 10)
+//     if (is_numeric($phone_no) && strlen($phone_no) == 11)
 //         return false;
 //     else return true;
 // }

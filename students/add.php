@@ -43,14 +43,14 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Full Name</label>
-                                        <input type="text" class="form-control" name="name" />
+                                        <input type="text" class="form-control" name="name" required />
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">ID Number</label>
-                                        <input type="text" class="form-control" name="dept_id" />
+                                        <input type="text" class="form-control" name="dept_id"  required/>
                                     </div>
                                 </div>
 
@@ -58,7 +58,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Department</label>
-                                        <input type="text" class="form-control" name="dept" />
+                                        <input type="text" class="form-control" name="dept"  required/>
                                     </div>
                                 </div>
 
@@ -67,21 +67,21 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email" />
+                                        <input type="email" class="form-control" name="email"  required/>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Phone No</label>
-                                        <input type="text" class="form-control" name="phone_no" />
+                                        <input type="text" class="form-control" name="phone_no" required />
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Address</label>
-                                        <input type="text" class="form-control" name="address" />
+                                        <input type="text" class="form-control" name="address"  required />
                                     </div>
                                 </div>
 

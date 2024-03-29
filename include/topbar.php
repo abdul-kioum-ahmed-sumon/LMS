@@ -1,5 +1,5 @@
 <!--Top Navbar Start-->
-<nav class=" navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
+<nav class=" navbar navbar-expand-lg navbar-dark bg-dark fixed-top " style="background-image: radial-gradient(circle, #051937, #00172b, #00141e, #000d11, #010202);">
     <div class="container-fluid bg-hess ">
         <!--offcanvar trigger start-->
         <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">

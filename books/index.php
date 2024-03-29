@@ -83,7 +83,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                     if ($books->num_rows > 0) {
                                         $i = 1;
                                         while ($row = $books->fetch_assoc()) {
-                                            ?>
+                                    ?>
                                             <tr>
                                                 <th scope="row"><?php echo $i++ ?></th>
                                                 <td><?php echo $row['title'] ?></td>
@@ -100,12 +100,12 @@ include_once(DIR_URL . "include/sidebar.php");
 
                                                     ?>
                                                 </td>
-                                                <td><?php echo date("d-m-Y h:i A", strtotime($row['created_at'])) ?></td>
+                                                <td><?php echo date("d-m-Y", strtotime($row['created_at'])) ?></td>
                                                 <td>
                                                     <a href="<?php echo BASE_URL ?>books/edit.php?id=<?php echo $row['id'] ?>" class="btn btn-primary btn-sm">
                                                         Edit
                                                     </a>
-                                                    <a href="<?php echo BASE_URL ?>books?action=delete&id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm">
+                                                    <a onclick="return confirm('Are you sure?')" href="<?php echo BASE_URL ?>books?action=delete&id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm">
                                                         Delete
                                                     </a>
 
@@ -114,16 +114,16 @@ include_once(DIR_URL . "include/sidebar.php");
                                                             Inactive
                                                         </a>
                                                     <?php }
-                                                if ($row['status'] == 0) {  ?>
+                                                    if ($row['status'] == 0) {  ?>
 
                                                         <a href="<?php echo BASE_URL ?>books?action=status&id=<?php echo $row['id'] ?>&status=1" class="btn btn-success btn-sm">
                                                             Active
                                                         </a>
-                                                    </td>
-                                                <?php } ?>
+                                                </td>
+                                            <?php } ?>
                                             </tr>
-                                        <?php }
-                                } ?>
+                                    <?php }
+                                    } ?>
 
                                 </tbody>
                             </table>

@@ -41,14 +41,14 @@ if (isset($_POST['submit'])) {
     <title>Login | Baust Library</title>
 </head>
 
-<body style="background-image: linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );">
+<body  style="background-image: linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );">
     <div class="container d-flex align-items-center justify-content-center vh-100 ">
         <div class="row ">
             <div class="col-md-12 login-form ">
-                <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded " style="background-image: linear-gradient( 174.2deg,  rgba(255,244,228,1) 7.1%, rgba(240,246,238,1) 67.4% ); max-width: 900px">
+                <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded " style="background-image: radial-gradient(circle, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); max-width: 900px">
                     <div class="row g-0 ">
                         <div class="col-md-5  ">
-                            <img src="assets/images/DSLR pixel by Riyan20230214_112633_R15- DSLR Pixel by Riyan.PORTRAIT.jpg" class="img-fluid rounded shadow-lg bg-body rounded" />
+                            <img src="assets/images/IMG_20221121_095126_tigr-01.jpeg" class="img-fluid rounded shadow-lg bg-body rounded" />
                         </div>
                         <div class="col-md-7 ">
                             <div class="card-body ms-3 ">
@@ -82,7 +82,11 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
     <script src="./assets/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 

@@ -1,6 +1,6 @@
 <!--Offcanvas Menu start-->
 <div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav bg-hess " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-body">
+    <div class="offcanvas-body" style="background-image: radial-gradient(circle, #051937, #00172b, #00141e, #000d11, #010202);">
         <nav class="navbar-dark">
             <ul class="navbar-nav">
                 <li>
@@ -10,7 +10,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="<?php echo BASE_URL ?>dashboard">
-                        <i class="fa-solid fa-display fa-fade me-2" style="color: #08bf6a;"></i> Dashboard</a>
+                        <i class="fa-solid fa-display  me-2" style="color: #b2bafb;"></i> Dashboard</a>
                 </li>
                 <li class="my-0">
                     <hr />
@@ -24,7 +24,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#booksManagement" role="button" aria-expanded="false" aria-controls="booksManagement">
-                        <i class="fa-solid fa-book fa-fade me-2" style="color: #08bf6a;"></i>
+                        <i class="fa-solid fa-book  me-2" style="color: #b2bafb;"></i>
                         Books Management
                         <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
@@ -45,7 +45,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#studentsManagement" role="button" aria-expanded="false" aria-controls="studentsManagement">
-                        <i class="fa-solid fa-user-graduate fa-fade me-2" style="color: #08bf6a;"></i>
+                        <i class="fa-solid fa-user-graduate  me-2" style="color: #b2bafb;"></i>
                         Students Management
                         <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
@@ -75,7 +75,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#loanManagement" role="button" aria-expanded="false" aria-controls="loanManagement">
-                        <i class="fa-solid fa-book-open-reader fa-fade me-2" style="color: #08bf6a;"></i>
+                        <i class="fa-solid fa-book-open-reader  me-2" style="color: #b2bafb;"></i>
                         Books Issue
                         <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
@@ -96,7 +96,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#subscriptionManagement" role="button" aria-expanded="false" aria-controls="subscriptionManagement">
-                        <i class="fa-solid fa-bangladeshi-taka-sign  fa-fade me-2" style="color: #08bf6a;"></i>
+                        <i class="fa-solid fa-bangladeshi-taka-sign   me-2" style="color: #b2bafb;"></i>
                         Membership
                         <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
@@ -122,11 +122,11 @@
                     Others
                 </div>
                 <li>
-                    <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="nav-link"><i class="fa-solid fa-gear fa-spin me-2" style="color: #08bf6a;"></i>Settings
+                    <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="nav-link"><i class="fa-solid fa-gear fa-spin me-2" style="color: #b2bafb;"></i>Settings
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo BASE_URL ?>logout.php" class="nav-link"><i class="fa-solid fa-right-from-bracket me-2" style="color: #08bf6a;"></i> Logout</a>
+                    <a href="<?php echo BASE_URL ?>logout.php" class="nav-link"><i class="fa-solid fa-right-from-bracket me-2" style="color: #b2bafb;"></i> Logout</a>
                 </li>
             </ul>
         </nav>
