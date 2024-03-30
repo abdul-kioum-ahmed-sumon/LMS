@@ -51,12 +51,12 @@ include_once(DIR_URL . "include/sidebar.php");
     <div class="container-fluid">
         <!--Cards-->
         <div class="row dashboard-counts">
-            <div class="col-md-12">
+            <div class="col-md-12 mt-4">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h4 class="fw-bold text-uppercase">Manage Books Issue</h4>
+                <h3 class="fw-bold text-uppercase ">Manage Books Issue</h3>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mt-4">
                 <div class="card">
                     <div class="card-header">
                         All Books Issue
@@ -81,7 +81,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                     if ($loans->num_rows > 0) {
                                         $i = 1;
                                         while ($row = $loans->fetch_assoc()) {
-                                            ?>
+                                    ?>
                                             <tr>
                                                 <th scope="row"><?php echo $i++ ?></th>
                                                 <td><?php echo $row['book_title'] ?></td>
@@ -116,9 +116,9 @@ include_once(DIR_URL . "include/sidebar.php");
                                                     <?php  } ?>
                                                 </td>
                                             <?php } ?>
-                                        </tr>
-                                    <?php
-                                } ?>
+                                            </tr>
+                                        <?php
+                                    } ?>
 
                                 </tbody>
                             </table>

@@ -76,8 +76,8 @@ include_once(DIR_URL . "include/sidebar.php");
         </div>
 
         <!--Tabs-->
-        <div class="row mt-5">
-            <div class="col-md-12">
+        <div class="row mt-5 ">
+            <div class="col-md-12 mt-5">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link text-uppercase active" id="new-students" data-bs-toggle="tab" data-bs-target="#new-students-pane" type="button" role="tab" aria-controls="new-students-pane" aria-selected="true">

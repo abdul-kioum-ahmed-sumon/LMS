@@ -42,18 +42,17 @@ include_once(DIR_URL . "include/sidebar.php");
     <div class="container-fluid">
         <!--Cards-->
         <div class="row dashboard-counts">
-            <div class="col-md-12">
+            <div class="col-md-12 mt-4">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h4 class="fw-bold text-uppercase">Membership plan
-
-                </h4>
+                <h3 class="fw-bold text-uppercase ">Membership plan
+                </h3>
 
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mt-4">
                 <div class="card">
                     <div class="card-header">
-                       Create Membership and Purchase History
+                        Create Membership and Purchase History
                     </div>
                     <div class="card-body">
                         <!--Search form-->

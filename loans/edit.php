@@ -39,12 +39,12 @@ include_once(DIR_URL . "include/sidebar.php");
     <div class="container-fluid">
         <!--Cards-->
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mt-4">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h4 class="fw-bold text-uppercase">Edit Loan</h4>
+                <h3 class="fw-bold text-uppercase ">Edit Loan</h3>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mt-4">
                 <div class="card">
                     <div class="card-header">
                         Fill the form
@@ -67,7 +67,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                             while ($row = $books->fetch_assoc()) {
                                                 if ($row['id'] === $loan['book_id'])
                                                     $selected = "selected";
-                                                ?>
+                                            ?>
                                                 <option <?php echo $selected ?> value="<?php echo $row['id'] ?>"><?php echo $row['title'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -86,7 +86,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                             while ($row = $students->fetch_assoc()) {
                                                 if ($row['id'] === $loan['student_id'])
                                                     $selected = "selected";
-                                                ?>
+                                            ?>
                                                 <option <?php echo $selected ?> value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
                                             <?php } ?>
                                         </select>
