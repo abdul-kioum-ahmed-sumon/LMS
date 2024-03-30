@@ -63,12 +63,10 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <select name="book_id" class="form-control">
                                             <option value="">Please select</option>
                                             <?php
-                                            $selected = "";
                                             while ($row = $books->fetch_assoc()) {
-                                                if ($row['id'] === $loan['book_id'])
-                                                    $selected = "selected";
+                                                $selected = ($row['id'] == $loan['book_id']) ? "selected" : "";
                                             ?>
-                                                <option <?php echo $selected ?> value="<?php echo $row['id'] ?>"><?php echo $row['title'] ?></option>
+                                                <option value="<?php echo $row['id'] ?>" <?php echo $selected ?>><?php echo $row['isbn'] ?><span class="text-muted">&nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp;</span><?php echo $row['title'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -82,16 +80,15 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <select name="student_id" class="form-control">
                                             <option value="">Please select</option>
                                             <?php
-                                            $selected = "";
                                             while ($row = $students->fetch_assoc()) {
-                                                if ($row['id'] === $loan['student_id'])
-                                                    $selected = "selected";
+                                                $selected = ($row['id'] == $loan['student_id']) ? "selected" : "";
                                             ?>
-                                                <option <?php echo $selected ?> value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                                                <option value="<?php echo $row['id'] ?>" <?php echo $selected ?>><?php echo $row['dept_id'] ?> <span class="text-muted">&nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp;</span> <?php echo $row['name'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                 </div>
+
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
