@@ -273,3 +273,35 @@ a:active {
     }
 }
 /* bg */
+
+.text-muted {
+    color: #6c757d; /* Adjust to your desired muted color */
+    margin: 0 0.5rem; /* Adjust spacing as needed */
+}
+
+
+
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333; /* Adjust color as needed */
+}
+
+.dept-id {
+    font-weight: bold;
+    margin-right: 0.5rem; /* Adjust spacing as needed */
+}
+
+.name {
+    color: #666; /* Adjust color as needed */
+}
+
+.option {
+    padding: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.option:hover {
+    background-color: #f4f4f4; /* Adjust hover background color as needed */
+}

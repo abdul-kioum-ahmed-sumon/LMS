@@ -50,24 +50,27 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <select name="book_id" class="form-control">
                                             <option value="">Please select</option>
                                             <?php while ($row = $books->fetch_assoc()) { ?>
-                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['title'] ?></option>
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['isbn'] ?><span class="text-muted">&nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp;</span><?php echo $row['title'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Select Student</label>
+                                        <label class="form-label">Select Student ID</label>
                                         <?php
                                         $students = getStudents($conn);
                                         ?>
                                         <select name="student_id" class="form-control">
                                             <option value="">Please select</option>
                                             <?php while ($row = $students->fetch_assoc()) { ?>
-                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['dept_id'] ?> <span class="text-muted">&nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp;</span> <?php echo $row['name'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
+
+
+
                                 </div>
 
                                 <div class="col-md-6">
