@@ -108,11 +108,10 @@ include_once(DIR_URL . "include/sidebar.php");
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button name="update" type="submit" class="btn btn-success">
+                                    <button name="update" type="submit" class="btn btn-success btn1">
                                         Update
                                     </button>
-
-                                    <a href="<?php echo BASE_URL ?>books" class="btn btn-secondary">
+                                    <a href="<?php echo BASE_URL ?>books" class="btn btn-secondary btn1">
                                         Back
                                     </a>
                                 </div>

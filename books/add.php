@@ -90,11 +90,11 @@ include_once(DIR_URL . "include/sidebar.php");
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button name="publish" type="submit" class="btn btn-success">
-                                        Publish
+                                    <button name="publish" type="submit" class="btn btn-success btn1">
+                                        ADD Book
                                     </button>
 
-                                    <button type="reset" class="btn btn-secondary">
+                                    <button type="reset" class="btn btn-secondary btn1">
                                         Cancel
                                     </button>
                                 </div>

@@ -56,8 +56,10 @@ include_once(DIR_URL . "include/sidebar.php");
                             <i class="fa-solid fa-bangladeshi-taka-sign "></i> <?php echo number_format($counts['total_revenue']) ?>
                         </p>
                         </p>
-                        <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="card-link link-underline-light">View more
+                        <a href="#" class="card-link link-underline-light">View more
                         </a>
+                        <!-- <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="card-link link-underline-light">View more
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -80,7 +82,7 @@ include_once(DIR_URL . "include/sidebar.php");
             <div class="col-md-12 mt-5">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link text-uppercase active" id="new-students" data-bs-toggle="tab" data-bs-target="#new-students-pane" type="button" role="tab" aria-controls="new-students-pane" aria-selected="true">
+                        <button class="nav-link text-uppercase active " id="new-students" data-bs-toggle="tab" data-bs-target="#new-students-pane" type="button" role="tab" aria-controls="new-students-pane" aria-selected="true">
                             New Students
                         </button>
                     </li>
@@ -141,7 +143,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <th scope="col">#</th>
                                         <th scope="col">Book Name</th>
                                         <th scope="col">Student Name</th>
-                                        <th scope="col">Loan Date</th>
+                                        <th scope="col">Issue Date</th>
                                         <th scope="col">Due Date</th>
                                         <th scope="col">Status</th>
                                     </tr>

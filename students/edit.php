@@ -97,11 +97,11 @@ include_once(DIR_URL . "include/sidebar.php");
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" name="submit" class="btn btn-success">
+                                    <button type="submit" name="submit" class="btn btn-success btn1">
                                         Save
                                     </button>
 
-                                    <a href="<?php echo BASE_URL ?>students" class="btn btn-secondary">
+                                    <a href="<?php echo BASE_URL ?>students" class="btn btn-secondary btn1">
                                         Cancel
                                     </a>
                                 </div>

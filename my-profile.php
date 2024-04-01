@@ -43,13 +43,13 @@ include_once(DIR_URL . "include/sidebar.php");
     <div class="container-fluid">
         <!--Cards-->
         <div class="row">
-            <div class="col-md-12">
-                <h4 class="fw-bold text-uppercase">My Profile</h4>
+            <div class="col-md-12 mt-4">
+                <h3 class="fw-bold text-uppercase">My Profile</h3>
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
             </div>
 
             <!--Account info form-->
-            <div class="col-md-6">
+            <div class="col-md-6 mt-4">
                 <div class="card">
                     <div class="card-header">
                         Account Information
@@ -94,7 +94,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" name="profile_submit" class="btn btn-success">
+                                    <button type="submit" name="profile_submit" class="btn btn-success btn1">
                                         Save
                                     </button>
                                 </div>
@@ -105,7 +105,7 @@ include_once(DIR_URL . "include/sidebar.php");
             </div>
 
             <!--Change password form-->
-            <div class="col-md-6">
+            <div class="col-md-6 mt-4">
                 <div class="card" style="min-height:457px;">
                     <div class="card-header">
                         Change Password
@@ -134,7 +134,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" name="password_submit" class="btn btn-success">
+                                    <button type="submit" name="password_submit" class="btn btn-success btn1">
                                         Submit
                                     </button>
                                 </div>
