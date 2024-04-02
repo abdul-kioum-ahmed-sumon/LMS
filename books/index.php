@@ -102,21 +102,21 @@ include_once(DIR_URL . "include/sidebar.php");
                                                 </td>
                                                 <td><?php echo date("d-m-Y", strtotime($row['created_at'])) ?></td>
                                                 <td>
-                                                    <a href="<?php echo BASE_URL ?>books/edit.php?id=<?php echo $row['id'] ?>" class="btn btn-primary btn-sm">
+                                                    <a href="<?php echo BASE_URL ?>books/edit.php?id=<?php echo $row['id'] ?>" class="btn btn-primary btn-sm rgb">
                                                         Edit
                                                     </a>
-                                                    <a onclick="return confirm('Are you sure?')" href="<?php echo BASE_URL ?>books?action=delete&id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm">
+                                                    <a onclick="return confirm('Are you sure?')" href="<?php echo BASE_URL ?>books?action=delete&id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm rgb">
                                                         Delete
                                                     </a>
 
                                                     <?php if ($row['status'] == 1) { ?>
-                                                        <a href="<?php echo BASE_URL ?>books?action=status&id=<?php echo $row['id'] ?>&status=0" class="btn btn-warning btn-sm">
+                                                        <a href="<?php echo BASE_URL ?>books?action=status&id=<?php echo $row['id'] ?>&status=0" class="btn btn-warning btn-sm rgb">
                                                             Inactive
                                                         </a>
                                                     <?php }
                                                     if ($row['status'] == 0) {  ?>
 
-                                                        <a href="<?php echo BASE_URL ?>books?action=status&id=<?php echo $row['id'] ?>&status=1" class="btn btn-success btn-sm">
+                                                        <a href="<?php echo BASE_URL ?>books?action=status&id=<?php echo $row['id'] ?>&status=1" class="btn btn-success btn-sm rgb">
                                                             Active
                                                         </a>
                                                 </td>
