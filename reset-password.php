@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <script src="./assets/js/1c26fb5c51.js" crossorigin="anonymous"></script>
-    <title>Reset Password | Star Library</title>
+    <title>Reset Password | Baust Library</title>
 </head>
 
 <body style="background-color: #212529">
@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
                         <div class="col-md-7">
                             <div class="card-body">
                                 <h1 class="card-title text-uppercase fw-bold">
-                                    star library
+                                    Baust library
                                 </h1>
                                 <p class="card-text">Reset password</p>
                                 <?php include_once(DIR_URL . "include/alerts.php"); ?>

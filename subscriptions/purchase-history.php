@@ -38,7 +38,7 @@ include_once(DIR_URL . "include/sidebar.php");
 
 ?>
 <!--Main content start-->
-<main class="mt-5 pt-3">
+<main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
     <div class="container-fluid">
         <!--Cards-->
         <div class="row dashboard-counts">

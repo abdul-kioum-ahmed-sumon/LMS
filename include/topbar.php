@@ -39,7 +39,7 @@
 
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="<?php echo BASE_URL ?>my-profile.php">My Profle</a></li>
-                        <li><a class="dropdown-item" href="<?php echo BASE_URL ?>my-profile.php">Change Password</a></li>
+                        <li><a class="dropdown-item" href="<?php echo BASE_URL ?>change_pass.php">Change Password</a></li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>

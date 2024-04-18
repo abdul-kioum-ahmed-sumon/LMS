@@ -23,7 +23,7 @@ include_once(DIR_URL . "include/topbar.php");
 include_once(DIR_URL . "include/sidebar.php");
 ?>
 <!--Main content start-->
-<main class="mt-5 pt-3">
+<main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
     <div class="container-fluid">
         <!--Cards-->
         <div class="row">
@@ -70,7 +70,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Shelf Number</label>
-                                        <input type="text" name="shelf_number" class="form-control"  />
+                                        <input type="text" name="shelf_number" class="form-control" />
                                     </div>
                                 </div>
 

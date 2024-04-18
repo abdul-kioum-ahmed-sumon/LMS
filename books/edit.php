@@ -35,7 +35,7 @@ include_once(DIR_URL . "include/topbar.php");
 include_once(DIR_URL . "include/sidebar.php");
 ?>
 <!--Main content start-->
-<main class="mt-5 pt-3">
+<main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
     <div class="container-fluid">
         <!--Cards-->
         <div class="row">
@@ -100,7 +100,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                                 if ($row['id'] === $book['category_id'])
                                                     $selected = "selected";
 
-                                                ?>
+                                            ?>
                                                 <option <?php echo $selected ?> value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
                                             <?php } ?>
                                         </select>

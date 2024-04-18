@@ -111,8 +111,6 @@ function changePassword($conn, $param)
     }
 
 
-
-
     return $result;
 }
 

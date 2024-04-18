@@ -47,8 +47,8 @@ include_once(DIR_URL . "include/sidebar.php");
 
 ?>
 <!--Main content start-->
-<main class="mt-5 pt-3" >
-    <div class="container-fluid" >
+<main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
+    <div class="container-fluid">
         <!--Cards-->
         <div class="row dashboard-counts ">
             <div class="col-md-12 mb-3 mt-4">
@@ -56,8 +56,8 @@ include_once(DIR_URL . "include/sidebar.php");
                 <h3 class="fw-bold text-uppercase">Manage Students</h3>
             </div>
 
-            <div class="col-md-12" >
-                <div class="card" >
+            <div class="col-md-12">
+                <div class="card">
                     <div class="card-header">
                         All Students
                     </div>
@@ -82,7 +82,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                     if ($students->num_rows > 0) {
                                         $i = 1;
                                         while ($row = $students->fetch_assoc()) {
-                                            ?>
+                                    ?>
                                             <tr>
                                                 <th scope="row"><?php echo $i++ ?></th>
                                                 <td><?php echo $row['name'] ?></td>
@@ -113,16 +113,16 @@ include_once(DIR_URL . "include/sidebar.php");
                                                             Inactive
                                                         </a>
                                                     <?php }
-                                                if ($row['status'] == 0) {  ?>
+                                                    if ($row['status'] == 0) {  ?>
 
                                                         <a href="<?php echo BASE_URL ?>students?action=status&id=<?php echo $row['id'] ?>&status=1" class="btn btn-success btn-sm">
                                                             Active
                                                         </a>
-                                                    </td>
-                                                <?php } ?>
+                                                </td>
+                                            <?php } ?>
                                             </tr>
-                                        <?php }
-                                } ?>
+                                    <?php }
+                                    } ?>
 
                                 </tbody>
                             </table>

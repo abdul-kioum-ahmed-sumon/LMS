@@ -23,7 +23,7 @@ include_once(DIR_URL . "include/topbar.php");
 include_once(DIR_URL . "include/sidebar.php");
 ?>
 <!--Main content start-->
-<main class="mt-5 pt-3">
+<main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
     <div class="container-fluid">
         <!--Cards-->
         <div class="row">
@@ -50,7 +50,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">ID Number</label>
-                                        <input type="text" class="form-control" name="dept_id"  required/>
+                                        <input type="text" class="form-control" name="dept_id" required />
                                     </div>
                                 </div>
 
@@ -58,16 +58,16 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Department</label>
-                                        <input type="text" class="form-control" name="dept"  required/>
+                                        <input type="text" class="form-control" name="dept" required />
                                     </div>
                                 </div>
 
-                                
-                                
+
+
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email"  required/>
+                                        <input type="email" class="form-control" name="email" required />
                                     </div>
                                 </div>
 
@@ -81,7 +81,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Address</label>
-                                        <input type="text" class="form-control" name="address"  required />
+                                        <input type="text" class="form-control" name="address" required />
                                     </div>
                                 </div>
 
