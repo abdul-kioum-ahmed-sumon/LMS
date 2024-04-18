@@ -59,10 +59,10 @@ include_once(DIR_URL . "include/sidebar.php");
                         <form method="get">
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <button type="button" style="float:leftt" class="btn btn-success mb-2 " data-bs-toggle="modal" data-bs-target="#subsModal">
+                                    <button type="button" style="float:leftt" class="btn btn-success mb-3 btn1 mt-2" data-bs-toggle="modal" data-bs-target="#subsModal">
                                         Create Membership
                                     </button>
-                                    <h5 class="fw-bold text-uppercase">Search</h5>
+                                    <h5 class="fw-bold text-uppercase mt-2 mb-3">Search</h5>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">From</label>
@@ -74,7 +74,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <input type="date" class="form-control" name="to" value="<?php echo $to ?>" />
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-3 mb-4">
                                     <button type="submit" name="search" class="btn btn-primary btn-sm" style="margin-top:35px">
                                         Search
                                     </button>
@@ -156,7 +156,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <select name="student_id" class="form-control">
                                     <option value="">Please select</option>
                                     <?php while ($row = $students->fetch_assoc()) { ?>
-                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['dept_id'] ?> <span class="text-muted">&nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp;</span> <?php echo $row['name'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -171,7 +171,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <select name="plan_id" class="form-control">
                                     <option value="">Please select</option>
                                     <?php while ($row = $plans->fetch_assoc()) { ?>
-                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['title'] ?></option>
+                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['title'] ?><span class="text-muted">&nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp;</span> <?php echo $row['amount'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
