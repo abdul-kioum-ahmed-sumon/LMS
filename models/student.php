@@ -40,7 +40,7 @@ function create($conn, $param)
 // Function to get all students
 function getStudents($conn)
 {
-    $sql = "select * from students order by id desc";
+    $sql = "select * from students order by id desc ";
     $result = $conn->query($sql);
     return $result;
 }

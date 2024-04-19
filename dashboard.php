@@ -56,10 +56,8 @@ include_once(DIR_URL . "include/sidebar.php");
                             <i class="fa-solid fa-bangladeshi-taka-sign "></i> <?php echo number_format($counts['total_revenue']) ?>
                         </p>
                         </p>
-                        <a href="#" class="card-link link-underline-light">View more
+                        <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="card-link link-underline-light">View more
                         </a>
-                        <!-- <a href="<?php echo BASE_URL ?>subscriptions/purchase-history.php" class="card-link link-underline-light">View more
-                        </a> -->
                     </div>
                 </div>
             </div>

@@ -41,7 +41,7 @@ include_once(DIR_URL . "include/sidebar.php");
         <div class="row">
             <div class="col-md-12 mt-4">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h3 class="fw-bold text-uppercase ">Edit Loan</h3>
+                <h3 class="fw-bold text-uppercase ">Edit issue Book</h3>
             </div>
 
             <div class="col-md-12 mt-4">
@@ -92,7 +92,7 @@ include_once(DIR_URL . "include/sidebar.php");
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Loan Date</label>
+                                        <label class="form-label">Issue Date</label>
                                         <input type="date" class="form-control" name="loan_date" required value="<?php echo $loan['loan_date'] ?>" />
                                     </div>
                                 </div>

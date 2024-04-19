@@ -88,7 +88,7 @@ function update($conn, $param)
 // Function to get students
 function getStudents($conn)
 {
-    $sql = "select id, name,dept_id from students";
+    $sql = "select id, name,dept_id from students where status = 1";
     $result = $conn->query($sql);
     return $result;
 }
@@ -96,7 +96,7 @@ function getStudents($conn)
 // Function to get books
 function getBooks($conn)
 {
-    $sql = "select id, title,isbn from books";
+    $sql = "select id, title,isbn from books where status = 1";
     $result = $conn->query($sql);
     return $result;
 }

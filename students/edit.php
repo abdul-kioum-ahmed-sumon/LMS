@@ -39,12 +39,12 @@ include_once(DIR_URL . "include/sidebar.php");
     <div class="container-fluid">
         <!--Cards-->
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mt-4">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
                 <h4 class="fw-bold text-uppercase">Edit Student</h4>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mt-3">
                 <div class="card">
                     <div class="card-header">
                         Fill the form

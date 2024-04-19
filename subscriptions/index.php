@@ -216,7 +216,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                             Cancel
                                         </button>
                                     <?php } else { ?>
-                                        <a href="<?php echo BASE_URL ?>subscriptions" class="btn btn-secondary">
+                                        <a href="<?php echo BASE_URL ?>subscriptions" class="btn btn-secondary btn1">
                                             Cancel
                                         </a>
                                     <?php } ?>
