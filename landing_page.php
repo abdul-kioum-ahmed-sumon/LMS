@@ -82,14 +82,14 @@
         <div class="row justify-content-start">
           <div class="col-lg-8">
             <h2 class="">Welcome to Library Management System!</h2>
-            <p>Introducing Our Advanced Library Management System</p>
+            <p>Introducing Our Advanced Library Management System . . . .</p>
             <a href="#about" class="btn-get-started">Get Started</a>
           </div>
         </div>
       </div>
 
     </section><!-- /Hero Section -->
-    
+
 
     <!-- About Section -->
     <section id="about" class="about section">
@@ -119,7 +119,7 @@
               <li><i class="bi bi-check-circle"></i> <span>User Management</span></li>
               <li><i class="bi bi-check-circle"></i> <span>Circulation Management</span></li>
             </ul>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            <a href="index.php" class="read-more"><span>See demo</span><i class="bi bi-arrow-right"></i></a>
           </div>
 
         </div>

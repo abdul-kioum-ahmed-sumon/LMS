@@ -36,12 +36,13 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link href="assets/images/BAUST_LOGO.png" rel="icon">
 
     <script src="./assets/js/1c26fb5c51.js" crossorigin="anonymous"></script>
     <title>Login | Baust Library</title>
 </head>
 
-<body  style="background-image: linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );">
+<body style="background-image: linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );">
     <div class="container d-flex align-items-center justify-content-center vh-100 ">
         <div class="row ">
             <div class="col-md-12 login-form ">
