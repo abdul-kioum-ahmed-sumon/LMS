@@ -100,6 +100,15 @@ function update($conn, $param)
 
     $datetime = date("Y-m-d H:i:s");
 
+    // Sanitize variables
+    $name = $conn->real_escape_string($name);
+    $email = $conn->real_escape_string($email);
+    $phone_no = $conn->real_escape_string($phone_no);
+    $address = $conn->real_escape_string($address);
+    $datetime = $conn->real_escape_string($datetime);
+    $dept = $conn->real_escape_string($dept);
+    $dept_id = $conn->real_escape_string($dept_id);
+
     $sql = "UPDATE students SET 
         name = '$name', 
         email = '$email', 

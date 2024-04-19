@@ -81,21 +81,35 @@ function updateBook($conn, $param)
     ## Validation end
 
     $datetime = date("Y-m-d H:i:s");
-    $sql = "UPDATE books SET 
-                title = ?, 
-                author = ?, 
-                publication_year = ?,
-                isbn = ?,
-                shelf_no = ?,
-                category_id = ?,
-                updated_at = ?
-            WHERE id = ?";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssisis", $title, $author, $publication_year, $isbn, $shelf_number, $category_id, $datetime, $id);
-    $result['success'] = $stmt->execute();
-    $stmt->close();
+    // Sanitize variables 
+    $title = $conn->real_escape_string($title);
+    $author = $conn->real_escape_string($author);
+    $publication_year = $conn->real_escape_string($publication_year);
+    $isbn = $conn->real_escape_string($isbn);
+    $shelf_number = $conn->real_escape_string($shelf_number);
+    $category_id = $conn->real_escape_string($category_id);
+    $datetime = $conn->real_escape_string($datetime);
+
+    $sql = "UPDATE books SET 
+            title = '$title', 
+            author = '$author', 
+            publication_year = '$publication_year',
+            isbn = '$isbn',
+            shelf_no = '$shelf_number',
+            category_id = '$category_id',
+            updated_at = '$datetime'
+        WHERE id = $id";
+
+    if ($conn->query($sql) === TRUE) {
+        $result['success'] = true;
+    } else {
+        $result['success'] = false;
+        $result['error'] = $conn->error;
+    }
+
     return $result;
+
 }
 
 

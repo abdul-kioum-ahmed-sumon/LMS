@@ -50,8 +50,6 @@
 
       <di class="container position-relative d-flex align-items-center justify-content-between">
         <a href="landing_page.php" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets_2/img/logo.png" alt=""> -->
           <h1 class=""><img src="assets/images/LMS_fabicon.png" alt="baust" class="baust_logo  ">Library Management System</h1>
         </a>
 
@@ -82,7 +80,7 @@
         <div class="row justify-content-start">
           <div class="col-lg-8">
             <h2 class="">Welcome to Library Management System!</h2>
-            <p>Introducing Our Advanced Library Management System . . . .</p>
+            <p>Introducing Our Advanced Library Management System. </p>
             <a href="#about" class="btn-get-started">Get Started</a>
           </div>
         </div>

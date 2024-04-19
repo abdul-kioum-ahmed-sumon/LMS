@@ -71,7 +71,14 @@ function update($conn, $param)
         return $result;
     }
     ## Validation end
-
+    // Sanitize variables 
+    $book_id = $conn->real_escape_string($book_id);
+    $student_id = $conn->real_escape_string($student_id);
+    $loan_date = $conn->real_escape_string($loan_date);
+    $return_date = $conn->real_escape_string($return_date);
+    $datetime = $conn->real_escape_string($datetime);
+ 
+    $title = $conn->real_escape_string($title);
     $datetime = date("Y-m-d H:i:s");
     $sql = "UPDATE book_loans SET 
         book_id = '$book_id', 
