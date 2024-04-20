@@ -59,6 +59,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="User/index.php" target="_self">Student Login</a></li>
             <li><a href="index.php" target="_self">Admin Login</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -79,7 +80,7 @@
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row justify-content-start">
           <div class="col-lg-8">
-            <h2 class="">Welcome to Library Management System!</h2>
+            <h1 class="">Welcome to Library Management System!</h1>
             <p>Introducing Our Advanced Library Management System. </p>
             <a href="#about" class="btn-get-started">Get Started</a>
           </div>
