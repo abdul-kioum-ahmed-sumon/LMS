@@ -213,78 +213,106 @@ include_once(DIR_URL . "models/dashboard.php");
 </div>
 
 <!--Offcanvas Menu end-->
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background-color: #fff;
-  }
-
-  th,
-  td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-
-  th {
-    background-color: #f2f2f2;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-</style>
 
 <body class="container1">
   <!--Main Container Start-->
   <main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
 
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
 
-    <h2>Data Table</h2>
-    <!-- Button to add a new FAQ -->
-    <a class='btn btn-primary btn-sm' href='add_faq.php' target='_BLANK'>Add FAQ</a>
-    <!-- Table to display FAQs -->
-    <table id="FAQ Table">
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: #fff;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+    </head>
+
+
+    <!-- Page Heading and Add Question Button -->
+    <h2 mt-5>Data Table</h2>
+    <a class='btn btn-primary btn-sm' href='qb.php' target='_BLANK'>Add Question</a>
+    <table id="questionTable">
       <thead>
         <tr>
+          <th>Course</th>
+          <th>Subject</th>
+          <th>Year</th>
+          <th>Semester</th>
           <th>Question</th>
-          <th>Answer</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
 
         <?php
-        // Include the file containing database connection details
-        include "db_connection.php";
+        // PHP code to retrieve and display data from the database
+        $db_server = "localhost";
+        $db_user = "root";
+        $db_pass = "";
+        $db_name = "lms";
+        $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
 
-        // SQL query to fetch FAQs from the database
-        $sql = "SELECT * FROM faq";
-        // Execute the SQL query
-        $result = $con->query($sql);
-        // Loop through each row of the result set and display FAQs
+        $sql = "SELECT * FROM previous_questions";
+        $result = $conn->query($sql);
         while ($row = $result->fetch_assoc()) {
           echo "<tr>
-              <td>" . $row['question'] . "</td>
-              <td>" . $row['answer'] . "</td>
+              <td>" . $row['course'] . "</td>
+              <td>" . $row['subject'] . "</td>
+              <td>" . $row["year"] . "</td>
+              <td>" . $row["semester"] . "</td>
+              <td>" . $row["question"] . "</td>
               <td>
-                <a class='btn btn-primary btn-sm' href='update_faq.php?id=$row[id]' target='_BLANK'>Update</a>
-                <a class='btn btn-danger btn-sm' href='delete_faq.php?id=$row[id]'>Delete</a>
+                <a class='btn btn-primary btn-sm' href='qb_update.php?id=$row[id]' target='_BLANK'>Update</a>
+                <a class='btn btn-danger btn-sm' href='qb_delete.php?id=$row[id]'>Delete</a>
               </td>
             </tr>";
         }
         ?>
       </tbody>
+    </table>
 
+    <!-- JavaScript for Dynamic Table Update -->
+    <script>
+      // Function to update the table dynamically
+      function updateTable() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("questionTable").innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("GET", "get_updated_questions.php", true);
+        xhttp.send();
+      }
+
+      // Call updateTable function when the page loads
+      window.onload = function() {
+        updateTable();
+      };
+    </script>
 
 
 

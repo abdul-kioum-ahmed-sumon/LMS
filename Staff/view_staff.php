@@ -230,6 +230,10 @@ include_once(DIR_URL . "models/dashboard.php");
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo BASE_URL ?>Question_bank/qb_read.php" class="nav-link"><i class="fas fa-newspaper me-2" style="color: #b2bafb;"></i>Question Bank
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo BASE_URL ?>NoticeBoard/index.php" class="nav-link"><i class="fa-solid fa-pen-to-square me-2" style="color: #b2bafb;"></i>Notice Board
                     </a>
                 </li>
@@ -449,49 +453,49 @@ include_once(DIR_URL . "models/dashboard.php");
         </style>
         </head>
 
-      
-            <div class="container">
-                <h2>Staff Management System</h2>
-                <a href="staff_management.php" class="btn btn-primary btn-square mb-3"><i class="fas fa-home fa-lg"></i> Home</a> <!-- Home button with home icon -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <form class="form-inline">
-                            <input type="text" class="form-control mr-2" name="search" placeholder="Search by name">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </form>
-                    </div>
+
+        <div class="container">
+            <h2>Staff Management System</h2>
+            <a href="staff_management.php" class="btn btn-primary btn-square mb-3"><i class="fas fa-home fa-lg"></i> Home</a> <!-- Home button with home icon -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <form class="form-inline">
+                        <input type="text" class="form-control mr-2" name="search" placeholder="Search by name">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
                 </div>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th><span>Name</span></th>
-                            <th><span>Email</span></th>
-                            <th><span>Position</span></th>
-                            <th><span>Actions</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . $row["name"] . "</td>";
-                                echo "<td>" . $row["email"] . "</td>";
-                                echo "<td>" . $row["position"] . "</td>";
-                                echo "<td class='action-links'>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th><span>Name</span></th>
+                        <th><span>Email</span></th>
+                        <th><span>Position</span></th>
+                        <th><span>Actions</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row["name"] . "</td>";
+                            echo "<td>" . $row["email"] . "</td>";
+                            echo "<td>" . $row["position"] . "</td>";
+                            echo "<td class='action-links'>
                                 <a href='edit_staff.php?id=" . $row["staff_id"] . "' class='btn btn-primary btn-square'><i class='fas fa-edit fa-lg'></i> Edit</a> <!-- Edit button with edit icon -->
                                 <a href='delete_staff.php?id=" . $row["staff_id"] . "' class='btn btn-danger btn-square' onclick='return confirm(\"Are you sure you want to delete this staff?\")'><i class='fas fa-trash-alt fa-lg'></i> Delete</a> <!-- Delete button with trash icon -->
                               </td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='4'>No staff found.</td></tr>";
+                            echo "</tr>";
                         }
-                        ?>
-                    </tbody>
-                </table>
-                <a href="javascript:history.back()" class="btn btn-back"><i class="fas fa-arrow-left fa-lg"></i> Back</a> <!-- Back button with back arrow icon -->
-            </div>
+                    } else {
+                        echo "<tr><td colspan='4'>No staff found.</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <a href="javascript:history.back()" class="btn btn-back"><i class="fas fa-arrow-left fa-lg"></i> Back</a> <!-- Back button with back arrow icon -->
+        </div>
 
     </main>
     <!--Main content end-->

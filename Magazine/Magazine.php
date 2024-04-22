@@ -213,6 +213,10 @@ if (!$books) {
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo BASE_URL ?>Question_bank/qb_read.php" class="nav-link"><i class="fas fa-newspaper me-2" style="color: #b2bafb;"></i>Question Bank
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo BASE_URL ?>NoticeBoard/index.php" class="nav-link"><i class="fa-solid fa-pen-to-square me-2" style="color: #b2bafb;"></i>Notice Board
                     </a>
                 </li>

@@ -70,6 +70,10 @@ include_once(DIR_URL . "models/dashboard.php");
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo BASE_URL ?>User/qb_read.php" class="nav-link"><i class="fas fa-newspaper me-2" style="color: #b2bafb;"></i>Question Bank
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo BASE_URL ?>User/faq.php" class="nav-link"><i class="fa-solid fa-circle-question me-2" style="color: #b2bafb;"></i>FAQ
                     </a>
                 </li>
@@ -89,34 +93,34 @@ include_once(DIR_URL . "models/dashboard.php");
 <body class="container1 mt-3">
 
     <main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
-   
-            <div class="main mt-4">
 
-                <table class="table table-sm custom-table">
+        <div class="main mt-4">
 
-                    <thead>
-                        <tr>
+            <table class="table table-sm custom-table">
 
-                            <th>Title</th>
-                            <th>Publisher</th>
-                            <th>Publication Date</th>
-                            <th>Category</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if (isset($_POST['search'])) {
-                            $searchField = $_POST['sv'];
-                            $sql = "SELECT * FROM Magazine WHERE title LIKE '%$searchField%' OR publisher LIKE '%$searchField%' OR category LIKE '%$searchField%'";
-                        } else {
-                            $sql = "SELECT * FROM Magazine";
-                        }
+                <thead>
+                    <tr>
 
-                        $result = mysqli_query($conn, $sql);
+                        <th>Title</th>
+                        <th>Publisher</th>
+                        <th>Publication Date</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['search'])) {
+                        $searchField = $_POST['sv'];
+                        $sql = "SELECT * FROM Magazine WHERE title LIKE '%$searchField%' OR publisher LIKE '%$searchField%' OR category LIKE '%$searchField%'";
+                    } else {
+                        $sql = "SELECT * FROM Magazine";
+                    }
 
-                        while ($row = $result->fetch_assoc()) {
-                            echo       "<tr>
+                    $result = mysqli_query($conn, $sql);
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo       "<tr>
             <td>" . $row["title"] . "</td>
             <td>" . $row["publisher"] . "</td>
             <td>" . $row["publication_date"] . "</td>
@@ -125,19 +129,19 @@ include_once(DIR_URL . "models/dashboard.php");
                 <a class='btn btn-info btn-sm' href='view_magazine.php?id=$row[magazine_id]'>View</a>
             </td>
         </tr>";
-                        }
+                    }
 
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-            </div>
-            </div>
-            <script src="script.js"></script>
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        </div>
+        <script src="script.js"></script>
 
-            <!-- ====== ionicons ======= -->
-            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <!-- ====== ionicons ======= -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

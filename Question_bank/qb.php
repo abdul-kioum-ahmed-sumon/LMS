@@ -219,30 +219,136 @@ include_once(DIR_URL . "models/dashboard.php");
     <main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
 
 
-        <form method="POST" action="add_faq.php" class="mt-5">
-            <label for="question">Question:</label><br>
-            <input type="text" id="question" name="question" required><br><br>
-            <label for="answer">Answer:</label><br>
-            <textarea id="answer" name="answer" rows="4" required></textarea><br><br>
-            <input type="submit" name="submit" value="Add FAQ">
-        </form>
+        <style>
+            /* Basic CSS for layout */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
 
-        <?php // PHP code to add a new FAQ to the database
+            .container {
+                max-width: 600px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
 
-        if (isset($_POST['submit'])) {
-            // Get the question and answer from the form
-            $question = $_POST['question'];
-            $answer = $_POST['answer'];
-            // SQL query to insert the new FAQ into the database
-            $sql = "INSERT INTO faq (question, answer)
-        VALUES(' $question','$answer')";
-            // Execute the SQL query
-            $res = mysqli_query($con, $sql);
-            // Redirect to the page displaying all FAQs after adding the new FAQ
-            header("Location: read_faq.php");
-        }
-        ?>
+            h1 {
+                text-align: center;
+                color: #007bff;
+                margin-bottom: 20px;
+            }
 
+            form {
+                margin-bottom: 20px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                color: #333;
+            }
+
+            input[type="text"],
+            textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            textarea {
+                height: 100px;
+            }
+
+            input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+        </style>
+        </head>
+
+        <body>
+            <!-- Form Container -->
+            <div class="container mt-5">
+                <!-- Form Heading -->
+                <h1>University Previous Questions</h1>
+
+                <!-- Form for adding a new question -->
+                <form action="#" method="post">
+                    <!-- Input fields for course, subject, year, semester, and question -->
+                    <label for="course">Course:</label>
+                    <input type="text" id="course" name="course" required placeholder="Enter course name"><br>
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required placeholder="Enter subject name"><br>
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" name="year" required placeholder="Enter year"><br>
+                    <label for="semester">Semester:</label>
+                    <input type="number" id="semester" name="semester" required placeholder="Enter semester"><br>
+                    <label for="question">Question:</label>
+                    <textarea id="question" name="question" required placeholder="Enter question"></textarea><br>
+                    <!-- Submit button to add the question -->
+                    <input type="submit" name="s" value="Add Question">
+                </form>
+                <?php
+                // PHP code for adding a new question to the database
+                $db_server = "localhost";
+                $db_user = "root";
+                $db_pass = "";
+                $db_name = "lms";
+                $conn = "";
+
+                // Establish a connection to the MySQL database
+                $conn = mysqli_connect(
+                    $db_server,
+                    $db_user,
+                    $db_pass,
+                    $db_name
+                );
+
+                // Check if the form is submitted
+                if (isset($_POST["s"])) {
+                    // Get form data
+                    $course = $_POST['course'];
+                    $subject = $_POST['subject'];
+                    $year = $_POST['year'];
+                    $semester = $_POST['semester'];
+                    $question = $_POST['question'];
+
+                    // Construct SQL query to insert the new question into the database
+                    $sql = "INSERT INTO previous_questions (course, subject, year, semester, question) VALUES ('$course', '$subject', $year, $semester, '$question')";
+                    // Execute the SQL query
+                    $result = mysqli_query($conn, $sql);
+                    // Redirect to the question bank page after adding the question
+                    header("Location: qb_read.php");
+
+                    // Display success or error message based on the query result
+                    if ($result) {
+                        echo "Question added successfully!";
+                    } else {
+                        echo "Error: " . mysqli_error($conn);
+                    }
+                }
+
+
+                ?>
+            </div>
 
 
 

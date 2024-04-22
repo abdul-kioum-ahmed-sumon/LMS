@@ -10,33 +10,6 @@ $tabs = getTabData($conn);
 
 ?>
 
-<?php
-// Function to retrieve books from the database
-function GetBooks($conn)
-{
-  // Perform your database query here to fetch books
-  // Example query:
-  $query = "select b.*, c.name as cat_name from books b 
-        inner join categories c on c.id = b.category_id 
-        order by id desc";
-  $result = $conn->query($query);
-
-  // Check if query was successful
-  if ($result) {
-    // Return the result set
-    return $result;
-  } else {
-    // Return an empty result or handle the error as needed
-    return false;
-  }
-}
-
-$books = GetBooks($conn);
-if (!$books) {
-  $_SESSION['error'] = "Error fetching books: " . $conn->error;
-}
-
-?>
 
 
 <!DOCTYPE html>
@@ -123,65 +96,98 @@ if (!$books) {
 <body class="container1 mt-3">
 
   <main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
+
     <style>
       body {
         font-family: Arial, sans-serif;
-        background-color: #f8f9fa;
+        background-color: #f4f4f4;
         margin: 0;
         padding: 20px;
       }
 
-      h1 {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      .faq-container {
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .faq-item {
+      table {
+        width: 100%;
+        border-collapse: collapse;
         margin-bottom: 20px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 15px;
         background-color: #fff;
       }
 
-      .question {
-        font-size: 18px;
-        margin-bottom: 10px;
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
       }
 
-      .answer {
-        font-size: 16px;
-        line-height: 1.5;
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
       }
     </style>
-    <!-- Heading for the FAQ page -->
-    <h1>Library Management FAQ</h1>
+    </head>
 
-    <!-- Container for displaying FAQ items -->
-    <div class="faq-container">
-      <?php
-      // Define an array of frequently asked questions and their answers
-      $faq = array(
-        "How do I borrow a book?" => "To borrow a book, visit the library's circulation desk and present your library card to the librarian. You can then choose the books you wish to borrow.",
-        "Can I renew my borrowed books?" => "Yes, you can renew your borrowed books if they are not reserved by other users. You can do this by visiting the library's website or by contacting the circulation desk.",
-        "What should I do if I lose a library book?" => "If you lose a library book, you are responsible for replacing it or paying for its replacement cost. Please inform the library staff immediately to discuss the necessary steps.",
-        // Add more questions and answers as needed
-      );
 
-      // Display the FAQ items
-      foreach ($faq as $question => $answer) {
-        echo "<div class='faq-item'>";
-        echo "<h3 class='question'>$question</h3>"; // Display the question
-        echo "<p class='answer'>$answer</p>"; // Display the answer
-        echo "</div>";
+    <!-- Page Heading and Add Question Button -->
+    <h2 mt-5>Data Table</h2>
+
+    <table id="questionTable">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>Subject</th>
+          <th>Year</th>
+          <th>Semester</th>
+          <th>Question</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <?php
+        // PHP code to retrieve and display data from the database
+        $db_server = "localhost";
+        $db_user = "root";
+        $db_pass = "";
+        $db_name = "lms";
+        $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
+
+        $sql = "SELECT * FROM previous_questions";
+        $result = $conn->query($sql);
+        while ($row = $result->fetch_assoc()) {
+          echo "<tr>
+              <td>" . $row['course'] . "</td>
+              <td>" . $row['subject'] . "</td>
+              <td>" . $row["year"] . "</td>
+              <td>" . $row["semester"] . "</td>
+              <td>" . $row["question"] . "</td>
+            </tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+
+    <!-- JavaScript for Dynamic Table Update -->
+    <script>
+      // Function to update the table dynamically
+      function updateTable() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("questionTable").innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("GET", "get_updated_questions.php", true);
+        xhttp.send();
       }
-      ?>
-    </div>
+
+      // Call updateTable function when the page loads
+      window.onload = function() {
+        updateTable();
+      };
+    </script>
+
   </main>
   <!--Main content end-->
   <?php include_once(DIR_URL . "include/footer.php") ?>

@@ -190,6 +190,10 @@ include_once(DIR_URL . "models/dashboard.php");
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo BASE_URL ?>Question_bank/qb_read.php" class="nav-link"><i class="fas fa-newspaper me-2" style="color: #b2bafb;"></i>Question Bank
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo BASE_URL ?>NoticeBoard/index.php" class="nav-link"><i class="fa-solid fa-pen-to-square me-2" style="color: #b2bafb;"></i>Notice Board
                     </a>
                 </li>
@@ -312,20 +316,20 @@ include_once(DIR_URL . "models/dashboard.php");
         </style>
         </head>
 
-        
-            <h1 class="mt-5">Add Staff</h1>
-            <div class="container">
-                <form id="add_staff_form" action="add_staff.php" method="post">
-                    <input type="text" name="name" placeholder="Name" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <input type="text" name="position" placeholder="Position" required>
-                    <input type="submit" value="Add Staff">
-                </form>
-                <!-- See List button -->
-                <a class="see-list-button" href="view_staff.php">See List</a>
-            </div>
-        
+
+        <h1 class="mt-5">Add Staff</h1>
+        <div class="container">
+            <form id="add_staff_form" action="add_staff.php" method="post">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="text" name="position" placeholder="Position" required>
+                <input type="submit" value="Add Staff">
+            </form>
+            <!-- See List button -->
+            <a class="see-list-button" href="view_staff.php">See List</a>
+        </div>
+
 
 
 
