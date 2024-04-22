@@ -1,0 +1,86 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.notice {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-edit {
+    background-color: #28a745;
+}
+
+.notice-buttons {
+    margin-top: 15px; /* Increase the top margin */
+}
+
+.delete-btn {
+    background-color: #ff3333; /* Red background color for delete button */
+    color: rgb(255, 255, 255); /* White text color */
+    margin-left: 20px; /* Add more space between the buttons */
+}
+
+.delete-btn:hover {
+    background-color: #cc0000; /* Darker red color on hover */
+}
+
+/* You can adjust the spacing and colors according to your preference */
+
+input[type="text"],
+textarea {
+    width: calc(100% - 22px); /* Adjusted width to accommodate button margins */
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+}
+
+textarea {
+    height: 100px;
+}
+
+h2 {
+    color: #333;
+    font-weight: bold;
+}
+
+p {
+    color: #666;
+    font-size: 16px;
+}
+
+small {
+    color: #999;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    color: #333;
+}
