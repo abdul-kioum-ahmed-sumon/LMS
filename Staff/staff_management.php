@@ -6,76 +6,7 @@ include_once(DIR_URL . "models/dashboard.php");
 
 
 ?>
-<?php
 
-
-include 'db_connection.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
-    $notice_id = $_GET['id'];
-    $sql = "SELECT * FROM notices2 WHERE id = $notice_id";
-    $result = $conn->query($sql);
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        $title = $row['title'];
-        $content = $row['content'];
-        $file_path = $row['file_path'];
-    } else {
-        $_SESSION['error_message'] = "Notice not found!";
-        header("Location: index.php");
-        exit();
-    }
-} elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $notice_id = $_POST['id'];
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-
-    // File upload handling
-    $file_path = '';
-    if ($_FILES['file']['error'] === 0) {
-        $file_name = $_FILES['file']['name'];
-        $file_tmp = $_FILES['file']['tmp_name'];
-        $upload_dir = 'uploads/';
-        if (!file_exists($upload_dir)) {
-            mkdir($upload_dir, 0777, true); // Create the directory recursively
-        }
-        $file_path = $upload_dir . $file_name;
-        if (move_uploaded_file($file_tmp, $file_path)) {
-            // Update notice with new image
-            $sql = "UPDATE notices2 SET title='$title', content='$content', file_path='$file_path' WHERE id=$notice_id";
-            if ($conn->query($sql) === TRUE) {
-                $_SESSION['success_message'] = "Notice updated successfully!";
-                header("Location: index.php");
-                exit();
-            } else {
-                $_SESSION['error_message'] = "Error updating notice: " . $conn->error;
-                header("Location: edit_notice.php?id=$notice_id");
-                exit();
-            }
-        } else {
-            $_SESSION['error_message'] = "Error uploading image.";
-            header("Location: edit_notice.php?id=$notice_id");
-            exit();
-        }
-    } else {
-        // Update notice without changing the image
-        $sql = "UPDATE notices2 SET title='$title', content='$content' WHERE id=$notice_id";
-        if ($conn->query($sql) === TRUE) {
-            $_SESSION['success_message'] = "Notice updated successfully!";
-            header("Location: index.php");
-            exit();
-        } else {
-            $_SESSION['error_message'] = "Error updating notice: " . $conn->error;
-            header("Location: edit_notice.php?id=$notice_id");
-            exit();
-        }
-    }
-} else {
-    $_SESSION['error_message'] = "Invalid request!";
-    header("Location: index.php");
-    exit();
-}
-?>
 
 
 <!DOCTYPE html>
@@ -118,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="d-flex ms-auto" role="search">
                 <div class="input-group my-3 my-lg-0">
-                    <input type="text" class="form-control" placeholder="Search" aria-describedby="button-addon2" />
-                    <button class="btn btn-outline-secondary bg-primary text-white" type="button" id="button-addon2">
+                    <input type="text" class="form-control" placeholder="Search" aria-describedby="button-addon2" style />
+                    <button class="btn btn-outline-secondary bg-primary text-white mt-0" type="button" id="button-addon2">
                         <i class="fa-solid fa-magnifying-glass"></i></i>
                     </button>
                 </div>
@@ -285,31 +216,117 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     <main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
 
 
-
-
-        <div class="container mt-5">
-            <h2>Edit Notice</h2>
-            <?php
-            if (isset($_SESSION['error_message'])) {
-                echo "<p class='error-message'>" . htmlspecialchars($_SESSION['error_message']) . "</p>";
-                unset($_SESSION['error_message']);
+        <style>
+            /* Additional CSS for styling the form */
+            body {
+                background-color: #f2f2f2;
+                /* Set background color for the page */
+                font-family: Arial, sans-serif;
+                /* Use a sans-serif font */
             }
-            ?>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?php echo $notice_id; ?>">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" value="<?php echo $title; ?>" required>
 
-                <label for="content">Content:</label>
-                <textarea id="content" name="content" rows="4" required><?php echo $content; ?></textarea>
+            .container {
+                max-width: 500px;
+                /* Set maximum width for the container */
+                margin: 0 auto;
+                /* Center the container horizontally */
+                padding: 20px;
+                /* Add some padding */
+                background-color: #fff;
+                /* Set background color for the container */
+                border-radius: 8px;
+                /* Add border radius */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                /* Add box shadow */
+                position: relative;
+                /* Make the container position relative */
+            }
 
-                <label for="file">Change Image (Optional):</label>
-                <input type="file" id="file" name="file">
+            h1 {
+                text-align: center;
+                /* Center align the heading */
+                color: #333;
+                /* Set text color */
+            }
 
-                <button type="submit" name="submit" class="btn">Update Notice</button>
-            </form>
-            <a href="index.php" class="btn">Back to Notice Board</a>
-        </div>
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="submit"] {
+                width: 100%;
+                /* Set width to 100% */
+                padding: 10px;
+                /* Add padding */
+                margin: 5px 0;
+                /* Add margin */
+                border: 1px solid #ccc;
+                /* Add border */
+                border-radius: 4px;
+                /* Add border radius */
+                box-sizing: border-box;
+                /* Ensure padding and border are included in the width */
+                font-size: 16px;
+                /* Set font size */
+            }
+
+            input[type="submit"] {
+                font-weight: bold;
+                /* Make the text bold */
+                background-color: #4CAF50;
+                /* Set background color */
+                color: #fff;
+                /* Set text color to white */
+                border: none;
+                /* Remove border */
+                cursor: pointer;
+                /* Change cursor to pointer on hover */
+            }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+                /* Darken background color on hover */
+            }
+
+            /* CSS for the See List button */
+            .see-list-button {
+                background-color: #008CBA;
+                /* Change to desired color */
+                border: none;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                /* Adjust font size if necessary */
+                border-radius: 3px;
+                padding: 10px 20px;
+                /* Adjust padding if necessary */
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .see-list-button:hover {
+                background-color: #005f79;
+                /* Change to desired hover color */
+            }
+        </style>
+        </head>
+
+        
+            <h1 class="mt-5">Add Staff</h1>
+            <div class="container">
+                <form id="add_staff_form" action="add_staff.php" method="post">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="text" name="position" placeholder="Position" required>
+                    <input type="submit" value="Add Staff">
+                </form>
+                <!-- See List button -->
+                <a class="see-list-button" href="view_staff.php">See List</a>
+            </div>
+        
+
 
 
 

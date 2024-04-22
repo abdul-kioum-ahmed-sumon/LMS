@@ -1,3 +1,43 @@
+<?php
+session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "lms";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Display success message if it exists
+if (isset($_SESSION['success_message'])) {
+    echo "<div class='alert alert-success'>" . $_SESSION['success_message'] . "</div>";
+    unset($_SESSION['success_message']);
+}
+
+// sanitize input data
+function sanitize_input($data)
+{
+    global $conn;
+    return htmlspecialchars(strip_tags($conn->real_escape_string($data)));
+}
+
+// Fetch all staff records or filtered records if search query is provided
+if (isset($_GET['search'])) {
+    $search = sanitize_input($_GET['search']);
+    $sql = "SELECT * FROM staff WHERE name LIKE '%$search%'";
+} else {
+    $sql = "SELECT * FROM staff";
+}
+
+$result = $conn->query($sql);
+?>
+
 </html>
 <?php
 include_once("/Xampp/htdocs/lms-master/config/config.php");
@@ -6,76 +46,7 @@ include_once(DIR_URL . "models/dashboard.php");
 
 
 ?>
-<?php
 
-
-include 'db_connection.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
-    $notice_id = $_GET['id'];
-    $sql = "SELECT * FROM notices2 WHERE id = $notice_id";
-    $result = $conn->query($sql);
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        $title = $row['title'];
-        $content = $row['content'];
-        $file_path = $row['file_path'];
-    } else {
-        $_SESSION['error_message'] = "Notice not found!";
-        header("Location: index.php");
-        exit();
-    }
-} elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $notice_id = $_POST['id'];
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-
-    // File upload handling
-    $file_path = '';
-    if ($_FILES['file']['error'] === 0) {
-        $file_name = $_FILES['file']['name'];
-        $file_tmp = $_FILES['file']['tmp_name'];
-        $upload_dir = 'uploads/';
-        if (!file_exists($upload_dir)) {
-            mkdir($upload_dir, 0777, true); // Create the directory recursively
-        }
-        $file_path = $upload_dir . $file_name;
-        if (move_uploaded_file($file_tmp, $file_path)) {
-            // Update notice with new image
-            $sql = "UPDATE notices2 SET title='$title', content='$content', file_path='$file_path' WHERE id=$notice_id";
-            if ($conn->query($sql) === TRUE) {
-                $_SESSION['success_message'] = "Notice updated successfully!";
-                header("Location: index.php");
-                exit();
-            } else {
-                $_SESSION['error_message'] = "Error updating notice: " . $conn->error;
-                header("Location: edit_notice.php?id=$notice_id");
-                exit();
-            }
-        } else {
-            $_SESSION['error_message'] = "Error uploading image.";
-            header("Location: edit_notice.php?id=$notice_id");
-            exit();
-        }
-    } else {
-        // Update notice without changing the image
-        $sql = "UPDATE notices2 SET title='$title', content='$content' WHERE id=$notice_id";
-        if ($conn->query($sql) === TRUE) {
-            $_SESSION['success_message'] = "Notice updated successfully!";
-            header("Location: index.php");
-            exit();
-        } else {
-            $_SESSION['error_message'] = "Error updating notice: " . $conn->error;
-            header("Location: edit_notice.php?id=$notice_id");
-            exit();
-        }
-    }
-} else {
-    $_SESSION['error_message'] = "Invalid request!";
-    header("Location: index.php");
-    exit();
-}
-?>
 
 
 <!DOCTYPE html>
@@ -118,8 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="d-flex ms-auto" role="search">
                 <div class="input-group my-3 my-lg-0">
-                    <input type="text" class="form-control" placeholder="Search" aria-describedby="button-addon2" />
-                    <button class="btn btn-outline-secondary bg-primary text-white" type="button" id="button-addon2">
+                    <input type="text" class="form-control" placeholder="Search" aria-describedby="button-addon2" style />
+                    <button class="btn btn-outline-secondary bg-primary text-white mt-0" type="button" id="button-addon2">
                         <i class="fa-solid fa-magnifying-glass"></i></i>
                     </button>
                 </div>
@@ -284,34 +255,243 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     <!--Main Container Start-->
     <main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
 
-
-
-
-        <div class="container mt-5">
-            <h2>Edit Notice</h2>
-            <?php
-            if (isset($_SESSION['error_message'])) {
-                echo "<p class='error-message'>" . htmlspecialchars($_SESSION['error_message']) . "</p>";
-                unset($_SESSION['error_message']);
+        <style>
+            /* Additional CSS for styling */
+            body {
+                background-color: #f4f4f4;
+                /* Light gray background */
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
             }
-            ?>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?php echo $notice_id; ?>">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" value="<?php echo $title; ?>" required>
 
-                <label for="content">Content:</label>
-                <textarea id="content" name="content" rows="4" required><?php echo $content; ?></textarea>
+            .container {
+                width: 80%;
+                margin: 20px auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                position: relative;
+                /* Ensure position relative for absolute positioning */
+            }
 
-                <label for="file">Change Image (Optional):</label>
-                <input type="file" id="file" name="file">
+            h2 {
+                color: #007bff;
+                /* Blue heading */
+                text-align: center;
+                /* Center align heading */
+                margin-bottom: 20px;
+            }
 
-                <button type="submit" name="submit" class="btn">Update Notice</button>
-            </form>
-            <a href="index.php" class="btn">Back to Notice Board</a>
-        </div>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
 
+            th,
+            td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
 
+            th {
+                background-color: #007bff;
+                color: #fff;
+                text-align: center;
+                /* Center align column names */
+                text-transform: uppercase;
+                font-weight: bold;
+                /* Bold font for column names */
+            }
+
+            th:first-child {
+                border-top-left-radius: 8px;
+                /* Rounded corners for first column header */
+            }
+
+            th:last-child {
+                border-top-right-radius: 8px;
+                /* Rounded corners for last column header */
+            }
+
+            /* Different style for column name rows */
+            th:first-child,
+            /* First column */
+            th:nth-child(2),
+            /* Second column */
+            th:nth-child(3),
+            /* Third column */
+            th:nth-child(4) {
+                /* Fourth column */
+                background-color: #0056b3;
+                /* Darker blue background for column name rows */
+            }
+
+            th:first-child span,
+            /* First column text */
+            th:nth-child(2) span,
+            /* Second column text */
+            th:nth-child(3) span,
+            /* Third column text */
+            th:nth-child(4) span {
+                /* Fourth column text */
+                color: #fff;
+                /* White text */
+            }
+
+            td:first-child {
+                font-weight: bold;
+            }
+
+            /* Center-align email and position column values */
+            td:nth-child(2),
+            /* 2nd column, which is the Email column */
+            td:nth-child(3) {
+                /* 3rd column, which is the Position column */
+                text-align: center;
+            }
+
+            /* Center-align action column values */
+            .action-links {
+                display: flex;
+                justify-content: center;
+            }
+
+            .action-links a {
+                text-decoration: none;
+                color: #fff;
+                margin-right: 10px;
+                padding: 8px;
+                /* Adjusted padding */
+                border-radius: 5px;
+                transition: background-color 0.3s;
+                display: inline-block;
+            }
+
+            .action-links a:hover {
+                background-color: #0056b3;
+            }
+
+            .btn-square {
+                background-color: #007bff;
+                /* Blue button */
+                border: none;
+                color: #fff;
+                padding: 8px;
+                /* Adjusted padding */
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+                display: inline-block;
+            }
+
+            .btn-square:hover {
+                background-color: #0056b3;
+                /* Darker blue on hover */
+            }
+
+            .btn-danger {
+                background-color: #dc3545;
+                /* Red button */
+                padding: 8px;
+                /* Adjusted padding */
+            }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                /* Darker red on hover */
+            }
+
+            /* Ensure names appear in a single line */
+            td:first-child {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* Adjust position of back button */
+            .btn-back {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+
+            /* Style for the back button */
+            .btn-back {
+                background-color: #6c757d;
+                /* Gray button */
+                color: #fff;
+                /* White text */
+                padding: 8px 16px;
+                /* Adjusted padding */
+                border-radius: 5px;
+                /* Rounded corners */
+                text-decoration: none;
+                /* Remove default link underline */
+                transition: background-color 0.3s;
+                /* Add transition effect */
+            }
+
+            /* Style the back button on hover */
+            .btn-back:hover {
+                background-color: #5a6268;
+                /* Darker gray on hover */
+            }
+
+            /* Change background color of even rows */
+            tbody tr:nth-child(even) {
+                background-color: #f2f2f2;
+                /* Light gray background for even rows */
+            }
+        </style>
+        </head>
+
+      
+            <div class="container">
+                <h2>Staff Management System</h2>
+                <a href="staff_management.php" class="btn btn-primary btn-square mb-3"><i class="fas fa-home fa-lg"></i> Home</a> <!-- Home button with home icon -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <form class="form-inline">
+                            <input type="text" class="form-control mr-2" name="search" placeholder="Search by name">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th><span>Name</span></th>
+                            <th><span>Email</span></th>
+                            <th><span>Position</span></th>
+                            <th><span>Actions</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["name"] . "</td>";
+                                echo "<td>" . $row["email"] . "</td>";
+                                echo "<td>" . $row["position"] . "</td>";
+                                echo "<td class='action-links'>
+                                <a href='edit_staff.php?id=" . $row["staff_id"] . "' class='btn btn-primary btn-square'><i class='fas fa-edit fa-lg'></i> Edit</a> <!-- Edit button with edit icon -->
+                                <a href='delete_staff.php?id=" . $row["staff_id"] . "' class='btn btn-danger btn-square' onclick='return confirm(\"Are you sure you want to delete this staff?\")'><i class='fas fa-trash-alt fa-lg'></i> Delete</a> <!-- Delete button with trash icon -->
+                              </td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>No staff found.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <a href="javascript:history.back()" class="btn btn-back"><i class="fas fa-arrow-left fa-lg"></i> Back</a> <!-- Back button with back arrow icon -->
+            </div>
 
     </main>
     <!--Main content end-->

@@ -1,3 +1,68 @@
+<?php
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "lms";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Display success message if it exists
+if (isset($_SESSION['success_message'])) {
+    echo "<div class='alert alert-success'>" . $_SESSION['success_message'] . "</div>";
+    unset($_SESSION['success_message']);
+}
+
+// sanitize input data
+function sanitize_input($data)
+{
+    global $conn;
+    return htmlspecialchars(strip_tags($conn->real_escape_string($data)));
+}
+
+// Retrieve staff details based on staff ID
+if (isset($_GET['id'])) {
+    $staff_id = sanitize_input($_GET['id']);
+    $sql = "SELECT * FROM staff WHERE staff_id = $staff_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $name = $row["name"];
+        $email = $row["email"];
+        $position = $row["position"];
+    } else {
+        echo "Staff not found.";
+        exit;
+    }
+}
+
+// Update staff details
+if (isset($_POST['update'])) {
+    $staff_id = sanitize_input($_POST['staff_id']);
+    $name = sanitize_input($_POST['name']);
+    $email = sanitize_input($_POST['email']);
+    $position = sanitize_input($_POST['position']);
+
+    $sql = "UPDATE staff SET name='$name', email='$email', position='$position' WHERE staff_id=$staff_id";
+
+    if ($conn->query($sql) === TRUE) {
+        $_SESSION['success_message'] = "Staff details updated successfully!";
+        header("Location: view_staff.php");
+        exit();
+    } else {
+        echo "Error updating staff details: " . $conn->error;
+    }
+}
+?>
+
 </html>
 <?php
 include_once("/Xampp/htdocs/lms-master/config/config.php");
@@ -6,76 +71,7 @@ include_once(DIR_URL . "models/dashboard.php");
 
 
 ?>
-<?php
 
-
-include 'db_connection.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
-    $notice_id = $_GET['id'];
-    $sql = "SELECT * FROM notices2 WHERE id = $notice_id";
-    $result = $conn->query($sql);
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        $title = $row['title'];
-        $content = $row['content'];
-        $file_path = $row['file_path'];
-    } else {
-        $_SESSION['error_message'] = "Notice not found!";
-        header("Location: index.php");
-        exit();
-    }
-} elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $notice_id = $_POST['id'];
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-
-    // File upload handling
-    $file_path = '';
-    if ($_FILES['file']['error'] === 0) {
-        $file_name = $_FILES['file']['name'];
-        $file_tmp = $_FILES['file']['tmp_name'];
-        $upload_dir = 'uploads/';
-        if (!file_exists($upload_dir)) {
-            mkdir($upload_dir, 0777, true); // Create the directory recursively
-        }
-        $file_path = $upload_dir . $file_name;
-        if (move_uploaded_file($file_tmp, $file_path)) {
-            // Update notice with new image
-            $sql = "UPDATE notices2 SET title='$title', content='$content', file_path='$file_path' WHERE id=$notice_id";
-            if ($conn->query($sql) === TRUE) {
-                $_SESSION['success_message'] = "Notice updated successfully!";
-                header("Location: index.php");
-                exit();
-            } else {
-                $_SESSION['error_message'] = "Error updating notice: " . $conn->error;
-                header("Location: edit_notice.php?id=$notice_id");
-                exit();
-            }
-        } else {
-            $_SESSION['error_message'] = "Error uploading image.";
-            header("Location: edit_notice.php?id=$notice_id");
-            exit();
-        }
-    } else {
-        // Update notice without changing the image
-        $sql = "UPDATE notices2 SET title='$title', content='$content' WHERE id=$notice_id";
-        if ($conn->query($sql) === TRUE) {
-            $_SESSION['success_message'] = "Notice updated successfully!";
-            header("Location: index.php");
-            exit();
-        } else {
-            $_SESSION['error_message'] = "Error updating notice: " . $conn->error;
-            header("Location: edit_notice.php?id=$notice_id");
-            exit();
-        }
-    }
-} else {
-    $_SESSION['error_message'] = "Invalid request!";
-    header("Location: index.php");
-    exit();
-}
-?>
 
 
 <!DOCTYPE html>
@@ -118,8 +114,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="d-flex ms-auto" role="search">
                 <div class="input-group my-3 my-lg-0">
-                    <input type="text" class="form-control" placeholder="Search" aria-describedby="button-addon2" />
-                    <button class="btn btn-outline-secondary bg-primary text-white" type="button" id="button-addon2">
+                    <input type="text" class="form-control" placeholder="Search" aria-describedby="button-addon2" style />
+                    <button class="btn btn-outline-secondary bg-primary text-white mt-0" type="button" id="button-addon2">
                         <i class="fa-solid fa-magnifying-glass"></i></i>
                     </button>
                 </div>
@@ -284,32 +280,28 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     <!--Main Container Start-->
     <main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
 
-
-
-
         <div class="container mt-5">
-            <h2>Edit Notice</h2>
-            <?php
-            if (isset($_SESSION['error_message'])) {
-                echo "<p class='error-message'>" . htmlspecialchars($_SESSION['error_message']) . "</p>";
-                unset($_SESSION['error_message']);
-            }
-            ?>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?php echo $notice_id; ?>">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" value="<?php echo $title; ?>" required>
-
-                <label for="content">Content:</label>
-                <textarea id="content" name="content" rows="4" required><?php echo $content; ?></textarea>
-
-                <label for="file">Change Image (Optional):</label>
-                <input type="file" id="file" name="file">
-
-                <button type="submit" name="submit" class="btn">Update Notice</button>
+            <h2>Edit Staff</h2>
+            <form method="post" action="">
+                <input type="hidden" name="staff_id" value="<?php echo $staff_id; ?>">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="position">Position:</label>
+                    <input type="text" class="form-control" id="position" name="position" value="<?php echo $position; ?>" required>
+                </div>
+                <button type="submit" name="update" class="btn btn-primary mt-2">Update</button>
+                <a href="view_staff.php" class="btn btn-secondary">Cancel</a>
             </form>
-            <a href="index.php" class="btn">Back to Notice Board</a>
         </div>
+
+
 
 
 

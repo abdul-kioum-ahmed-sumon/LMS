@@ -146,6 +146,10 @@ if (!$books) {
                         </div>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a href="<?php echo BASE_URL ?>Staff/staff_management.php" class="nav-link"><i class="fa-solid fa-users-line me-2" style="color: #b2bafb;"></i>Staff Management
+                    </a>
+                </li>
                 <li class="my-0">
                     <hr />
                 </li>
