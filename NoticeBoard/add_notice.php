@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="d-flex ms-auto" role="search">
                 <div class="input-group my-3 my-lg-0">
-                    <input  type="text" class="form-control" placeholder="Search" aria-describedby="button-addon2"style />
+                    <input type="text" class="form-control" placeholder="Search" aria-describedby="button-addon2" style />
                     <button class="btn btn-outline-secondary bg-primary text-white mt-0" type="button" id="button-addon2">
                         <i class="fa-solid fa-magnifying-glass"></i></i>
                     </button>
@@ -240,6 +240,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
                 <li>
                     <a href="<?php echo BASE_URL ?>NoticeBoard/index.php" class="nav-link"><i class="fa-solid fa-pen-to-square me-2" style="color: #b2bafb;"></i>Notice Board
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo BASE_URL ?>FAQ/read_faq.php" class="nav-link"><i class="fa-solid fa-circle-question me-2" style="color: #b2bafb;"></i>FAQ
                     </a>
                 </li>
                 <li>

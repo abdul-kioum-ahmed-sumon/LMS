@@ -95,6 +95,14 @@ if (!$books) {
                     <a class="nav-link active" aria-current="page">
                         <i class="fa-solid fa-display  me-2" style="color: #b2bafb;"></i> Dashboard</a>
                 </li>
+                <li>
+                    <a href="<?php echo BASE_URL ?>User/Magazine.php" class="nav-link"><i class="fas fa-newspaper me-2" style="color: #b2bafb;"></i>Magazine
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo BASE_URL ?>User/faq.php" class="nav-link"><i class="fa-solid fa-circle-question me-2" style="color: #b2bafb;"></i>FAQ
+                    </a>
+                </li>
                 <li class="my-0">
                     <hr />
                 </li>

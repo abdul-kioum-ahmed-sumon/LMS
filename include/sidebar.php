@@ -130,6 +130,10 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo BASE_URL ?>FAQ/read_faq.php" class="nav-link"><i class="fa-solid fa-circle-question me-2" style="color: #b2bafb;"></i>FAQ
+                    </a>
+                </li>
+                <li>
                     <a href=" #" class="nav-link"><i class="fa-solid fa-gear fa-spin me-2" style="color: #b2bafb;"></i>Settings
                     </a>
                 </li>

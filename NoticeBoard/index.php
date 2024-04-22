@@ -191,6 +191,10 @@ include_once(DIR_URL . "models/dashboard.php");
                     <a href=" #" class="nav-link"><i class="fa-solid fa-gear fa-spin me-2" style="color: #b2bafb;"></i>Settings
                     </a>
                 </li>
+                <li>
+                    <a href="<?php echo BASE_URL ?>FAQ/read_faq.php" class="nav-link"><i class="fa-solid fa-circle-question me-2" style="color: #b2bafb;"></i>FAQ
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="<?php echo BASE_URL ?>logout.php" class="nav-link"><i class="fa-solid fa-right-from-bracket me-2" style="color: #b2bafb;"></i> Logout</a>
                 </li>
