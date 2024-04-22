@@ -35,7 +35,7 @@
       <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
           <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@baust.edu.bd">info@baust.edu.bd</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+88-01769675559</span></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+8801769-675559</span></i>
         </div>
         <div class="social-links d-none d-md-flex align-items-center">
           <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -259,7 +259,7 @@
             <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-telephone"></i>
               <h3>Call Us</h3>
-              <p>+88-01769675559</p>
+              <p>+8801769-675559</p>
             </div>
           </div><!-- End Info Item -->
 
@@ -288,7 +288,7 @@
         <a href="landing_page.php" class="logo">Library Management System</a>
         <div class="footer-contact pt-3">
           <p>Saidpur Cantonment, Saidpur</p>
-          <p class="mt-3"><strong>Phone:</strong> <span>+88-01769675559</span></p>
+          <p class="mt-3"><strong>Phone:</strong> <span>+8801769-675559</span></p>
           <p><strong>Email:</strong> <span>info@baust.edu.bd</span></p>
         </div>
         <div class="social-links d-flex mt-4">

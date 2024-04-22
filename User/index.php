@@ -16,7 +16,7 @@
     <div>
       <div class="contact-info d-flex align-items-center">
         <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@baust.edu.bd">info@baust.edu.bd</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span style="margin-left: 50px;">+88-01769675559</span></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span style="margin-left: 50px;">+8801769-675559</span></i>
       </div>
     </div>
   </div>
@@ -86,9 +86,6 @@
   <div style="position: fixed; bottom: 0; left: 0; width: 100%;  background-color: #c9d6ff; background:linear-gradient(to right,#e2e2e2,#c9d6ff); padding: 20px; text-align: center;">
     <p>© <span>Copyright</span> <strong class="px-1">Library Management System</strong> <span>All Rights Reserved</span></p>
   </div>
-
-
-
   <script src="script.js"></script>
 </body>
 
