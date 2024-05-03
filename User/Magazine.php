@@ -103,7 +103,7 @@ include_once(DIR_URL . "models/dashboard.php");
 
                         <th>Title</th>
                         <th>Publisher</th>
-                        <th>Publication Date</th>
+
                         <th>Category</th>
                         <th>Action</th>
                     </tr>
@@ -123,7 +123,6 @@ include_once(DIR_URL . "models/dashboard.php");
                         echo       "<tr>
             <td>" . $row["title"] . "</td>
             <td>" . $row["publisher"] . "</td>
-            <td>" . $row["publication_date"] . "</td>
             <td>" . $row["category"] . "</td>
             <td>
                 <a class='btn btn-info btn-sm' href='view_magazine.php?id=$row[magazine_id]'>View</a>

@@ -285,7 +285,7 @@ if (!$books) {
 
                             <th>Title</th>
                             <th>Publisher</th>
-                            <th>Publication Date</th>
+                        
                             <th>Category</th>
                             <th>Action</th>
                         </tr>
@@ -306,7 +306,6 @@ if (!$books) {
                             echo       "<tr>
             <td>" . $row["title"] . "</td>
             <td>" . $row["publisher"] . "</td>
-            <td>" . $row["publication_date"] . "</td>
             <td>" . $row["category"] . "</td>
             <td>
                 <a class='btn btn-primary btn-sm' href='UpdateMagazine.php?id=$row[magazine_id]'>Update</a>
