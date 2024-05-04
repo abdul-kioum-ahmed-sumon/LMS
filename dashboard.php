@@ -16,10 +16,12 @@ include_once(DIR_URL . "include/sidebar.php");
 <main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
     <div class="container-fluid ">
         <div class="row">
-            <div class="col-md-12 mt-4">
-                <h3 class="fw-bold text-uppercase">Dashboard</h3>
-                <p>Statistics of the system!</p>
+            <div class="col-md-12 mt-4 d-flex align-items-center">
+                <h3><span class="fw-bold text-uppercase">Dashboard</span></h3>
+                <a href="<?php echo BASE_URL ?>reporting.php" class="btn btn-success  btn1 ms-auto ">Generate Report
+                </a>
             </div>
+            <p>Statistics of the system!</p>
 
             <div class="col-md-3 mt-4">
                 <div class="card">
