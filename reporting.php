@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["start_date"]) && isset($
                 display: none;
             }
 
-            .noprint{
+            .noprint {
                 display: none;
             }
         }
@@ -361,6 +361,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["start_date"]) && isset($
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID</th>
+                                        <th scope="col">Dept</th>
                                         <th scope="col">Phone No</th>
                                         <th scope="col">Registered On</th>
                                         <th scope="col">Status</th>
@@ -376,6 +377,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["start_date"]) && isset($
                                                 <th><?php echo $i++ ?></th>
                                                 <td><?php echo $st['name'] ?></td>
                                                 <td><?php echo $st['dept_id'] ?></td>
+                                                <td><?php echo $st['dept'] ?></td>
                                                 <td><?php echo $st['phone_no'] ?></td>
                                                 <td><?php echo date("d-m-Y H:i A", strtotime($st['created_at'])) ?></td>
                                                 <td>
@@ -390,7 +392,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["start_date"]) && isset($
                                     <?php
                                         }
                                     } else {
-                                        echo "<tr><td colspan='5'>No data available</td></tr>";
+                                        echo "<tr>
+                                        <td>No data available</td>
+                                        <td>No data available</td>
+                                        <td>No data available</td>
+                                        <td>No data available</td>
+                                        <td>No data available</td>                                        
+                                        <td colspan='6'>No data available</td></tr>";
                                     }
                                     ?>
                                 </tbody>
@@ -435,7 +443,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["start_date"]) && isset($
                                     <?php
                                         }
                                     } else {
-                                        echo "<tr><td colspan='6'>No data available</td></tr>";
+                                        echo "<tr>
+                                        <td>No data available</td>
+                                        <td>No data available</td>
+                                        <td>No data available</td>
+                                        <td>No data available</td>
+                                        <td>No data available</td>  
+                                        <td colspan='6'>No data available</td>
+                                        </tr>";
                                     }
                                     ?>
                                 </tbody>
@@ -485,7 +500,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["start_date"]) && isset($
                                     <?php
                                         }
                                     } else {
-                                        echo "<tr><td colspan='6'>No data available</td></tr>";
+                                        echo "<tr>
+                                        <td>No data available</td>
+                                        <td>No data available</td>
+                                        <td>No data available</td>
+                                        <td>No data available</td>
+                                        <td>No data available</td>  
+                                        <td colspan='6'>No data available</td>
+                                        </tr>";
                                     }
                                     ?>
                                 </tbody>
