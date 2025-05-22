@@ -112,7 +112,7 @@ if ($valid) {
                 </div>
 
                 <div class="text-center mt-4">
-                    <a href="<?php echo generateBookingQRCode($booking_id, 'download_url', 500); ?>" class="btn btn-primary">
+                    <a href="<?php echo generateBookingQRCode($booking_id, 'download_url', 500); ?>" class="btn btn-primary" download="booking-<?php echo $booking_id; ?>.png">
                         <i class="fas fa-download"></i> Download QR Code
                     </a>
                     <a href="<?php echo BASE_URL; ?>student_dashboard.php" class="btn btn-secondary">

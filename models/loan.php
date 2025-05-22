@@ -159,7 +159,7 @@ function update($conn, $param)
 }
 
 // Function to get students
-function getStudents($conn)
+function getLoanableStudents($conn)
 {
     $sql = "select id, name,dept_id from students where status = 1";
     $result = $conn->query($sql);

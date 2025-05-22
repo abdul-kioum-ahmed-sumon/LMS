@@ -160,10 +160,6 @@ include_once(DIR_URL . "include/sidebar.php");
                                                             Revoke Verification
                                                         </a>
                                                     <?php } ?>
-
-                                                    <a href="<?php echo BASE_URL ?>loans?student_id=<?php echo $row['id'] ?>" class="btn btn-info btn-sm mt-1">
-                                                        View Bookings
-                                                    </a>
                                                 </td>
                                             </tr>
                                     <?php }

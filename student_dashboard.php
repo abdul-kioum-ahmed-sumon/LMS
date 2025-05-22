@@ -91,7 +91,10 @@ $available_books = getAvailableBooks($conn);
     <!-- Student Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fas fa-book-reader me-2"></i> Library Management System</a>
+            <a class="navbar-brand" href="#">
+                <img src="<?php echo BASE_URL ?>assets/images/BAUST_LOGO.png" alt="BAUST Logo" height="40" class="me-2">
+                Library Management System
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -154,7 +157,7 @@ $available_books = getAvailableBooks($conn);
                             </div>
                             <p class="mb-1">Booking ID: <strong><?php echo $booking_id; ?></strong></p>
                             <div class="mt-3">
-                                <a href="<?php echo generateBookingQRCode($booking_id, 'download_url', 500); ?>" class="btn btn-outline-primary btn-sm">
+                                <a href="<?php echo generateBookingQRCode($booking_id, 'download_url', 500); ?>" class="btn btn-outline-primary btn-sm" download="booking-<?php echo $booking_id; ?>.png">
                                     <i class="fas fa-download me-1"></i> Download QR Code
                                 </a>
                                 <a href="show_qr.php?id=<?php echo $booking_id; ?>" class="btn btn-outline-success btn-sm ms-2">
@@ -320,50 +323,12 @@ $available_books = getAvailableBooks($conn);
                                                 });
                                             });
                                         </script>
-                                        <?php
+                                <?php
                                     } else {
                                         // No loans found or query failed
                                         echo '<div class="alert alert-info">';
                                         echo '<h5><i class="fas fa-info-circle me-2"></i>No active book loans found</h5>';
                                         echo '<p>You don\'t have any active book loans at the moment. Browse the available books below to borrow something interesting!</p>';
-
-                                        // Get recommended books - recently added or popular
-                                        $recommended_sql = "SELECT b.id, b.title, b.author, c.name as category 
-                                                      FROM books b
-                                                      LEFT JOIN categories c ON b.category_id = c.id
-                                                      WHERE b.status = 1
-                                                      ORDER BY b.created_at DESC
-                                                      LIMIT 3";
-                                        $recommended_books = $conn->query($recommended_sql);
-
-                                        if ($recommended_books && $recommended_books->num_rows > 0) {
-                                        ?>
-                                            <div class="mt-3">
-                                                <h6>Recommended Books:</h6>
-                                                <div class="row">
-                                                    <?php while ($rec_book = $recommended_books->fetch_assoc()): ?>
-                                                        <div class="col-md-4 mb-2">
-                                                            <div class="card h-100 border-primary">
-                                                                <div class="card-body">
-                                                                    <h6 class="card-title"><?php echo htmlspecialchars($rec_book['title']); ?></h6>
-                                                                    <p class="card-text small mb-1">By: <?php echo htmlspecialchars($rec_book['author']); ?></p>
-                                                                    <span class="badge bg-light text-dark"><?php echo htmlspecialchars($rec_book['category']); ?></span>
-                                                                </div>
-                                                                <div class="card-footer bg-transparent border-0 text-end">
-                                                                    <form method="post" class="d-inline">
-                                                                        <input type="hidden" name="book_id" value="<?php echo $rec_book['id']; ?>">
-                                                                        <button type="submit" name="reserve" class="btn btn-sm btn-outline-primary">
-                                                                            <i class="fas fa-bookmark me-1"></i> Reserve
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php endwhile; ?>
-                                                </div>
-                                            </div>
-                                <?php
-                                        }
                                         echo '</div>';
                                     }
                                 } else {
@@ -462,6 +427,7 @@ $available_books = getAvailableBooks($conn);
 
                     // Set download link
                     document.getElementById('download-qr-link').href = '<?php echo BASE_URL; ?>qr_samples.php?download=' + bookingId + '&size=500';
+                    document.getElementById('download-qr-link').setAttribute('download', 'booking-' + bookingId + '.png');
 
                     // Clear previous QR code
                     const container = document.getElementById('modal-qrcode-container');

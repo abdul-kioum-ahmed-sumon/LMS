@@ -61,78 +61,195 @@ if (isset($_POST['login_form_submitted'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Login - Library Management System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL ?>assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #1e2124;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
         }
 
         .login-container {
-            max-width: 500px;
-            margin: 80px auto;
+            width: 900px;
+            height: 560px;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            display: flex;
         }
 
-        .form-header {
-            text-align: center;
-            margin-bottom: 30px;
+        .image-side {
+            width: 45%;
+            position: relative;
+            overflow: hidden;
         }
 
-        .form-header h1 {
+        .image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .form-side {
+            width: 55%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .login-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             color: #333;
-            font-size: 28px;
         }
 
-        .btn-primary {
+        .login-subtitle {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-check-input {
+            margin-right: 8px;
+        }
+
+        .form-check-label {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
             background-color: #0d6efd;
             border: none;
-            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #0b5ed7;
+        }
+
+        .register-link {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .register-link a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
             width: 100%;
+            max-width: 340px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="login-container">
-            <div class="form-header">
-                <h1><i class="fas fa-book-reader"></i> Library Management System</h1>
-                <h2>Student Login</h2>
-            </div>
+    <div class="login-container">
+        <div class="image-side">
+            <img src="<?php echo BASE_URL ?>assets/images/Library_bg (2).jpg" alt="Library Image">
+        </div>
+        <div class="form-side">
+            <img src="<?php echo BASE_URL ?>assets/images/BAUST_LOGO.png" alt="BAUST Logo" class="logo">
+            <h1 class="login-title">Library Management System</h1>
+            <p class="login-subtitle">Student Login</p>
 
             <?php if (!empty($login_error)): ?>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger">
                     <?php echo $login_error; ?>
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email Address</label>
+            <form class="login-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <div class="mb-3 form-check">
+                <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="remember" name="remember">
                     <label class="form-check-label" for="remember">Remember me</label>
                 </div>
-                <button type="submit" name="login_form_submitted" class="btn btn-primary">Login</button>
+                <button type="submit" name="login_form_submitted" class="login-btn">Login</button>
             </form>
-
-            <div class="mt-4 text-center">
-                <p>Don't have an account? <a href="student_register.php">Register here</a></p>
-            </div>
+            <p class="register-link">Don't have an account? <a href="student_register.php">Register here</a></p>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo BASE_URL ?>assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

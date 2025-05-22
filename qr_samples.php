@@ -46,7 +46,8 @@ function getExtensionFromMimeType($mime_type)
 }
 
 // Generate a downloadable QR code image
-if (isset($_GET['download']) && in_array($_GET['download'], $all_ids)) {
+if (isset($_GET['download'])) {
+    // Accept any booking ID for download (removed the restrictive validation)
     $booking_id = $_GET['download'];
     $size = isset($_GET['size']) ? intval($_GET['size']) : 300;
 

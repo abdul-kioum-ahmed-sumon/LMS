@@ -75,7 +75,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <div class="mb-3">
                                         <label class="form-label">Select Student</label>
                                         <?php
-                                        $students = getStudents($conn);
+                                        $students = getLoanableStudents($conn);
                                         ?>
                                         <select name="student_id" class="form-control">
                                             <option value="">Please select</option>
