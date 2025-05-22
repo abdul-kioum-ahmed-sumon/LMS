@@ -61,8 +61,8 @@ if (isset($_POST['login_form_submitted'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Login - Library Management System</title>
-    <link href="<?php echo BASE_URL ?>assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/style.css" />
+    <link href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
@@ -217,10 +217,10 @@ if (isset($_POST['login_form_submitted'])) {
 <body>
     <div class="login-container">
         <div class="image-side">
-            <img src="<?php echo BASE_URL ?>assets/images/Library_bg (2).jpg" alt="Library Image">
+            <img src="<?php echo BASE_URL; ?>assets/images/Library_bg (2).jpg" alt="Library Image">
         </div>
         <div class="form-side">
-            <img src="<?php echo BASE_URL ?>assets/images/BAUST_LOGO.png" alt="BAUST Logo" class="logo">
+            <img src="<?php echo BASE_URL; ?>assets/images/BAUST_LOGO.png" alt="BAUST Logo" class="logo">
             <h1 class="login-title">Library Management System</h1>
             <p class="login-subtitle">Student Login</p>
 
@@ -249,7 +249,7 @@ if (isset($_POST['login_form_submitted'])) {
         </div>
     </div>
 
-    <script src="<?php echo BASE_URL ?>assets/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

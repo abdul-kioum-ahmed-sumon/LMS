@@ -80,8 +80,8 @@ if (isset($_GET['download'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Samples - LMS</title>
-    <link href="<?php echo BASE_URL ?>assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/style.css" />
+    <link href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" />
     <style>
         .qr-sample {
             text-align: center;

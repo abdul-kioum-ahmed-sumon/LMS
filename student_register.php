@@ -52,8 +52,8 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration - Library Management System</title>
-    <link href="<?php echo BASE_URL ?>assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/style.css" />
+    <link href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
@@ -71,7 +71,7 @@ if ($result->num_rows > 0) {
     <div class="container py-5">
         <div class="card">
             <div class="card-header bg-white text-center py-4">
-                <img src="<?php echo BASE_URL ?>assets/images/BAUST_LOGO.png" alt="BAUST Logo" style="max-height: 80px;">
+                <img src="<?php echo BASE_URL; ?>assets/images/BAUST_LOGO.png" alt="BAUST Logo" style="max-height: 80px;">
                 <h1 class="mt-2 fw-bold text-uppercase">Library Management System</h1>
                 <h3 class="text-muted">Student Registration</h3>
             </div>
@@ -170,13 +170,13 @@ if ($result->num_rows > 0) {
             </div>
 
             <div class="card-footer bg-white text-center py-3">
-                <img src="<?php echo BASE_URL ?>assets/images/LIBRARY-MANAGEMENT-SYSTEM.png" alt="LMS" style="max-height: 40px;">
+                <img src="<?php echo BASE_URL; ?>assets/images/LIBRARY-MANAGEMENT-SYSTEM.png" alt="LMS" style="max-height: 40px;">
                 <p class="small text-muted mt-2 mb-0">© <?php echo date('Y'); ?> BAUST Library Management System</p>
             </div>
         </div>
     </div>
 
-    <script src="<?php echo BASE_URL ?>assets/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

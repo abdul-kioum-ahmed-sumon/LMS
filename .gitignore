@@ -1,0 +1,55 @@
+# Environment variables, config files, etc.
+.env
+config/local.php
+*.conf
+
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+.komodotools/
+.DS_Store
+
+# Logs and debug files
+*.log
+session_debug.log
+logs/
+debug/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Dependencies that should be installed with package managers
+node_modules/
+vendor/
+bower_components/
+
+# Build artifacts
+build/
+dist/
+out/
+
+# API keys and credentials
+*.pem
+*.key
+*.cert
+
+# Cache
+cache/
+.sass-cache/
+
+# User uploaded content that shouldn't be in git
+uploads/
+media/
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db 

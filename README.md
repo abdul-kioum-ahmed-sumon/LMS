@@ -1,79 +1,77 @@
 # Library Management System
 
-A comprehensive system for managing a library's resources and operations.
+A comprehensive Library Management System for educational institutions, built with PHP, MySQL, and Bootstrap 5.
 
-## New Features - Student Book Booking System
+## Features
 
-We've upgraded the Library Management System with the following new features:
+- **Admin Panel**: Manage books, students, loans, and reports
+- **Student Portal**: Allow students to browse books, reserve titles, and manage their loans
+- **QR Code System**: Generate QR codes for book loans and verification
+- **Responsive Design**: Works on desktop and mobile devices
 
-### Student Authentication
+## Requirements
 
-- Secure student login system using unique student IDs
-- Student registration with ID verification
-- Session/token-based authentication with secure password storage
+- PHP 7.4 or higher
+- MySQL 5.7 or higher
+- Apache/Nginx web server
+- XAMPP/WAMP/MAMP for local development
 
-### Book Booking System
+## Installation
 
-- Students can browse available books and reserve them online
-- Real-time book availability tracking
-- QR code generation for book collection
-- Staff verification system for book issuance
+1. Clone the repository to your web server's document root (e.g., `htdocs` in XAMPP)
 
-### Installation Instructions
-
-1. Import the database schema from `lms.sql` to set up the initial database
-2. Run the update script `update_schema.sql` to add the new tables and fields:
    ```
-   mysql -u username -p lms < update_schema.sql
+   git clone https://github.com/abdul-kioum-ahmed-sumon/LMS.git
    ```
-3. Make sure the web server has write permissions to the necessary directories
 
-### Staff Instructions
+2. Import the database schema from `database/lms.sql`
 
-1. Students will register and log in using their student IDs
-2. When a student books a book, they will receive a booking ID and QR code
-3. At the library counter, staff can scan the QR code or enter the booking ID manually using the verification page
-4. The system will show the book and student details for verification
-5. After verification, staff can issue the book with a single click
+3. Configure the database connection:
 
-### Student Instructions
+   - Open `config/config.php`
+   - Update the database credentials if needed
 
-1. Register or log in using your student ID and password
-2. Browse available books in the catalog
-3. Book a book by clicking the "Book Now" button
-4. Note your booking ID or show the QR code at the library counter to collect your book
+4. Access the system:
+   - Admin: [http://localhost/lms-master/](http://localhost/lms-master/)
+   - Student: [http://localhost/lms-master/student_login.php](http://localhost/lms-master/student_login.php)
 
-## Original Features
+## Default Login
 
-- Book Management
-- Student Management
-- Borrowing and Returning
-- Reporting and Statistics
-- And more...
+- **Admin**
+
+  - Email: admin@example.com
+  - Password: admin123
+
+- **Student**
+  - Email: student@example.com
+  - Password: student123
+
+## Usage
+
+### Admin Features
+
+- Manage Books: Add, edit, delete, and categorize books
+- Manage Students: Approve registrations and manage student accounts
+- Issue & Return Books: Manage book loans and returns
+- Reports: Generate various reports on books, students, and loans
+
+### Student Features
+
+- Browse available books
+- Reserve books
+- Track loan status
+- Manage profile information
+
+## Security
+
+- Passwords are hashed using PHP's password_hash()
+- Input validation and sanitization
+- Session-based authentication
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Credits
 
-Developer: Original Developer + Upgrade Team
-
-## Technologies:
-
-    # Frontend: HTML, CSS, Bootstrap
-    # Backend: PHP
-    # Database: MySQL
-
-## Modules
-
-    # Books management
-    # Students management
-    # Loans management
-    # Membership management
-        # Plans
-        # Create Membership
-    # My profile
-    # Change password
-
-## To Login
-
-    # Login Credentials to access the dashboard
-        Email: abdulkioumahmed@gmail.com
-        Password: 1252
+Developed by Abdul Kioum Ahmed Sumon
