@@ -1,5 +1,5 @@
 <?php
-include_once("/Xampp/htdocs/lms-master/config/config.php");
+include_once(__DIR__ . "/../config/config.php");
 include_once(DIR_URL . "config/database.php");
 include_once(DIR_URL . "include/middleware.php");
 include_once(DIR_URL . "models/book.php");
@@ -29,6 +29,16 @@ include_once(DIR_URL . "include/sidebar.php");
         <div class="row">
             <div class="col-md-12 mt-4">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
+
+                <!-- Breadcrumb Navigation -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>dashboard.php">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>books/index.php">Books Management</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Add New Book</li>
+                    </ol>
+                </nav>
+
                 <h3 class="fw-bold text-uppercase">Add Book</h3>
             </div>
 

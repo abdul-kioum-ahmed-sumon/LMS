@@ -1,7 +1,35 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-
+    
+    # Ensure PHP sessions work properly
+    php_value session.cookie_httponly 1
+    php_value session.use_only_cookies 1
+    
+    # Set base path for cookies if needed
+    php_value session.cookie_path "/lms-master"
+    
+    # Handle HTTP to HTTPS redirects if needed (commented out for now)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Special case for /books/add URL
+    RewriteRule ^books/add$ books/add.php [NC,L]
+    
+    # Special cases for other common URLs
+    RewriteRule ^books$ books/index.php [NC,L]
+    RewriteRule ^students$ students/index.php [NC,L]
+    RewriteRule ^loans$ loans/index.php [NC,L]
+    RewriteRule ^admin$ admin/index.php [NC,L]
+    
+    # Enable clean URLs (remove .php extension)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.php -f
     RewriteRule ^(.*)$ $1.php [NC,L]
+    
+    # Ensure PHP errors are displayed during development
+    php_flag display_errors on
+    php_value error_reporting E_ALL
+    
+    # Prevent direct access to sensitive directories
+    Options -Indexes
 </IfModule>

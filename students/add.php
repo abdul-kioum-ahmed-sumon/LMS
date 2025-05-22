@@ -1,5 +1,5 @@
 <?php
-include_once("/Xampp/htdocs/lms-master/config/config.php");
+include_once("../config/config.php");
 include_once(DIR_URL . "config/database.php");
 include_once(DIR_URL . "include/middleware.php");
 include_once(DIR_URL . "models/student.php");
@@ -14,6 +14,16 @@ if (isset($_POST['submit'])) {
     } else {
         $_SESSION['error'] = $res['error'];
         header("LOCATION: " . BASE_URL . "students/add.php");
+    }
+}
+
+// Get departments for dropdown
+$sql = "SELECT DISTINCT name FROM categories";
+$result = $conn->query($sql);
+$departments = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $departments[] = $row['name'];
     }
 }
 ?>
@@ -54,20 +64,30 @@ include_once(DIR_URL . "include/sidebar.php");
                                     </div>
                                 </div>
 
-
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Department</label>
-                                        <input type="text" class="form-control" name="dept" required />
+                                        <select class="form-select" name="dept" required>
+                                            <option value="">Select Department</option>
+                                            <?php foreach ($departments as $dept) : ?>
+                                                <option value="<?php echo $dept; ?>"><?php echo $dept; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                 </div>
-
-
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
                                         <input type="email" class="form-control" name="email" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" class="form-control" name="password" required />
+                                        <small class="form-text text-muted">Password will be used for student login</small>
                                     </div>
                                 </div>
 
@@ -82,6 +102,26 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <div class="mb-3">
                                         <label class="form-label">Address</label>
                                         <input type="text" class="form-control" name="address" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Account Status</label>
+                                        <select class="form-select" name="status" required>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">ID Verification</label>
+                                        <select class="form-select" name="verified" required>
+                                            <option value="1">Verified</option>
+                                            <option value="0">Not Verified</option>
+                                        </select>
                                     </div>
                                 </div>
 

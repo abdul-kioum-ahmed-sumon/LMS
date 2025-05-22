@@ -1,0 +1,100 @@
+/**
+ * Student Management Page Styles
+ * Specialized styling for student management tables
+ */
+
+/* Ensure table headers have consistent styling */
+.student-table th,
+#student-data-table th,
+.table-responsive th {
+    background-color: #343a40 !important;
+    color: white !important;
+    font-weight: bold !important;
+    padding: 12px 8px !important;
+    border-color: #454d55 !important;
+    text-align: left !important;
+}
+
+/* Fixed width for ID columns */
+.student-table th:nth-child(2),
+#student-data-table th:nth-child(2) {
+    width: 120px;
+}
+
+/* Student data rows */
+.student-table tbody tr:hover,
+#student-data-table tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.075) !important;
+    cursor: pointer;
+}
+
+/* Status column styling */
+.student-table .status-column,
+#student-data-table .status-column {
+    text-align: center;
+}
+
+/* Improve verified badge styling */
+.badge.bg-success {
+    background-color: #28a745 !important;
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.badge.bg-info {
+    background-color: #17a2b8 !important;
+}
+
+/* Improve form controls in student pages */
+.student-form .form-control:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
+
+/* Card headers in student section */
+.student-card .card-header {
+    background-color: #343a40 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Apply styling even without specific classes */
+table.table thead th {
+    background-color: #343a40 !important;
+    color: white !important;
+    font-weight: bold !important;
+    border-color: #454d55 !important;
+}
+
+/* Search input styling */
+.dataTables_filter input {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.dataTables_filter input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+    outline: none;
+}
+
+/* Pagination styling */
+.dataTables_paginate .paginate_button.current {
+    background: #4CAF50 !important;
+    border-color: #4CAF50 !important;
+    color: white !important;
+}
+
+.dataTables_paginate .paginate_button:hover {
+    background: #388E3C !important;
+    border-color: #388E3C !important;
+    color: white !important;
+} 

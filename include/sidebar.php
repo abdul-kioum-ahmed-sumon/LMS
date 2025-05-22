@@ -33,10 +33,10 @@
                         <div>
                             <ul class="navbar-nav ps-3">
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>books/add" class="nav-link"><i class="fa-solid fa-book-medical me-2" style="color: #FFD43B;"></i> Add New</a>
+                                    <a href="<?php echo BASE_URL ?>books/add.php" class="nav-link"><i class="fa-solid fa-book-medical me-2" style="color: #FFD43B;"></i> Add New</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>books/" class="nav-link"><i class="fa-solid fa-sliders me-2" style="color: #FFD43B;"></i> Manage All</a>
+                                    <a href="<?php echo BASE_URL ?>books/index.php" class="nav-link"><i class="fa-solid fa-sliders me-2" style="color: #FFD43B;"></i> Manage All</a>
                                 </li>
                             </ul>
                         </div>
@@ -93,6 +93,9 @@
                                 </li>
                                 <li>
                                     <a href="<?php echo BASE_URL ?>loans" class="nav-link"><i class="fa-solid fa-sliders me-2" style="color: #FFD43B;"></i> Manage All</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo BASE_URL ?>loans/verify.php" class="nav-link"><i class="fa-solid fa-qrcode me-2" style="color: #FFD43B;"></i> Verify & Issue</a>
                                 </li>
                             </ul>
                         </div>

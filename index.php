@@ -1,30 +1,26 @@
 <?php
-include_once("/Xampp/htdocs/lms-master/config/config.php");
+include_once(__DIR__ . "/config/config.php");
 include_once(DIR_URL . "config/database.php");
 include_once(DIR_URL . "models/auth.php");
 
-// If already logged in
-if (isset($_SESSION['is_user_login'])) {
-    header("LOCATION: " . BASE_URL . 'dashboard.php');
-    exit;
-}
-
-// Login Functionality (pizza123)
+// Login Functionality
 if (isset($_POST['submit'])) {
     $res = login($conn, $_POST);
     if ($res['status'] == true) {
-        $_SESSION['is_user_login'] = true;
+        $_SESSION['is_login'] = true;
         $_SESSION['user'] = $res['user'];
-        header("LOCATION: " . BASE_URL . 'dashboard.php');
+        header("Location: " . BASE_URL . 'dashboard.php');
         exit;
     } else {
         $_SESSION['error'] = "Invalid login information";
-        header("LOCATION: " . BASE_URL);
-        exit;
     }
 }
 
-
+// If already logged in, redirect to dashboard
+if (isset($_SESSION['is_login']) && $_SESSION['is_login'] === true) {
+    header("Location: " . BASE_URL . "dashboard.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +54,13 @@ if (isset($_POST['submit'])) {
                                     Baust library
                                 </h1>
                                 <p class="card-text mb-4 ms-2">Enter email and password to login</p>
-                                <?php include_once(DIR_URL . "/include/alerts.php"); ?>
+                                <?php
+                                if (file_exists(DIR_URL . "include/alerts.php")) {
+                                    include_once(DIR_URL . "include/alerts.php");
+                                } elseif (file_exists(__DIR__ . "/include/alerts.php")) {
+                                    include_once(__DIR__ . "/include/alerts.php");
+                                }
+                                ?>
                                 <form method="post" action="<?php echo BASE_URL ?>">
                                     <div class="mb-4">
                                         <label class="form-label ms-2">Email address:</label><br>
@@ -76,6 +78,7 @@ if (isset($_POST['submit'])) {
                                 <hr />
 
                                 <a href="./forgot-password.php" class="card-text text-center link-underline-light ms-2">Forgot Password?</a>
+                              
                             </div>
                         </div>
                     </div>

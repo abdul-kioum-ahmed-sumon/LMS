@@ -1,0 +1,122 @@
+/**
+ * Custom CSS Enhancements for LMS
+ * This file contains additional styling to improve the UI
+ */
+
+/* Sidebar menu enhancements */
+.sidebar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.sidebar-nav .collapse.show {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* Breadcrumb styling */
+.breadcrumb {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.breadcrumb-item a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+
+/* Form control focus states */
+.form-control:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
+
+/* Button styling */
+.btn-success {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-success:hover {
+    background-color: #388E3C;
+    border-color: #388E3C;
+}
+
+/* Card styling */
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eaecef;
+    font-weight: bold;
+}
+
+/* Table styling - Improved color scheme */
+.table thead th,
+.table-dark th,
+.table-striped > thead > tr,
+.table > thead {
+    background-color: #343a40 !important;
+    color: white !important;
+    font-weight: bold;
+    border-color: #454d55 !important;
+}
+
+.table th {
+    font-weight: bold;
+}
+
+/* Fix for striped tables */
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.025);
+}
+
+.table-striped > tbody > tr:nth-of-type(even) {
+    background-color: #ffffff;
+}
+
+/* Table hover effect */
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.075);
+}
+
+/* Mobile responsiveness improvements */
+@media (max-width: 768px) {
+    .offcanvas-start {
+        width: 280px;
+    }
+    
+    main {
+        padding: 15px !important;
+    }
+}
+
+/* Status badges */
+.badge.text-bg-success {
+    background-color: #28a745 !important;
+}
+
+.badge.text-bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+.badge.text-bg-danger {
+    background-color: #dc3545 !important;
+}
+
+/* Action buttons in tables */
+.btn-sm.rgb {
+    margin-right: 2px;
+    margin-bottom: 2px;
+} 

@@ -237,6 +237,8 @@ if (!$books) {
                 </div>
             </div>
         </div>
+        <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVKJSWUBc=/?moveToViewport=-767,-440,1531,816&embedId=476550285501" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
     </main>
+
     <!--Main content end-->
     <?php include_once(DIR_URL . "include/footer.php") ?>

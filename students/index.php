@@ -38,7 +38,21 @@ if (isset($_GET['action']) && $_GET['action'] == 'status') {
     exit;
 }
 
+## Verification update of Student
+if (isset($_GET['action']) && $_GET['action'] == 'verify') {
+    $update = updateVerificationStatus($conn, $_GET['id'], $_GET['verified']);
+    if ($update) {
+        if ($_GET['verified'] == 1)
+            $msg = "Student ID has been successfully verified";
+        else $msg = "Student ID verification has been revoked";
 
+        $_SESSION['success'] = $msg;
+    } else {
+        $_SESSION['error'] = "Something went wrong";
+    }
+    header("LOCATION: " . BASE_URL . "students");
+    exit;
+}
 
 include_once(DIR_URL . "include/header.php");
 include_once(DIR_URL . "include/topbar.php");
@@ -73,6 +87,8 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone No</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Verified</th>
+                                        <th scope="col">Password</th>
                                         <th scope="col">Created At</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -96,9 +112,25 @@ include_once(DIR_URL . "include/sidebar.php");
                                                     if ($row['status'] == 1)
                                                         echo '<span class="badge text-bg-success">Active</span>';
                                                     else echo '<span class="badge text-bg-danger">Inactive</span>';
-
                                                     ?>
                                                 </td>
+
+                                                <td>
+                                                    <?php
+                                                    if (isset($row['verified']) && $row['verified'] == 1)
+                                                        echo '<span class="badge text-bg-success">Verified</span>';
+                                                    else echo '<span class="badge text-bg-warning">Not Verified</span>';
+                                                    ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php
+                                                    if (isset($row['password']) && !empty($row['password']))
+                                                        echo '<span class="badge text-bg-success">Set</span>';
+                                                    else echo '<span class="badge text-bg-danger">Not Set</span>';
+                                                    ?>
+                                                </td>
+
                                                 <td><?php echo date("d-m-Y", strtotime($row['created_at'])) ?></td>
                                                 <td>
                                                     <a href="<?php echo BASE_URL ?>students/edit.php?id=<?php echo $row['id'] ?>" class="btn btn-primary btn-sm">
@@ -114,12 +146,25 @@ include_once(DIR_URL . "include/sidebar.php");
                                                         </a>
                                                     <?php }
                                                     if ($row['status'] == 0) {  ?>
-
                                                         <a href="<?php echo BASE_URL ?>students?action=status&id=<?php echo $row['id'] ?>&status=1" class="btn btn-success btn-sm">
                                                             Active
                                                         </a>
+                                                    <?php } ?>
+
+                                                    <?php if (!isset($row['verified']) || $row['verified'] == 0) { ?>
+                                                        <a href="<?php echo BASE_URL ?>students?action=verify&id=<?php echo $row['id'] ?>&verified=1" class="btn btn-info btn-sm mt-1">
+                                                            Verify ID
+                                                        </a>
+                                                    <?php } else { ?>
+                                                        <a href="<?php echo BASE_URL ?>students?action=verify&id=<?php echo $row['id'] ?>&verified=0" class="btn btn-secondary btn-sm mt-1">
+                                                            Revoke Verification
+                                                        </a>
+                                                    <?php } ?>
+
+                                                    <a href="<?php echo BASE_URL ?>loans?student_id=<?php echo $row['id'] ?>" class="btn btn-info btn-sm mt-1">
+                                                        View Bookings
+                                                    </a>
                                                 </td>
-                                            <?php } ?>
                                             </tr>
                                     <?php }
                                     } ?>

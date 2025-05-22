@@ -59,7 +59,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="User/index.php" target="_self">Student Login</a></li>
+            <li><a href="student_login.php" target="_self">Student Login</a></li>
             <li><a href="index.php" target="_self">Admin Login</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

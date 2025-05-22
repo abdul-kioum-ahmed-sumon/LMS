@@ -25,8 +25,18 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
         $student = mysqli_fetch_assoc($student);
     }
 } else {
-    header("LOCATION: " . BASE_URL . "books");
+    header("LOCATION: " . BASE_URL . "students");
     exit;
+}
+
+// Get departments for dropdown
+$sql = "SELECT DISTINCT name FROM categories";
+$result = $conn->query($sql);
+$departments = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $departments[] = $row['name'];
+    }
 }
 ?>
 <?php
@@ -70,15 +80,27 @@ include_once(DIR_URL . "include/sidebar.php");
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Department</label>
-                                        <input type="text" class="form-control" name="dept" value="<?php echo $student['dept'] ?>" />
+                                        <select class="form-select" name="dept">
+                                            <option value="">Select Department</option>
+                                            <?php foreach ($departments as $dept) : ?>
+                                                <option value="<?php echo $dept; ?>" <?php echo ($student['dept'] == $dept) ? 'selected' : ''; ?>><?php echo $dept; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                 </div>
-
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
                                         <input type="email" class="form-control" name="email" value="<?php echo $student['email'] ?>" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Reset Password (Leave empty to keep current password)</label>
+                                        <input type="password" class="form-control" name="new_password" />
+                                        <small class="form-text text-muted">Enter a new password only if you want to change it</small>
                                     </div>
                                 </div>
 
@@ -93,6 +115,26 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <div class="mb-3">
                                         <label class="form-label">Address</label>
                                         <input type="text" class="form-control" name="address" value="<?php echo $student['address'] ?>" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Account Status</label>
+                                        <select class="form-select" name="status">
+                                            <option value="1" <?php echo ($student['status'] == 1) ? 'selected' : ''; ?>>Active</option>
+                                            <option value="0" <?php echo ($student['status'] == 0) ? 'selected' : ''; ?>>Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">ID Verification</label>
+                                        <select class="form-select" name="verified">
+                                            <option value="1" <?php echo (isset($student['verified']) && $student['verified'] == 1) ? 'selected' : ''; ?>>Verified</option>
+                                            <option value="0" <?php echo (!isset($student['verified']) || $student['verified'] == 0) ? 'selected' : ''; ?>>Not Verified</option>
+                                        </select>
                                     </div>
                                 </div>
 

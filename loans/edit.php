@@ -58,7 +58,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Select Book</label>
                                         <?php
-                                        $books = getBooks($conn);
+                                        $books = getAvailableBooksForLoan($conn);
                                         ?>
                                         <select name="book_id" class="form-control">
                                             <option value="">Please select</option>

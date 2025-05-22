@@ -38,6 +38,22 @@ function getBooks($conn)
     return $result;
 }
 
+// Function to get all available books (not currently loaned)
+function getAvailableBooks($conn)
+{
+    $sql = "SELECT b.*, c.name as cat_name 
+            FROM books b
+            INNER JOIN categories c ON c.id = b.category_id
+            WHERE b.status = 1 
+            AND (
+                SELECT COUNT(*) FROM book_loans 
+                WHERE book_id = b.id AND is_return = 0
+            ) = 0
+            ORDER BY b.id DESC";
+    $result = $conn->query($sql);
+    return $result;
+}
+
 // Function to get book details
 function getBookById($conn, $id)
 {
@@ -109,7 +125,6 @@ function updateBook($conn, $param)
     }
 
     return $result;
-
 }
 
 
@@ -132,4 +147,15 @@ function isIsbnUnique($conn, $isbn, $id = NULL)
     if ($result->num_rows > 0)
         return true;
     else return false;
+}
+
+// Function to check if a book is available (not currently booked)
+function isBookAvailable($conn, $book_id)
+{
+    $sql = "SELECT COUNT(*) as count FROM book_loans 
+            WHERE book_id = $book_id AND is_return = 0";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    return ($row['count'] == 0);
 }

@@ -1,5 +1,6 @@
 <?php
-include_once("/Xampp/htdocs/lms-master/config/config.php");
+// Using proper relative path instead of hardcoded absolute path
+include_once(__DIR__ . "/../config/config.php");
 include_once(DIR_URL . "config/database.php");
 include_once(DIR_URL . "include/middleware.php");
 include_once(DIR_URL . "models/book.php");
@@ -53,7 +54,12 @@ include_once(DIR_URL . "include/sidebar.php");
         <div class="row dashboard-counts">
             <div class="col-md-12 mt-4">
                 <?php include_once(DIR_URL . "include/alerts.php"); ?>
-                <h3 class="fw-bold text-uppercase">Manage Books</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="fw-bold text-uppercase">Manage Books</h3>
+                    <a href="<?php echo BASE_URL ?>books/add.php" class="btn btn-success">
+                        <i class="fa-solid fa-plus me-2"></i> Add New Book
+                    </a>
+                </div>
             </div>
 
             <div class="col-md-12 mt-4">
