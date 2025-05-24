@@ -52,4 +52,13 @@ media/
 # Database files
 *.sqlite
 *.sqlite3
-*.db 
+*.db
+
+# Composer specific files
+composer.lock
+
+# IDE specific files
+nbproject/
+
+# OS specific
+Thumbs.db 

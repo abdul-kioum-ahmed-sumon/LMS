@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2025 at 01:26 PM
+-- Generation Time: May 24, 2025 at 05:14 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,9 +58,30 @@ INSERT INTO `books` (`id`, `title`, `author`, `publication_year`, `isbn`, `categ
 (37, 'Engineering Mechanics: Statics', 'Russell C. Hibbeler', '2014', '978-0133918922', 3, 1, 'ME-13', '2024-04-02 02:25:02', NULL),
 (38, 'Harry Potter and the Sorcerer\'s Stone', 'J.K. Rowling', '1995', '978-059035341', 7, 1, '123', '2024-04-02 02:29:29', '0000-00-00 00:00:00'),
 (39, 'CP 52 problems', 'subin', '2021', '12938231', 7, 1, 'CSE-12', '2024-04-18 13:49:44', '2024-04-22 09:08:09'),
-(40, 'Understanding Deep Learning', 'Simon J. D. Prince', '2023', '9780262048644', 7, 1, 'CSE-12', '2024-04-19 00:33:25', '2024-04-22 09:22:00'),
+(40, 'Understanding Deep Learning', 'Simon J. D. Prince', '2023', '9780262048644', 1, 1, 'CSE-12', '2024-04-19 00:33:25', '2025-05-22 18:45:08'),
 (41, 'C#', 'J.K. Rowling', '2012', '34342332', 1, 1, 'CSE-12', '2024-05-04 16:25:21', NULL),
-(42, 'physic ssc', 'saiful', '2024', '999999', 7, 1, 'others', '2024-10-09 10:02:12', NULL);
+(42, 'physic ssc', 'saiful', '2024', '999999', 7, 1, 'others', '2024-10-09 10:02:12', NULL),
+(43, 'Software Engineering ', 'labid vai', '2021', '3423423545', 1, 1, 'CSE-12', '2025-05-22 17:11:06', NULL),
+(44, 'Introduction to Data Science', 'Rachel Thomas', '2023', '9781234567890', 1, 1, 'CSE-15', '2025-05-22 21:47:13', NULL),
+(45, 'Machine Learning Fundamentals', 'Andrew Ng', '2022', '9781234567891', 1, 1, 'CSE-16', '2025-05-22 21:47:13', NULL),
+(46, 'Python for Data Analysis', 'Wes McKinney', '2022', '9781234567892', 1, 1, 'CSE-17', '2025-05-22 21:47:13', NULL),
+(47, 'Deep Learning Revolution', 'Yoshua Bengio', '2023', '9781234567893', 1, 1, 'CSE-18', '2025-05-22 21:47:13', NULL),
+(48, 'Modern Database Systems', 'Jennifer Widom', '2022', '9781234567894', 1, 1, 'CSE-19', '2025-05-22 21:47:13', NULL),
+(49, 'Circuit Analysis', 'James Nilsson', '2021', '9781234567895', 2, 1, 'EEE-15', '2025-05-22 21:47:13', NULL),
+(50, 'Power System Engineering', 'Alexandra Watson', '2021', '9781234567896', 2, 1, 'EEE-16', '2025-05-22 21:47:13', NULL),
+(51, 'Renewable Energy Technologies', 'David Green', '2023', '9781234567897', 2, 1, 'EEE-17', '2025-05-22 21:47:13', NULL),
+(52, 'Digital Signal Processing', 'John Smith', '2022', '9781234567898', 2, 1, 'EEE-18', '2025-05-22 21:47:13', NULL),
+(53, 'Electronic Devices', 'Thomas Floyd', '2021', '9781234567899', 2, 1, 'EEE-19', '2025-05-22 21:47:13', NULL),
+(54, 'Engineering Mechanics', 'Russell Hibbeler', '2021', '9781234567900', 3, 1, 'ME-14', '2025-05-22 21:47:13', NULL),
+(55, 'Thermodynamics', 'Michael Moran', '2022', '9781234567901', 3, 1, 'ME-15', '2025-05-22 21:47:13', NULL),
+(56, 'Fluid Mechanics', 'Frank White', '2021', '9781234567902', 3, 1, 'ME-16', '2025-05-22 21:47:13', NULL),
+(57, 'Structural Analysis', 'Aslam Kassimali', '2023', '9781234567903', 4, 1, 'CE-01', '2025-05-22 21:47:13', NULL),
+(58, 'Soil Mechanics', 'Karl Terzaghi', '2022', '9781234567904', 4, 1, 'CE-02', '2025-05-22 21:47:13', NULL),
+(59, 'Marketing Principles', 'Philip Kotler', '2023', '9781234567905', 5, 1, 'BBA-10', '2025-05-22 21:47:13', NULL),
+(60, 'Business Communication', 'Mary Ellen Guffey', '2022', '9781234567906', 5, 1, 'BBA-11', '2025-05-22 21:47:13', NULL),
+(61, 'English Literature Anthology', 'William Shakespeare', '2021', '9781234567907', 6, 1, 'ENG-01', '2025-05-22 21:47:13', NULL),
+(62, 'The Art of Public Speaking', 'Dale Carnegie', '2021', '9781234567908', 6, 1, 'ENG-02', '2025-05-22 21:47:13', NULL),
+(63, 'World History: A New Perspective', 'David Roberts', '2022', '9781234567909', 7, 1, 'OTH-01', '2025-05-22 21:47:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -75,6 +96,7 @@ CREATE TABLE `book_loans` (
   `loan_date` date DEFAULT NULL,
   `return_date` date DEFAULT NULL,
   `is_return` tinyint(1) NOT NULL DEFAULT 0,
+  `issued_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -83,16 +105,31 @@ CREATE TABLE `book_loans` (
 -- Dumping data for table `book_loans`
 --
 
-INSERT INTO `book_loans` (`id`, `book_id`, `student_id`, `loan_date`, `return_date`, `is_return`, `created_at`, `updated_at`) VALUES
-(19, 21, 17, '2024-04-23', '2024-04-30', 0, '2024-04-23 03:46:19', NULL),
-(20, 20, 17, '2024-04-23', '2024-04-30', 1, '2024-04-23 03:47:31', NULL),
-(21, 37, 8, '2024-04-24', '2024-04-27', 0, '2024-04-24 11:39:55', NULL),
-(22, 30, 30, '2024-04-24', '2024-04-30', 1, '2024-04-24 11:54:41', NULL),
-(23, 19, 19, '2024-05-03', '2024-05-23', 0, '2024-05-03 12:13:18', NULL),
-(24, 30, 34, '2024-06-06', '2024-06-30', 0, '2024-06-06 01:49:06', NULL),
-(25, 18, 13, '2024-08-24', '2024-08-31', 1, '2024-08-24 09:33:54', NULL),
-(26, 42, 35, '2024-10-09', '2024-10-30', 1, '2024-10-09 10:03:19', NULL),
-(27, 41, 36, '2024-10-26', '2024-10-31', 1, '2024-10-26 10:49:03', NULL);
+INSERT INTO `book_loans` (`id`, `book_id`, `student_id`, `loan_date`, `return_date`, `is_return`, `issued_at`, `created_at`, `updated_at`) VALUES
+(21, 37, 8, '2024-04-24', '2024-04-27', 0, NULL, '2024-04-24 11:39:55', NULL),
+(22, 30, 30, '2024-04-24', '2024-04-30', 1, NULL, '2024-04-24 11:54:41', NULL),
+(28, 18, 40, '2025-05-22', '2025-06-05', 0, NULL, '2025-05-22 16:22:35', NULL),
+(30, 34, 41, '2025-05-22', '2025-06-05', 1, '2025-05-22 20:26:55', '2025-05-22 16:26:31', '2025-05-22 20:26:55'),
+(31, 38, 41, '2025-05-22', '2025-06-05', 1, '2025-05-22 20:33:39', '2025-05-22 16:33:20', '2025-05-22 20:33:39'),
+(32, 41, 41, '2025-05-22', '2025-06-05', 1, '2025-05-22 20:35:37', '2025-05-22 16:35:26', '2025-05-22 20:35:37'),
+(33, 22, 41, '2025-05-22', '2025-06-05', 1, '2025-05-22 20:54:42', '2025-05-22 16:48:14', '2025-05-22 20:54:42'),
+(34, 33, 41, '2025-05-22', '2025-06-05', 1, '2025-05-22 20:55:21', '2025-05-22 16:54:57', '2025-05-22 20:55:21'),
+(35, 40, 41, '2025-05-22', '2025-06-05', 1, '2025-05-22 20:55:53', '2025-05-22 16:55:42', '2025-05-22 20:55:53'),
+(36, 20, 41, '2025-05-22', '2025-06-05', 1, '2025-05-22 21:00:53', '2025-05-22 17:00:38', '2025-05-22 21:00:53'),
+(37, 43, 41, '2025-05-22', '2025-06-05', 1, '2025-05-22 21:12:36', '2025-05-22 17:11:36', '2025-05-22 21:12:36'),
+(38, 38, 11, '2025-05-23', '2025-05-31', 0, NULL, '2025-05-22 17:18:48', NULL),
+(39, 34, 43, '2025-05-22', '2025-06-05', 1, '2025-05-22 21:27:39', '2025-05-22 17:27:01', '2025-05-22 21:27:39'),
+(41, 36, 44, '2025-05-22', '2025-06-05', 1, '2025-05-22 21:34:04', '2025-05-22 17:32:14', '2025-05-22 21:34:04'),
+(43, 35, 44, '2025-05-22', '2025-06-05', 1, '2025-05-22 21:41:50', '2025-05-22 17:41:24', '2025-05-22 21:41:50'),
+(44, 60, 44, '2025-05-22', '2025-06-05', 0, '2025-05-22 21:49:36', '2025-05-22 17:49:12', '2025-05-22 21:49:36'),
+(45, 48, 41, '2025-05-23', '2025-06-06', 0, '2025-05-22 22:30:08', '2025-05-22 18:29:51', '2025-05-22 22:30:08'),
+(46, 40, 41, '2025-05-23', '2025-06-06', 0, '2025-05-22 22:46:00', '2025-05-22 18:45:27', '2025-05-22 22:46:00'),
+(47, 39, 45, '2025-05-23', '2025-06-06', 0, NULL, '2025-05-23 11:24:22', NULL),
+(48, 33, 45, '2025-05-23', '2025-06-06', 0, '2025-05-23 15:25:59', '2025-05-23 11:24:47', '2025-05-23 15:25:59'),
+(49, 53, 45, '2025-05-23', '2025-06-06', 1, '2025-05-23 15:27:47', '2025-05-23 11:27:25', '2025-05-23 15:27:47'),
+(50, 30, 46, '2025-05-23', '2025-06-06', 1, '2025-05-23 16:08:54', '2025-05-23 12:07:42', '2025-05-23 16:08:54'),
+(51, 49, 46, '2025-05-23', '2025-06-06', 0, '2025-05-23 16:10:32', '2025-05-23 12:10:13', '2025-05-23 16:10:32'),
+(52, 53, 46, '2025-05-23', '2025-06-06', 0, '2025-05-23 16:11:02', '2025-05-23 12:10:37', '2025-05-23 16:11:02');
 
 -- --------------------------------------------------------
 
@@ -305,8 +342,10 @@ CREATE TABLE `students` (
   `name` varchar(255) DEFAULT NULL,
   `phone_no` varchar(15) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `address` text DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
+  `verified` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
   `dept_id` varchar(255) DEFAULT NULL,
@@ -319,27 +358,12 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `name`, `phone_no`, `email`, `address`, `status`, `created_at`, `updated_at`, `dept_id`, `dept`, `reg_no`, `Username`) VALUES
-(8, 'Abdul kyum ahmed Sumon', '+8801309897349', 'sumonahmed2521@gmail.com', 'Joypurhat', 1, '2024-03-26 09:59:42', '2024-04-19 01:03:06', '220101046', 'CSE', NULL, NULL),
-(9, 'Abdullah Al Mamun', '01315272398', 'abdullah@1252', 'rongpur', 1, '2024-03-26 10:01:11', '2024-03-26 10:39:54', '220201034', 'CSE', NULL, NULL),
-(10, 'Labib', '013456789674563', 'labib@gmail.com', 'baust', 1, '2024-03-26 10:09:57', '2024-03-29 06:39:51', '220201019', 'CSE', NULL, NULL),
-(11, 'Siam Hasan', '01303567114', 'siam@baust', 'bogura', 1, '2024-03-26 10:11:49', '2024-04-02 03:26:08', '220201045', 'CSE', NULL, NULL),
-(13, 'arif ', '01760676357', 'arifulm233434@gmail.com', 'rongpur23', 0, '2024-03-29 10:09:42', '2024-08-24 09:32:42', '220101044', 'CSE', NULL, NULL),
-(17, 'Maruf', '01309895843', 'maruf@gmail.com', 'Nougan', 1, '2024-03-29 10:43:41', NULL, '2201010456', 'CSE', NULL, NULL),
-(18, 'Fahad', '013032321', 'fajera9894@lance7.com', 'Nougan', 1, '2024-03-29 10:52:57', '2024-03-29 10:53:18', '2212122123', 'BBA', NULL, NULL),
-(19, 'Asif  Rezwan', '01796050003', 'asif@gmail.com', 'r1ngpur', 1, '2024-03-30 00:17:54', '2024-04-02 02:50:36', '220201022', 'CSE', NULL, NULL),
-(20, 'Nafsun kabir', '01782921891', 'nafsun@gmail.com', 'rangpur', 1, '2024-04-01 08:03:19', '2024-04-01 08:03:58', '220201049', 'CSE', NULL, NULL),
-(21, 'Tanvir Islam', '0169696969', 'tanvir@gmail.com', 'Joypurhat', 1, '2024-04-02 03:05:29', NULL, '220201002', 'CSE', NULL, NULL),
-(23, 'Raihan ', '012773626155', 'raihan@gmail.cpm', 'Dhaka', 1, '2024-04-18 12:58:27', NULL, '220101557', 'IPE', NULL, NULL),
-(26, 'Vaskor', '01230323112', 'vaskor@gmail.com', 'rangpur', 1, '2024-04-19 01:09:16', '2024-04-19 01:09:29', '32343432233', 'CE', NULL, NULL),
-(27, 'Tamzid', '012320323222', 'tamzid@gmail.com', 'fulbari', 1, '2024-04-20 11:31:49', NULL, '220201001', 'CSE', NULL, NULL),
-(28, 'Rifat Bro', '0123202332', 'rifatbro@gmail.com', 'Dinajpur', 1, '2024-04-22 09:31:21', NULL, '220201232', 'CSE', NULL, NULL),
-(31, 'Emon', '01812649299', 'emon@gmail.com', 'Joypurhat', 1, '2024-05-04 15:31:38', '2024-06-20 15:58:54', '2202221022', 'CSE', NULL, NULL),
-(32, 'Adip', '01532213132', 'adip@gmail.com', 'rongpur', 1, '2024-05-05 14:40:10', NULL, '2323121', 'EEE', NULL, NULL),
-(33, 'Suvo', '01984322123', 'suvo@gmail.com', 'cumilla', 1, '2024-05-05 15:22:32', NULL, '23123112', 'ME', NULL, NULL),
-(34, 'kakoly', '01734897154', 'kakoly@gmail.com', 'Joypurhat', 1, '2024-06-06 01:48:20', NULL, '4554456', 'CSE', NULL, NULL),
-(35, 'Saiful islam', '01732101465', 'sisaifulislam7273@gmail.com', 'Joypurhat', 1, '2024-10-09 10:00:00', NULL, '7898103754', 'CSE', NULL, NULL),
-(36, 'Taj ul millat', '21342434535', 'fsdghjfash@gmail.com', 'Dhaka', 1, '2024-10-26 10:47:32', NULL, '0802420405101010', 'CSE', NULL, NULL);
+INSERT INTO `students` (`id`, `name`, `phone_no`, `email`, `password`, `address`, `status`, `verified`, `created_at`, `updated_at`, `dept_id`, `dept`, `reg_no`, `Username`) VALUES
+(41, 'Abdul Kyum Ahmed Sumon', '01309897349', 'abdulkioumahmed@gmail.com', '$2y$10$f4dVuE1Gpj0RE2iJmLrxTeusEEZg/fTBwuSa03po.tJh3.xQIyhDW', 'Joypurhat', 1, 1, '2025-05-22 16:25:13', NULL, '220201046', 'CSE', NULL, NULL),
+(43, 'Siam Hasan', '01532213132', 'siamhasan@baust', '$2y$10$qW4to5KJnAMDYh8mHB1u9et8beu87J84LNO.lLd3wlKVt1LqWYjmC', 'rongpur', 1, 1, '2025-05-22 17:22:08', NULL, '220201045', 'CSE', NULL, NULL),
+(44, 'Fahad', '0123232123', 'fahad@gmail.com', '$2y$10$vMsvBrD1cZmNT916lx5/Dez4ppSnN5ziRZ224ztWWz8Wr392NaUDC', 'Nougan', 1, 1, '2025-05-22 17:29:11', NULL, '2201232321', 'BBA', NULL, NULL),
+(45, 'Md. Labib Ahsan ', '9281742189709', 'labib@gmail.com', '$2y$10$x6GbeeLjM8dHqsYisTXfl.6gihTjoxWcy9cC7p.VX2.5.7KARauQO', 'rangpur', 1, 1, '2025-05-23 11:22:38', NULL, '220201019', 'CSE', NULL, NULL),
+(46, 'Abdullah ', '2432432432', 'as@gmail.com', '$2y$10$e9tZlHETt4qVPbz508Z3OuR22hZRf4I2SGyuf0oWdCmqrRxvOs5PC', 'Nilphamari', 1, 1, '2025-05-23 12:06:28', '2025-05-23 23:13:09', '220201034', 'CSE', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -585,13 +609,13 @@ ALTER TABLE `users_3`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `book_loans`
 --
 ALTER TABLE `book_loans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -651,7 +675,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `subscriptions`
