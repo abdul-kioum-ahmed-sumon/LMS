@@ -76,8 +76,8 @@ if (isset($_POST['login_form_submitted'])) {
         }
 
         .login-container {
-            width: 900px;
-            height: 560px;
+            width: 1100px;
+            height: 650px;
             background: white;
             border-radius: 10px;
             overflow: hidden;
@@ -245,7 +245,8 @@ if (isset($_POST['login_form_submitted'])) {
                 </div>
                 <button type="submit" name="login_form_submitted" class="login-btn">Login</button>
             </form>
-            <p class="register-link">Don't have an account? <a href="student_register.php">Register here</a></p>
+            <p class="register-link">Don't have an account? <a href="student_register.php">Create a student account</a></p>
+            <p class="register-link" style="margin-top:6px; color:#6c757d;">Note: New registrations require administrator approval before you can sign in.</p>
         </div>
     </div>
 

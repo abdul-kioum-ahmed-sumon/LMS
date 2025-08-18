@@ -26,8 +26,8 @@ function getCounts($conn)
         $counts['total_students'] = $books['total_students'];
     }
 
-    ## Get loans count
-    $sql = "select count(id) as total_loans from book_loans";
+    ## Get active loans count (not returned yet)
+    $sql = "select count(id) as total_loans from book_loans WHERE is_return = 0";
     $res = $conn->query($sql);
     if ($res->num_rows > 0) {
         $books = mysqli_fetch_assoc($res);
@@ -43,6 +43,29 @@ function getCounts($conn)
     }
 
     return $counts;
+}
+
+// Admin notifications helper
+function getAdminNotifications(mysqli $conn)
+{
+    // New student registrations waiting for approval
+    $studentsSql = "SELECT id, name, email, created_at FROM students WHERE verified = 0 ORDER BY created_at DESC LIMIT 10";
+    $students = $conn->query($studentsSql);
+
+    // New book reservations not issued yet
+    $loansSql = "SELECT l.id as booking_id, b.title, s.name as student_name, l.created_at
+                 FROM book_loans l
+                 JOIN books b ON b.id = l.book_id
+                 JOIN students s ON s.id = l.student_id
+                 WHERE l.is_return = 0 AND l.issued_at IS NULL
+                 ORDER BY l.created_at DESC
+                 LIMIT 10";
+    $loans = $conn->query($loansSql);
+
+    return [
+        'pending_students' => $students,
+        'pending_loans' => $loans
+    ];
 }
 
 // Function to get tab data

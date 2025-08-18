@@ -74,6 +74,7 @@ if ($result->num_rows > 0) {
                 <img src="<?php echo BASE_URL; ?>assets/images/BAUST_LOGO.png" alt="BAUST Logo" style="max-height: 80px;">
                 <h1 class="mt-2 fw-bold text-uppercase">Library Management System</h1>
                 <h3 class="text-muted">Student Registration</h3>
+                <p class="small text-muted mt-2 mb-0">After submitting this form, your account will be reviewed by an administrator. You will be able to log in once your account is approved.</p>
             </div>
 
             <div class="card-body p-4">
@@ -86,6 +87,7 @@ if ($result->num_rows > 0) {
                 <?php if (!empty($success)): ?>
                     <div class="alert alert-success" role="alert">
                         <?php echo $success; ?>
+                        <br><span class="small">Your account will be activated once approved by an administrator. You will receive confirmation accordingly.</span>
                         <br>
                         <a href="student_login.php" class="btn btn-sm btn-success mt-2">Go to login page</a>
                     </div>
@@ -127,7 +129,7 @@ if ($result->num_rows > 0) {
                             <div class="mb-3">
                                 <label for="dept_id" class="form-label">Student ID Number</label>
                                 <input type="text" class="form-control" id="dept_id" name="dept_id" required>
-                                <small class="form-text text-muted">Your university/college ID number</small>
+                                <small class="form-text text-muted">Enter your institutional student ID</small>
                             </div>
                         </div>
                         <div class="col-md-6">

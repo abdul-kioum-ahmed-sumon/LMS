@@ -12,8 +12,7 @@ if (isset($_POST['publish'])) {
         header("LOCATION: " . BASE_URL . "books");
         exit;
     } else {
-        $_SESSION['error'] = $res['error']; //"Something went wrong, please try again. ";
-        //header("LOCATION: " . BASE_URL . "books/add.php");
+        $_SESSION['error'] = $res['error'];
     }
 }
 ?>
@@ -99,9 +98,17 @@ include_once(DIR_URL . "include/sidebar.php");
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Quantity (number of copies)</label>
+                                        <input type="number" name="quantity" class="form-control" min="1" value="1" required />
+                                        <small class="text-muted">All copies will be tracked under the same ISBN.</small>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-12">
                                     <button name="publish" type="submit" class="btn btn-success btn1">
-                                        ADD Book
+                                        Add Book
                                     </button>
 
                                     <button type="reset" class="btn btn-secondary btn1">

@@ -24,6 +24,60 @@
             </form>
 
             <ul class="navbar-nav mb-2 mb-lg-0">
+                <?php
+                // Lightweight notifications for admins
+                include_once(DIR_URL . 'models/dashboard.php');
+                $notifs = getAdminNotifications($conn);
+                $pendingStudents = ($notifs['pending_students'] && $notifs['pending_students']->num_rows) ? $notifs['pending_students']->num_rows : 0;
+                $pendingLoans = ($notifs['pending_loans'] && $notifs['pending_loans']->num_rows) ? $notifs['pending_loans']->num_rows : 0;
+                $totalNotifs = $pendingStudents + $pendingLoans;
+                ?>
+                <li class="nav-item dropdown me-2">
+                    <a class="nav-link dropdown-toggle position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-bell"></i>
+                        <?php if ($totalNotifs > 0) { ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $totalNotifs; ?></span>
+                        <?php } ?>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" style="min-width: 320px;">
+                        <li class="dropdown-header fw-bold">Notifications</li>
+                        <li>
+                            <h6 class="dropdown-item-text mb-1">Pending Student Approvals (<?php echo $pendingStudents; ?>)</h6>
+                            <div class="px-3">
+                                <?php if ($pendingStudents > 0) {
+                                    while ($ps = $notifs['pending_students']->fetch_assoc()) { ?>
+                                        <div class="small text-truncate">
+                                            <i class="fa-solid fa-user me-1 text-secondary"></i>
+                                            <a href="<?php echo BASE_URL; ?>students" class="text-decoration-none">Approve <?php echo htmlspecialchars($ps['name']); ?></a>
+                                        </div>
+                                    <?php }
+                                } else { ?>
+                                    <div class="small text-muted">No pending students</div>
+                                <?php } ?>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <h6 class="dropdown-item-text mb-1">Pending Book Verifications (<?php echo $pendingLoans; ?>)</h6>
+                            <div class="px-3">
+                                <?php if ($pendingLoans > 0) {
+                                    while ($pl = $notifs['pending_loans']->fetch_assoc()) { ?>
+                                        <div class="small text-truncate">
+                                            <i class="fa-solid fa-book-open-reader me-1 text-secondary"></i>
+                                            <a href="<?php echo BASE_URL; ?>loans/verify.php?booking_id=<?php echo (int)$pl['booking_id']; ?>" class="text-decoration-none">
+                                                Verify booking #<?php echo (int)$pl['booking_id']; ?> (<?php echo htmlspecialchars($pl['student_name']); ?>)
+                                            </a>
+                                        </div>
+                                    <?php }
+                                } else { ?>
+                                    <div class="small text-muted">No pending verifications</div>
+                                <?php } ?>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php if ($_SESSION['user']['profile_pic']) { ?>

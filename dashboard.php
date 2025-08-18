@@ -77,42 +77,20 @@ include_once(DIR_URL . "include/sidebar.php");
             </div>
         </div>
         <?php
-
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "lms";
-
-
-        $con = new mysqli($servername, $username, $password, $dbname);
-
-        $cse_result = mysqli_query($con, "SELECT COUNT(id) as cse FROM students WHERE dept = 'CSE'");
-        $cse_row = mysqli_fetch_assoc($cse_result);
-        $cse_count = $cse_row['cse'];
-
-        $eee_result = mysqli_query($con, "SELECT COUNT(id) as eee FROM students WHERE dept = 'EEE'");
-        $eee_row = mysqli_fetch_assoc($eee_result);
-        $eee_count = $eee_row['eee'];
-
-        $bba_result = mysqli_query($con, "SELECT COUNT(id) as bba FROM students WHERE dept = 'BBA'");
-        $bba_row = mysqli_fetch_assoc($bba_result);
-        $bba_count = $bba_row['bba'];
-
-        $ipe_result = mysqli_query($con, "SELECT COUNT(id) as ipe FROM students WHERE dept = 'IPE'");
-        $ipe_row = mysqli_fetch_assoc($ipe_result);
-        $ipe_count = $ipe_row['ipe'];
-
-        $CE_result = mysqli_query($con, "SELECT COUNT(id) as CE FROM students WHERE dept = 'CE'");
-        $CE_row = mysqli_fetch_assoc($CE_result);
-        $CE_count = $CE_row['CE'];
-
-        $me_result = mysqli_query($con, "SELECT COUNT(id) as me FROM students WHERE dept = 'ME'");
-        $me_row = mysqli_fetch_assoc($me_result);
-        $me_count = $me_row['me'];
-
-        $total_result = mysqli_query($con, "SELECT COUNT(id) as total FROM students");
-        $total_row = mysqli_fetch_assoc($total_result);
-        $total_count = $total_row['total'];
+        // Build department distribution dynamically using existing $conn
+        $deptCounts = [];
+        $total_count = 0;
+        if ($res = $conn->query("SELECT dept, COUNT(*) as cnt FROM students GROUP BY dept")) {
+            while ($row = $res->fetch_assoc()) {
+                $dept = $row['dept'];
+                if ($dept === null || $dept === '') {
+                    $dept = 'Unknown';
+                }
+                $count = (int)$row['cnt'];
+                $deptCounts[] = [$dept, $count];
+                $total_count += $count;
+            }
+        }
         ?>
 
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -123,19 +101,32 @@ include_once(DIR_URL . "include/sidebar.php");
             google.charts.setOnLoadCallback(drawChart);
 
             function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                    ['Department', '<?php echo $total_count; ?>'],
-                    ['CSE', <?php echo $cse_count; ?>],
-                    ['EEE', <?php echo $eee_count; ?>],
-                    ['BBA', <?php echo $bba_count; ?>],
-                    ['IPE', <?php echo $ipe_count; ?>],
-                    ['CE', <?php echo $CE_count; ?>],
-                    ['ME', <?php echo $me_count; ?>]
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Department');
+                data.addColumn('number', 'Students');
+                data.addRows([
+                    <?php
+                    $rowsOut = [];
+                    foreach ($deptCounts as $pair) {
+                        // Escape department label for JS string
+                        $label = json_encode($pair[0]);
+                        $rowsOut[] = "[" . $label . ", " . (int)$pair[1] . "]";
+                    }
+                    echo implode(",\n                    ", $rowsOut);
+                    ?>
                 ]);
 
                 var options = {
-                    title: 'Distribution of Students by Department',
+                    title: 'Distribution of Students by Department (Total: <?php echo (int)$total_count; ?>)',
                     pieHole: 0.4,
+                    pieSliceText: 'percentage',
+                    legend: {
+                        position: 'right'
+                    },
+                    chartArea: {
+                        width: '85%',
+                        height: '80%'
+                    }
                 };
 
                 var chart = new google.visualization.PieChart(document.getElementById('donutchart'));

@@ -45,3 +45,7 @@ if ($using_builtin_server || (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['H
     define("PASSWORD", "");
     define("DATABASE", "lms");
 }
+
+// Base URL
+//define('BASE_URL', 'http://localhost/lms-master/'); // Comment out or remove the old one
+define('BASE_URL', 'http://yourlms.epizy.com/'); // Replace yourlms.epizy.com with your actual InfinityFree subdomain

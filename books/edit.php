@@ -108,6 +108,13 @@ include_once(DIR_URL . "include/sidebar.php");
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Quantity (number of copies)</label>
+                                        <input type="number" name="quantity" class="form-control" min="1" value="<?php echo isset($book['quantity']) ? (int)$book['quantity'] : 1; ?>" required />
+                                    </div>
+                                </div>
+
                                 <div class="col-md-12">
                                     <button name="update" type="submit" class="btn btn-success btn1">
                                         Update

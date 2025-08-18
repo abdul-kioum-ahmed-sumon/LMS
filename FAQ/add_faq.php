@@ -230,16 +230,26 @@ include_once(DIR_URL . "models/dashboard.php");
         <?php // PHP code to add a new FAQ to the database
 
         if (isset($_POST['submit'])) {
-            // Get the question and answer from the form
-            $question = $_POST['question'];
-            $answer = $_POST['answer'];
-            // SQL query to insert the new FAQ into the database
-            $sql = "INSERT INTO faq (question, answer)
-        VALUES(' $question','$answer')";
-            // Execute the SQL query
-            $res = mysqli_query($con, $sql);
-            // Redirect to the page displaying all FAQs after adding the new FAQ
-            header("Location: read_faq.php");
+            $question = trim($_POST['question']);
+            $answer = trim($_POST['answer']);
+
+            if ($question !== '' && $answer !== '') {
+                // Use the shared $conn from config/database.php
+                if ($stmt = $conn->prepare("INSERT INTO faq (question, answer) VALUES (?, ?)")) {
+                    $stmt->bind_param("ss", $question, $answer);
+                    if ($stmt->execute()) {
+                        echo "<script>window.location.href='read_faq.php';</script>";
+                        exit;
+                    } else {
+                        echo "<div class='alert alert-danger mt-3'>Failed to add FAQ: " . htmlspecialchars($conn->error) . "</div>";
+                    }
+                    $stmt->close();
+                } else {
+                    echo "<div class='alert alert-danger mt-3'>Database error: " . htmlspecialchars($conn->error) . "</div>";
+                }
+            } else {
+                echo "<div class='alert alert-warning mt-3'>Both question and answer are required.</div>";
+            }
         }
         ?>
 

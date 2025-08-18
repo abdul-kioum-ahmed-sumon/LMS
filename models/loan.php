@@ -44,18 +44,32 @@ function createBookReservation($conn, $student_id, $book_id, $return_date)
         return array("error" => "Student account is not active or verified");
     }
 
-    // Check if book is available
-    $sql = "SELECT * FROM books WHERE id = '$book_id' AND status = 1";
-    $result = $conn->query($sql);
-    if ($result->num_rows == 0) {
+    // Check if book exists and has available copies according to quantity
+    $bookSql = "SELECT quantity, status FROM books WHERE id = '$book_id'";
+    $bookRes = $conn->query($bookSql);
+    if (!$bookRes || $bookRes->num_rows === 0) {
+        return array("error" => "Book not found");
+    }
+    $bookRow = $bookRes->fetch_assoc();
+    if ((int)$bookRow['status'] !== 1) {
         return array("error" => "Book is not available");
     }
 
-    // Check if book is already issued to someone else
-    $sql = "SELECT * FROM book_loans WHERE book_id = '$book_id' AND is_return = 0";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        return array("error" => "This book is already issued to someone else");
+    $quantity = isset($bookRow['quantity']) ? (int)$bookRow['quantity'] : 1;
+    if ($quantity < 1) {
+        $quantity = 1;
+    }
+
+    // Active loans for this book row
+    $activeSql = "SELECT COUNT(*) AS active FROM book_loans WHERE book_id = '$book_id' AND is_return = 0";
+    $activeRes = $conn->query($activeSql);
+    $activeCount = 0;
+    if ($activeRes && $activeRes->num_rows > 0) {
+        $activeCount = (int)$activeRes->fetch_assoc()['active'];
+    }
+
+    if ($activeCount >= $quantity) {
+        return array("error" => "No copies available for this book at the moment");
     }
 
     // Create booking

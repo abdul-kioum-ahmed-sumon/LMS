@@ -129,9 +129,25 @@
                 <div class="text-secondary small fw-bold text-uppercase">
                     Others
                 </div>
-                <li>
-                    <a href="<?php echo BASE_URL ?>Magazine/Magazine.php" class="nav-link"><i class="fas fa-newspaper me-2" style="color: #b2bafb;"></i>Magazine
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#magazinesManagement" role="button" aria-expanded="false" aria-controls="magazinesManagement">
+                        <i class="fas fa-newspaper me-2" style="color: #b2bafb;"></i>
+                        Magazines Management
+                        <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
                     </a>
+
+                    <div class="collapse" id="magazinesManagement">
+                        <div>
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a href="<?php echo BASE_URL ?>magazines/index.php" class="nav-link"><i class="fa-solid fa-sliders me-2" style="color: #FFD43B;"></i> Manage All</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo BASE_URL ?>Magazine/add_magazine.php" class="nav-link"><i class="fa-solid fa-plus me-2" style="color: #FFD43B;"></i> Add New</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <a href="<?php echo BASE_URL ?>Question_bank/qb_read.php" class="nav-link"><i class="fas fa-newspaper me-2" style="color: #b2bafb;"></i>Question Bank

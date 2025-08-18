@@ -58,6 +58,26 @@ if (isset($_POST['book_id']) && isset($_POST['reserve'])) {
     exit;
 }
 
+// Handle reservation by ISBN (choose an available copy)
+if (isset($_POST['reserve_by_isbn']) && isset($_POST['reserve_isbn'])) {
+    $isbn = trim($_POST['reserve_isbn']);
+    $availableCopyId = findReservableBookIdByIsbn($conn, $isbn);
+    if ($availableCopyId) {
+        $return_date = date('Y-m-d', strtotime('+14 days'));
+        $result = createBookReservation($conn, $student_id, $availableCopyId, $return_date);
+        if (isset($result['success'])) {
+            $_SESSION['success_message'] = "Book reserved successfully! Your booking ID is: " . $result['booking_id'];
+            $_SESSION['booking_id'] = $result['booking_id'];
+        } else {
+            $_SESSION['error_message'] = $result['error'];
+        }
+    } else {
+        $_SESSION['error_message'] = 'No available copies found for this title.';
+    }
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+}
+
 // Get messages from session and clear them
 $success_message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : null;
 $error_message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : null;
@@ -116,6 +136,29 @@ $available_books = getAvailableBooks($conn);
 
     <!-- Main Content -->
     <div class="container mt-4">
+        <!-- Student Resources Top Row -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <a href="<?php echo BASE_URL; ?>User/Magazine.php" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-newspaper me-2"></i> Magazine
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="<?php echo BASE_URL; ?>User/qb_read.php" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-book me-2"></i> Question Bank
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="<?php echo BASE_URL; ?>User/notice.php" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-bullhorn me-2"></i> Notice Board
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="<?php echo BASE_URL; ?>User/faq.php" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-circle-question me-2"></i> FAQ
+                </a>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -175,7 +218,7 @@ $available_books = getAvailableBooks($conn);
                     </div>
                 <?php endif; ?>
 
-                <!-- Available Books Section -->
+                <!-- Available Books (by Title/ISBN with copy counts) -->
                 <div class="card">
                     <div class="card-header bg-success text-white">
                         <h4 class="mb-0">Available Books</h4>
@@ -187,57 +230,40 @@ $available_books = getAvailableBooks($conn);
                                     <tr>
                                         <th>Title</th>
                                         <th>Author</th>
-                                        <th>Publication Year</th>
                                         <th>Category</th>
-                                        <th>Shelf No</th>
-                                        <th>Actions</th>
+                                        <th>ISBN</th>
+                                        <th>Available/Total</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if ($available_books->num_rows > 0) {
-                                        while ($book = $available_books->fetch_assoc()) {
-                                    ?>
-                                            <tr>
-                                                <td><?php echo $book['title']; ?></td>
-                                                <td><?php echo $book['author']; ?></td>
-                                                <td><?php echo $book['publication_year']; ?></td>
-                                                <td><?php echo $book['cat_name']; ?></td>
-                                                <td><?php echo $book['shelf_no']; ?></td>
-                                                <td>
-                                                    <?php
-                                                    // Check if student has already booked this book - use direct query
-                                                    $check_booked_sql = "SELECT COUNT(*) as booked 
-                                                                        FROM book_loans l 
-                                                                        JOIN students s ON s.id = l.student_id
-                                                                        WHERE l.book_id = {$book['id']} 
-                                                                        AND s.email = '" . $conn->real_escape_string($student['email']) . "'
-                                                                        AND l.is_return = 0";
-                                                    $check_result = $conn->query($check_booked_sql);
-                                                    $has_booked = false;
-
-                                                    if ($check_result && $check_result->num_rows > 0) {
-                                                        $booked_data = $check_result->fetch_assoc();
-                                                        $has_booked = ($booked_data['booked'] > 0);
-                                                    }
-
-                                                    if ($has_booked) {
-                                                        echo '<span class="badge bg-warning">Already Booked</span>';
-                                                    } else {
-                                                    ?>
-                                                        <form method="post" class="d-inline">
-                                                            <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
-                                                            <button type="submit" name="reserve" class="btn btn-sm btn-primary">
-                                                                Reserve Book
-                                                            </button>
-                                                        </form>
-                                                    <?php } ?>
-                                                </td>
-                                            </tr>
-                                    <?php
+                                    require_once(DIR_URL . 'models/book.php');
+                                    $agg = getBooksAvailabilityAggregated($conn);
+                                    if ($agg && $agg->num_rows > 0) {
+                                        while ($row = $agg->fetch_assoc()) {
+                                            $available = (int)$row['available_copies'];
+                                            $total = (int)$row['total_copies'];
+                                            echo '<tr>';
+                                            echo '<td>' . htmlspecialchars($row['title']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($row['author']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($row['cat_name']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($row['isbn']) . '</td>';
+                                            echo '<td>' . $available . ' / ' . $total . '</td>';
+                                            echo '<td>';
+                                            if ($available > 0) {
+                                                echo '<form method="post" class="d-inline">';
+                                                echo '<input type="hidden" name="reserve_isbn" value="' . htmlspecialchars($row['isbn']) . '">';
+                                                echo '<button type="submit" name="reserve_by_isbn" class="btn btn-sm btn-primary">Reserve Copy</button>';
+                                                echo '</form>';
+                                            } else {
+                                                echo '<span class="badge bg-secondary">All Copies Issued</span>';
+                                            }
+                                            echo '</td>';
+                                            echo '</tr>';
                                         }
                                     } else {
-                                        echo '<tr><td colspan="6" class="text-center">No books available</td></tr>';
+                                        echo '<tr><td colspan="6" class="text-center">No books found</td></tr>';
                                     }
                                     ?>
                                 </tbody>
@@ -245,6 +271,8 @@ $available_books = getAvailableBooks($conn);
                         </div>
                     </div>
                 </div>
+
+
 
                 <!-- Current Bookings Section -->
                 <div class="row mt-4">

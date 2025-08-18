@@ -64,8 +64,9 @@ include_once(DIR_URL . "include/sidebar.php");
 
             <div class="col-md-12 mt-4">
                 <div class="card">
-                    <div class="card-header">
-                        All Books
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>All Books</span>
+                        <a href="#" class="btn btn-outline-secondary btn-sm" data-bs-toggle="collapse" data-bs-target="#byIsbn">View by Title/ISBN</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -79,6 +80,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <th scope="col">ISBN No</th>
                                         <th scope="col">Cat Name</th>
                                         <th scope="col">Shelf Number</th>
+                                        <th scope="col">Available Copies</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Created At</th>
                                         <th scope="col">Action</th>
@@ -98,6 +100,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                                 <td><?php echo $row['isbn'] ?></td>
                                                 <td><?php echo $row['cat_name'] ?></td>
                                                 <td><?php echo $row['shelf_no'] ?></td>
+                                                <td><?php echo isset($row['available_copies']) ? (int)$row['available_copies'] : 0; ?></td>
                                                 <td>
                                                     <?php
                                                     if ($row['status'] == 1)
@@ -131,6 +134,46 @@ include_once(DIR_URL . "include/sidebar.php");
                                     <?php }
                                     } ?>
 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Aggregated by ISBN/title -->
+                <div class="card mt-3 collapse" id="byIsbn">
+                    <div class="card-header">Inventory Summary (by Title/ISBN)</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Category</th>
+                                        <th>ISBN</th>
+                                        <th>Total Copies</th>
+                                        <th>Available Copies</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    require_once(DIR_URL . 'models/book.php');
+                                    $agg = getBooksAvailabilityAggregated($conn);
+                                    if ($agg && $agg->num_rows > 0) {
+                                        while ($r = $agg->fetch_assoc()) {
+                                            echo '<tr>';
+                                            echo '<td>' . htmlspecialchars($r['title']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($r['author']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($r['cat_name']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($r['isbn']) . '</td>';
+                                            echo '<td>' . (int)$r['total_copies'] . '</td>';
+                                            echo '<td>' . (int)$r['available_copies'] . '</td>';
+                                            echo '</tr>';
+                                        }
+                                    } else {
+                                        echo '<tr><td colspan="6" class="text-center">No data</td></tr>';
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
