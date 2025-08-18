@@ -1,5 +1,5 @@
 <?php
-include_once("/Xampp/htdocs/lms-master/config/config.php");
+include_once(__DIR__ . "/../config/config.php");
 include_once(DIR_URL . "config/database.php");
 include_once(DIR_URL . "include/middleware.php");
 include_once(DIR_URL . "models/loan.php");
@@ -100,6 +100,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                         <th scope="col">Issue Date</th>
                                         <th scope="col">Return Date</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Fine</th>
                                         <th scope="col">Issued</th>
                                         <th scope="col">Created At</th>
                                         <th scope="col">Action</th>
@@ -125,6 +126,17 @@ include_once(DIR_URL . "include/sidebar.php");
                                                     if ($row['is_return'] == 1)
                                                         echo '<span class="badge text-bg-success">Returned</span>';
                                                     else echo '<span class="badge text-bg-warning">Active</span>';
+                                                    ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php
+                                                    // Calculate fine for active, overdue loans
+                                                    $fine = 0;
+                                                    if ((int)$row['is_return'] === 0) {
+                                                        $fine = calculateCurrentFineAmount($row);
+                                                    }
+                                                    echo $fine > 0 ? '<span class="badge text-bg-danger">' . $fine . ' ৳</span>' : '<span class="text-muted">0</span>';
                                                     ?>
                                                 </td>
 

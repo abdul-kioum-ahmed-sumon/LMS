@@ -225,6 +225,13 @@ include_once(DIR_URL . "include/sidebar.php");
                                             <?php echo !empty($booking['issued_at']) ? 'Collected' : 'Booked'; ?>
                                         </span>
                                     </p>
+                                    <?php
+                                                $currentFine = 0;
+                                                if (!isset($booking['is_return']) || (int)$booking['is_return'] === 0) {
+                                                    $currentFine = calculateCurrentFineAmount($booking);
+                                                }
+                                    ?>
+                                    <p><strong>Current Fine:</strong> <?php echo $currentFine; ?> ৳</p>
                                 </div>
                             </div>
 

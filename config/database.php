@@ -26,12 +26,4 @@ try {
     die("Database connection error: " . $e->getMessage());
 }
 
-// define('DB_HOST', 'localhost');
-// define('DB_USER', 'root');
-// define('DB_PASS', '');
-// define('DB_NAME', 'lms');
-
-define('DB_HOST', 'sqlXXX.epizy.com'); // Replace with your InfinityFree MySQL Hostname
-define('DB_USER', 'epiz_XXXXXXXXX'); // Replace with your InfinityFree Username
-define('DB_PASS', 'your_password'); // Replace with your InfinityFree Password
-define('DB_NAME', 'epiz_XXXXXXXXX_yourdbname'); // Replace with your InfinityFree Database Name
+// Remove unrelated InfinityFree defines to avoid confusion; we already connect via constants above

@@ -34,13 +34,27 @@ function getCounts($conn)
         $counts['total_loans'] = $books['total_loans'];
     }
 
-    ## Get loans count
-    $sql = "select sum(amount) as total_revenue from subscriptions";
+    ## Get revenue: subscriptions + collected fines
+    $sub_total = 0;
+    $sql = "select COALESCE(sum(amount),0) as total_revenue from subscriptions";
     $res = $conn->query($sql);
-    if ($res->num_rows > 0) {
-        $books = mysqli_fetch_assoc($res);
-        $counts['total_revenue'] = $books['total_revenue'];
+    if ($res && $res->num_rows > 0) {
+        $row = mysqli_fetch_assoc($res);
+        $sub_total = (int)$row['total_revenue'];
     }
+
+    $fine_total = 0;
+    if ($col = $conn->query("SHOW COLUMNS FROM book_loans LIKE 'fine_paid'")) {
+        if ($col->num_rows > 0) {
+            $res2 = $conn->query("SELECT COALESCE(SUM(fine_paid),0) AS fine_total FROM book_loans");
+            if ($res2 && $res2->num_rows > 0) {
+                $row2 = mysqli_fetch_assoc($res2);
+                $fine_total = (int)$row2['fine_total'];
+            }
+        }
+    }
+
+    $counts['total_revenue'] = $sub_total + $fine_total;
 
     return $counts;
 }

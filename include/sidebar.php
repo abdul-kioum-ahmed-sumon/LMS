@@ -162,7 +162,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href=" #" class="nav-link"><i class="fa-solid fa-gear fa-spin me-2" style="color: #b2bafb;"></i>Settings
+                    <a href="<?php echo BASE_URL ?>settings.php" class="nav-link"><i class="fa-solid fa-gear me-2" style="color: #b2bafb;"></i>Settings
                     </a>
                 </li>
                 <li class="nav-item">

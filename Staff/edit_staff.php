@@ -65,7 +65,7 @@ if (isset($_POST['update'])) {
 
 </html>
 <?php
-include_once("/Xampp/htdocs/lms-master/config/config.php");
+include_once(__DIR__ . "/../config/config.php");
 include_once(DIR_URL . "config/database.php");
 include_once(DIR_URL . "models/dashboard.php");
 

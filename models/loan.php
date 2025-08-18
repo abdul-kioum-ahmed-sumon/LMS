@@ -1,5 +1,33 @@
 <?php
 
+if (!defined('DAILY_FINE_TAKA')) {
+    define('DAILY_FINE_TAKA', 5);
+}
+
+// Ensure fine tracking columns exist on book_loans
+function ensureFineColumns(mysqli $conn): void
+{
+    $cols = [];
+    if ($res = $conn->query("SHOW COLUMNS FROM book_loans LIKE 'fine_accrued'")) {
+        if ($res->num_rows === 0) {
+            $cols[] = "ADD COLUMN fine_accrued INT NOT NULL DEFAULT 0";
+        }
+    }
+    if ($res = $conn->query("SHOW COLUMNS FROM book_loans LIKE 'fine_paid'")) {
+        if ($res->num_rows === 0) {
+            $cols[] = "ADD COLUMN fine_paid INT NOT NULL DEFAULT 0";
+        }
+    }
+    if ($res = $conn->query("SHOW COLUMNS FROM book_loans LIKE 'fine_paid_at'")) {
+        if ($res->num_rows === 0) {
+            $cols[] = "ADD COLUMN fine_paid_at DATETIME NULL";
+        }
+    }
+    if (!empty($cols)) {
+        $conn->query("ALTER TABLE book_loans " . implode(", ", $cols));
+    }
+}
+
 // Function to create loan
 function create($conn, $param)
 {
@@ -19,6 +47,28 @@ function create($conn, $param)
         VALUES ($book_id, $student_id, '$loan_date', '$return_date', '$datetime')";
     $result['success'] = $conn->query($sql);
     return $result;
+}
+
+// Calculate current fine for a loan record
+function calculateCurrentFineAmount(array $loan): int
+{
+    // Only calculate for active (not returned) loans
+    if (!isset($loan['is_return']) || (int)$loan['is_return'] === 1) {
+        return 0;
+    }
+
+    if (!isset($loan['return_date']) || empty($loan['return_date'])) {
+        return 0;
+    }
+
+    $today = new DateTime(date('Y-m-d'));
+    $due = new DateTime(date('Y-m-d', strtotime($loan['return_date'])));
+    if ($today <= $due) {
+        return 0;
+    }
+
+    $daysOver = (int)$due->diff($today)->format('%a');
+    return $daysOver * DAILY_FINE_TAKA;
 }
 
 // Function to create a book booking by a student
@@ -134,9 +184,23 @@ function delete($conn, $id)
 // Function to update student status
 function updateStatus($conn, $id, $status)
 {
-    $sql = "update book_loans set is_return = '$status' where id = $id";
-    $result = $conn->query($sql);
-    return $result;
+    ensureFineColumns($conn);
+
+    $id = (int)$id;
+    $status = (int)$status;
+
+    if ($status === 1) {
+        // On return, compute fine and mark as paid now
+        $loanRes = $conn->query("SELECT id, return_date, is_return FROM book_loans WHERE id = $id LIMIT 1");
+        if ($loanRes && $loanRes->num_rows === 1) {
+            $loan = $loanRes->fetch_assoc();
+            $fine = calculateCurrentFineAmount($loan);
+            $sql = "UPDATE book_loans SET is_return = 1, fine_accrued = $fine, fine_paid = $fine, fine_paid_at = NOW() WHERE id = $id";
+            return $conn->query($sql);
+        }
+    }
+
+    return $conn->query("UPDATE book_loans SET is_return = $status WHERE id = $id");
 }
 
 // Function to update

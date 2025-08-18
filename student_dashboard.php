@@ -41,7 +41,10 @@ error_log("Student ID: " . $student_id . ", Student Name: " . $student['name']);
 // Handle book reservation
 if (isset($_POST['book_id']) && isset($_POST['reserve'])) {
     $book_id = $_POST['book_id'];
-    $return_date = date('Y-m-d', strtotime('+14 days')); // Default 14 days loan period
+    // Borrow time limit from settings (fallback to 14)
+    include_once(DIR_URL . 'models/settings.php');
+    $borrowDays = (int) getIntSetting($conn, 'borrow_days', 14);
+    $return_date = date('Y-m-d', strtotime('+' . $borrowDays . ' days'));
 
     $result = createBookReservation($conn, $student_id, $book_id, $return_date);
 
@@ -63,7 +66,9 @@ if (isset($_POST['reserve_by_isbn']) && isset($_POST['reserve_isbn'])) {
     $isbn = trim($_POST['reserve_isbn']);
     $availableCopyId = findReservableBookIdByIsbn($conn, $isbn);
     if ($availableCopyId) {
-        $return_date = date('Y-m-d', strtotime('+14 days'));
+        include_once(DIR_URL . 'models/settings.php');
+        $borrowDays = (int) getIntSetting($conn, 'borrow_days', 14);
+        $return_date = date('Y-m-d', strtotime('+' . $borrowDays . ' days'));
         $result = createBookReservation($conn, $student_id, $availableCopyId, $return_date);
         if (isset($result['success'])) {
             $_SESSION['success_message'] = "Book reserved successfully! Your booking ID is: " . $result['booking_id'];
@@ -319,6 +324,7 @@ $available_books = getAvailableBooks($conn);
                                                         <th>Loan Date</th>
                                                         <th>Return By</th>
                                                         <th>Status</th>
+                                                        <th>Fine</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -334,6 +340,15 @@ $available_books = getAvailableBooks($conn);
                                                                 <?php else: ?>
                                                                     <span class="badge bg-warning text-dark">Active</span>
                                                                 <?php endif; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php
+                                                                $fine = 0;
+                                                                if ((int)$loan['is_return'] === 0) {
+                                                                    $fine = calculateCurrentFineAmount($loan);
+                                                                }
+                                                                echo $fine > 0 ? '<span class="badge bg-danger">' . $fine . ' ৳</span>' : '<span class="text-muted">0</span>';
+                                                                ?>
                                                             </td>
                                                         </tr>
                                                     <?php endwhile; ?>

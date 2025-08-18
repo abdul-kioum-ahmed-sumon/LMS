@@ -1,6 +1,6 @@
 <?php
 // Include necessary database connection file
-include_once("/Xampp/htdocs/lms-master/config/config.php");
+include_once(__DIR__ . "/config/config.php");
 
 $db_server = "localhost";
 $db_user = "root";

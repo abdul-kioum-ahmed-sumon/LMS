@@ -26,18 +26,48 @@ function registerStudent($conn, $param)
     // Validation
     if (empty($name)) {
         return array("error" => "Name is required");
-    } elseif (empty($email)) {
+    }
+
+    // Email format
+    if (empty($email)) {
         return array("error" => "Email is required");
-    } elseif (empty($password)) {
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return array("error" => "Invalid email format");
+    }
+
+    // Passwords
+    if (empty($password)) {
         return array("error" => "Password is required");
-    } elseif (empty($confirm_password)) {
+    }
+    if (strlen($password) < 6) {
+        return array("error" => "Password must be at least 6 characters");
+    }
+    if (empty($confirm_password)) {
         return array("error" => "Confirm password is required");
-    } elseif ($password !== $confirm_password) {
+    }
+    if ($password !== $confirm_password) {
         return array("error" => "Passwords do not match");
-    } elseif (empty($dept_id)) {
+    }
+
+    // Student ID (allow alphanumeric, dashes, underscores; 4-20 chars)
+    if (empty($dept_id)) {
         return array("error" => "Student ID is required");
-    } elseif (empty($dept)) {
+    }
+    if (!preg_match('/^[A-Za-z0-9_-]{4,20}$/', $dept_id)) {
+        return array("error" => "Invalid Student ID format");
+    }
+
+    // Department
+    if (empty($dept)) {
         return array("error" => "Department is required");
+    }
+
+    // Phone number (10-15 digits, optional leading +)
+    if (!empty($phone_no)) {
+        if (!preg_match('/^\+?[0-9]{10,15}$/', $phone_no)) {
+            return array("error" => "Invalid phone number");
+        }
     }
 
     // Check if student ID already exists
@@ -113,13 +143,17 @@ function loginStudent($conn, $email, $password)
     }
 
     // Set session cookie parameters to be compatible with both built-in server and Apache
-    if (session_status() == PHP_SESSION_NONE) { if (session_status() == PHP_SESSION_NONE) { session_set_cookie_params([
-        'lifetime' => 86400, // 24 hours
-        'path' => '/',
-        'domain' => '',
-        'secure' => false,
-        'httponly' => true
-    ]); } }
+    if (session_status() == PHP_SESSION_NONE) {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_set_cookie_params([
+                'lifetime' => 86400, // 24 hours
+                'path' => '/',
+                'domain' => '',
+                'secure' => false,
+                'httponly' => true
+            ]);
+        }
+    }
 
     // Make sure session is started
     if (session_status() != PHP_SESSION_ACTIVE) {
