@@ -149,8 +149,8 @@ $available_books = getAvailableBooks($conn);
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="<?php echo BASE_URL; ?>User/qb_read.php" class="btn btn-outline-secondary w-100">
-                    <i class="fas fa-book me-2"></i> Question Bank
+                <a href="<?php echo BASE_URL; ?>Question_bank/student_view.php" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-question-circle me-2"></i> Question Bank
                 </a>
             </div>
             <div class="col-md-3">

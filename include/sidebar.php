@@ -150,7 +150,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="<?php echo BASE_URL ?>Question_bank/qb_read.php" class="nav-link"><i class="fas fa-newspaper me-2" style="color: #b2bafb;"></i>Question Bank
+                    <a href="<?php echo BASE_URL ?>Question_bank/index.php" class="nav-link"><i class="fas fa-question-circle me-2" style="color: #b2bafb;"></i>Question Bank
                     </a>
                 </li>
                 <li>
