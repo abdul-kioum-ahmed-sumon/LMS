@@ -66,7 +66,7 @@ if (isset($_POST['login_form_submitted'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            background-color: #1e2124;
+            background-color: #588a63ff;
             height: 100vh;
             display: flex;
             align-items: center;
@@ -81,7 +81,7 @@ if (isset($_POST['login_form_submitted'])) {
             background: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 20px rgba(62, 170, 52, 0.3);
             display: flex;
         }
 
@@ -169,7 +169,7 @@ if (isset($_POST['login_form_submitted'])) {
         .login-btn {
             width: 100%;
             padding: 12px;
-            background-color: #0d6efd;
+            background-color: #089b2dff;
             border: none;
             border-radius: 5px;
             color: white;
@@ -180,7 +180,7 @@ if (isset($_POST['login_form_submitted'])) {
         }
 
         .login-btn:hover {
-            background-color: #0b5ed7;
+            background-color: #2dd70bff;
         }
 
         .register-link {
@@ -190,7 +190,7 @@ if (isset($_POST['login_form_submitted'])) {
         }
 
         .register-link a {
-            color: #0d6efd;
+            color: #10b32bff;
             text-decoration: none;
         }
 
@@ -215,11 +215,11 @@ if (isset($_POST['login_form_submitted'])) {
 </head>
 
 <body>
-    <div class="login-container">
-        <div class="image-side">
+    <div class="login-container shadow-lg">
+        <div class="image-side ">
             <img src="<?php echo BASE_URL; ?>assets/images/Library_bg (2).jpg" alt="Library Image">
         </div>
-        <div class="form-side">
+        <div class="form-side shadow">
             <img src="<?php echo BASE_URL; ?>assets/images/BAUST_LOGO.png" alt="BAUST Logo" class="logo">
             <h1 class="login-title">Library Management System</h1>
             <p class="login-subtitle">Student Login</p>

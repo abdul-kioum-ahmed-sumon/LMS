@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            background-color: #212529;
+            background-color: #588a63ff;
         }
 
         .card {
@@ -162,9 +162,9 @@ if ($result->num_rows > 0) {
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-between mt-4">
                         <a href="student_login.php" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Login
+                            <i class="fas fa-arrow-left me-1 "></i> Back to Login
                         </a>
-                        <button type="submit" name="register" class="btn btn-primary px-4">
+                        <button type="submit" name="register" class="login-btn">
                             <i class="fas fa-user-plus me-1"></i> Register
                         </button>
                     </div>
@@ -180,5 +180,24 @@ if ($result->num_rows > 0) {
 
     <script src="<?php echo BASE_URL; ?>assets/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<style>
+    .login-btn {
+        width: 10%;
+        padding: 12px;
+        background-color: #089b2dff;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: 100;
+        cursor: pointer;
+        margin-bottom: 20px;
+        transition: background-color 0.2s;
+    }
+
+    .login-btn:hover {
+        background-color: #2dd70bff;
+    }
+</style>
 
 </html>
