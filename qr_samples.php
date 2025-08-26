@@ -51,8 +51,10 @@ if (isset($_GET['download'])) {
     $booking_id = $_GET['download'];
     $size = isset($_GET['size']) ? intval($_GET['size']) : 300;
 
-    // Get QR code image from external service
-    $url = "https://api.qrserver.com/v1/create-qr-code/?size={$size}x{$size}&data={$booking_id}";
+    // Get QR code image from external service with new format
+    // Include qr_scan=true parameter to indicate this is an actual QR scan
+    $qr_data = $booking_id . "|qr_scan=true";
+    $url = "https://api.qrserver.com/v1/create-qr-code/?size={$size}x{$size}&data=" . urlencode($qr_data);
     $image_data = file_get_contents($url);
 
     if ($image_data !== false) {
@@ -121,7 +123,7 @@ if (isset($_GET['download'])) {
                         <div class="col-md-3 col-sm-4 col-6">
                             <div class="qr-sample">
                                 <a href="<?php echo $_SERVER['PHP_SELF']; ?>?download=<?php echo $id; ?>&size=300" download>
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=<?php echo $id; ?>"
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=<?php echo $id; ?>|qr_scan=true"
                                         alt="QR Code for ID <?php echo $id; ?>" class="img-fluid">
                                     <div>Booking ID: <?php echo $id; ?></div>
                                     <small class="text-muted">Click to download</small>

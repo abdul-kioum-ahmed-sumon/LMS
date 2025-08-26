@@ -122,21 +122,40 @@ function createBookReservation($conn, $student_id, $book_id, $return_date)
         return array("error" => "No copies available for this book at the moment");
     }
 
-    // Create booking
+    // Check if student already has any reservation or loan for this book
+    $existingSql = "SELECT id, issued_at, is_return FROM book_loans WHERE book_id = '$book_id' AND student_id = '$student_id' ORDER BY created_at DESC LIMIT 1";
+    $existingRes = $conn->query($existingSql);
+    if ($existingRes && $existingRes->num_rows > 0) {
+        $existingLoan = $existingRes->fetch_assoc();
+
+        if (empty($existingLoan['issued_at'])) {
+            // Pending reservation exists
+            return array("error" => "You already have a pending reservation for this book");
+        } elseif ($existingLoan['is_return'] == 0) {
+            // Active loan exists (book is currently borrowed)
+            return array("error" => "You already have this book borrowed. Please return it before reserving again.");
+        } else {
+            // Book was previously borrowed and returned
+            return array("error" => "You have already borrowed this book before. You cannot reserve the same book multiple times.");
+        }
+    }
+
+    // Create pending reservation (not yet issued)
     $loan_date = date('Y-m-d'); // Today's date
     $created_at = date('Y-m-d H:i:s');
 
-    $sql = "INSERT INTO book_loans (book_id, student_id, loan_date, return_date, created_at, is_return)
-            VALUES ('$book_id', '$student_id', '$loan_date', '$return_date', '$created_at', 0)";
+    $sql = "INSERT INTO book_loans (book_id, student_id, loan_date, return_date, created_at, is_return, issued_at)
+            VALUES ('$book_id', '$student_id', '$loan_date', '$return_date', '$created_at', 0, NULL)";
 
     if ($conn->query($sql)) {
         $booking_id = $conn->insert_id;
         return array(
             "success" => true,
-            "booking_id" => $booking_id
+            "booking_id" => $booking_id,
+            "message" => "Book reservation submitted successfully! Please wait for admin approval."
         );
     } else {
-        return array("error" => "Failed to create booking: " . $conn->error);
+        return array("error" => "Failed to create reservation: " . $conn->error);
     }
 }
 
@@ -201,6 +220,30 @@ function updateStatus($conn, $id, $status)
     }
 
     return $conn->query("UPDATE book_loans SET is_return = $status WHERE id = $id");
+}
+
+// Function to complete book return (auto on QR scan)
+function completeBookReturn(mysqli $conn, int $booking_id): array
+{
+    ensureFineColumns($conn);
+
+    $booking_id = (int)$booking_id;
+    // Fetch current loan
+    $loanRes = $conn->query("SELECT id, return_date, is_return FROM book_loans WHERE id = $booking_id LIMIT 1");
+    if (!$loanRes || $loanRes->num_rows === 0) {
+        return array("success" => false, "error" => "Booking not found.");
+    }
+    $loan = $loanRes->fetch_assoc();
+    if ((int)$loan['is_return'] === 1) {
+        return array("success" => true, "message" => "Already returned.");
+    }
+
+    $fine = calculateCurrentFineAmount($loan);
+    $sql = "UPDATE book_loans SET is_return = 1, updated_at = NOW(), fine_accrued = $fine, fine_paid = $fine, fine_paid_at = NOW() WHERE id = $booking_id";
+    if ($conn->query($sql)) {
+        return array("success" => true);
+    }
+    return array("success" => false, "error" => "Database error: " . $conn->error);
 }
 
 // Function to update
@@ -399,7 +442,9 @@ function generateBookingQRCode($booking_id, $type = 'url', $size = 200)
     switch ($type) {
         case 'url':
             // Generate QR code URL from QR server API (most reliable)
-            return "https://api.qrserver.com/v1/create-qr-code/?size={$size}x{$size}&data={$booking_id}";
+            // Include qr_scan=true parameter to indicate this is an actual QR scan
+            $qr_data = $booking_id . "|qr_scan=true";
+            return "https://api.qrserver.com/v1/create-qr-code/?size={$size}x{$size}&data=" . urlencode($qr_data);
 
         case 'data':
             // Just return the booking ID as data (for JavaScript libraries)

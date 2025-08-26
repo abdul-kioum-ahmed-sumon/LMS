@@ -52,6 +52,76 @@ if (isset($_POST['issue_book'])) {
     }
 }
 
+// Process book return (manual)
+if (isset($_POST['return_book'])) {
+    $booking_id = trim($_POST['booking_id']);
+    if (!empty($booking_id) && is_numeric($booking_id)) {
+        $result = completeBookReturn($conn, (int)$booking_id);
+        if ($result['success']) {
+            $success_message = "Book returned successfully!";
+            // Refresh booking information
+            $result = verifyBooking($conn, (int)$booking_id);
+            if ($result['success']) {
+                $booking = $result['booking'];
+            }
+        } else {
+            $error_message = isset($result['error']) ? $result['error'] : 'Failed to return the book.';
+        }
+    } else {
+        $error_message = "Invalid booking ID for return.";
+    }
+}
+
+// Auto-issue/return when arriving via QR scan with booking_id in query string
+// Only auto actions if this is actually a QR scan (not just a notification link)
+if (empty($success_message) && empty($error_message) && isset($_GET['booking_id']) && is_numeric($_GET['booking_id'])) {
+    $auto_booking_id = (int) $_GET['booking_id'];
+    $verify = verifyBooking($conn, $auto_booking_id);
+    if ($verify['success']) {
+        $booking = $verify['booking'];
+
+        // Check if this is a QR scan (student physically presenting QR code)
+        // We'll auto-issue or auto-return if there's a specific QR scan parameter
+        if (isset($_GET['qr_scan']) && $_GET['qr_scan'] === 'true') {
+            if (!isset($booking['issued_at']) || empty($booking['issued_at'])) {
+                // Not issued yet => issue now
+                $issue = completeBookIssuance($conn, $auto_booking_id);
+                if ($issue['success']) {
+                    $success_message = "Book issued successfully!";
+                    $verifyAfter = verifyBooking($conn, $auto_booking_id);
+                    if ($verifyAfter['success']) {
+                        $booking = $verifyAfter['booking'];
+                        $just_issued = true;
+                    }
+                } else {
+                    $error_message = $issue['error'];
+                }
+            } elseif (isset($booking['is_return']) && (int)$booking['is_return'] === 0) {
+                // Already issued and not returned => return now
+                $ret = completeBookReturn($conn, $auto_booking_id);
+                if ($ret['success']) {
+                    $success_message = "Book returned successfully!";
+                    $verifyAfter = verifyBooking($conn, $auto_booking_id);
+                    if ($verifyAfter['success']) {
+                        $booking = $verifyAfter['booking'];
+                    }
+                } else {
+                    $error_message = isset($ret['error']) ? $ret['error'] : 'Failed to return the book.';
+                }
+            } else {
+                // Already returned
+                $success_message = "This booking was already returned.";
+            }
+        } else {
+            // This is just a notification link - show booking details for manual verification
+            // Don't auto-issue, just display the booking information
+            $booking = $verify['booking'];
+        }
+    } else {
+        $error_message = $verify['error'];
+    }
+}
+
 // Include layout files
 include_once(DIR_URL . "include/header.php");
 include_once(DIR_URL . "include/topbar.php");
@@ -64,7 +134,7 @@ include_once(DIR_URL . "include/sidebar.php");
         <div class="row">
             <div class="col-md-12 mb-3 mt-4">
                 <h3 class="fw-bold text-uppercase">Verify Book Booking</h3>
-                <p>Scan QR code or enter booking ID to verify and issue a book</p>
+                <p>Scan QR code or enter booking ID to verify, issue, or return a book</p>
             </div>
         </div>
 
@@ -252,6 +322,16 @@ include_once(DIR_URL . "include/sidebar.php");
                                 </div>
                             <?php else: ?>
                                 <div class="d-grid mt-4">
+                                    <?php if (isset($booking['is_return']) && (int)$booking['is_return'] === 0): ?>
+                                        <form method="post" class="mb-2">
+                                            <input type="hidden" name="booking_id" value="<?php echo htmlspecialchars($booking['id']); ?>">
+                                            <button type="submit" name="return_book" class="btn btn-danger btn-lg">
+                                                <i class="fas fa-undo me-2"></i>Return Book
+                                            </button>
+                                        </form>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-outline-secondary" disabled>Already Returned</button>
+                                    <?php endif; ?>
                                     <a href="<?php echo BASE_URL; ?>loans" class="btn btn-secondary">Back to Loans</a>
                                 </div>
                             <?php endif; ?>
@@ -344,13 +424,25 @@ include_once(DIR_URL . "include/sidebar.php");
             if (decodedText !== lastResult) {
                 lastResult = decodedText;
 
-                if (/^\d+$/.test(decodedText)) {
-                    bookingIdInput.value = decodedText;
+                // Check if QR code contains the new format with qr_scan parameter
+                let bookingId = decodedText;
+                let qrScanParam = '';
+
+                if (decodedText.includes('|')) {
+                    const parts = decodedText.split('|');
+                    if (parts.length === 2 && parts[1] === 'qr_scan=true') {
+                        bookingId = parts[0];
+                        qrScanParam = '&qr_scan=true';
+                    }
+                }
+
+                if (/^\d+$/.test(bookingId)) {
+                    bookingIdInput.value = bookingId;
 
                     const resultHtml = `
                         <div class="alert alert-success">
                             <strong>QR Code Detected!</strong><br>
-                            Booking ID: ${decodedText}
+                            Booking ID: ${bookingId}
                             <div class="mt-2">
                                 <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
                                 <span>Verifying booking...</span>
@@ -366,8 +458,8 @@ include_once(DIR_URL . "include/sidebar.php");
 
                     // Show feedback for longer before submitting
                     setTimeout(() => {
-                        // Add the booking ID to the URL and redirect instead of form submission
-                        window.location.href = `<?php echo BASE_URL; ?>loans/verify.php?booking_id=${decodedText}`;
+                        // Add the booking ID and qr_scan parameter to the URL for auto-issuance
+                        window.location.href = `<?php echo BASE_URL; ?>loans/verify.php?booking_id=${bookingId}${qrScanParam}`;
                     }, 1500); // Increased timeout to give user more time to see the message
                 } else {
                     const errorHtml = `
@@ -429,7 +521,7 @@ include_once(DIR_URL . "include/sidebar.php");
                                 const isBack = label.toLowerCase().includes('back');
                                 cameraOptions += `
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input camera-option" type="radio" name="cameraId" 
+                                        <input class="form-check-input camera-option" type="radio" name="cameraId"
                                             id="camera${index}" value="${camera.id}" ${isBack ? 'checked' : ''}>
                                         <label class="form-check-label" for="camera${index}">
                                             ${label}
@@ -651,15 +743,27 @@ include_once(DIR_URL . "include/sidebar.php");
                     // Process the result
                     console.log("QR Code detected! Result:", decodedText);
 
+                    // Check if QR code contains the new format with qr_scan parameter
+                    let bookingId = decodedText;
+                    let qrScanParam = '';
+
+                    if (decodedText.includes('|')) {
+                        const parts = decodedText.split('|');
+                        if (parts.length === 2 && parts[1] === 'qr_scan=true') {
+                            bookingId = parts[0];
+                            qrScanParam = '&qr_scan=true';
+                        }
+                    }
+
                     // Check if it's a valid booking ID (numeric)
-                    if (/^\d+$/.test(decodedText)) {
+                    if (/^\d+$/.test(bookingId)) {
                         // Get the numeric value
-                        const bookingId = parseInt(decodedText, 10);
+                        const numericBookingId = parseInt(bookingId, 10);
 
                         fileResultElement.innerHTML = `
                             <div class="alert alert-success">
                                 <strong>QR Code Detected!</strong><br>
-                                Booking ID: ${bookingId}
+                                Booking ID: ${numericBookingId}
                                 <div class="mt-2">
                                     <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
                                     <span>Verifying booking...</span>
@@ -669,7 +773,7 @@ include_once(DIR_URL . "include/sidebar.php");
 
                         // Show verification progress for a moment before redirecting
                         setTimeout(() => {
-                            window.location.href = `<?php echo BASE_URL; ?>loans/verify.php?booking_id=${bookingId}`;
+                            window.location.href = `<?php echo BASE_URL; ?>loans/verify.php?booking_id=${numericBookingId}${qrScanParam}`;
                         }, 1500);
                     } else {
                         // Invalid QR code content

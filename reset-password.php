@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
     <title>Reset Password | Baust Library</title>
 </head>
 
-<body style="background-color: #212529">
+<body style="background-color: #507950ff">
     <div class="container d-flex align-items-center justify-content-center vh-100">
         <div class="row">
             <div class="col-md-12 login-form">

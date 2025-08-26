@@ -25,57 +25,26 @@ if ($student_id) {
         $student = mysqli_fetch_assoc($student_result);
     }
 }
+
+include_once(DIR_URL . "include/header.php");
+include_once(DIR_URL . "include/student_topbar.php");
+include_once(DIR_URL . "include/student_sidebar.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" crossorigin="anonymous"></script>
-    <title>Question Bank | Library Management System</title>
-</head>
-
-<body>
-    <!-- Student Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="<?php echo BASE_URL; ?>student_dashboard.php">
-                <img src="<?php echo BASE_URL; ?>assets/images/BAUST_LOGO.png" alt="BAUST Logo" height="40" class="me-2">
-                Library Management System
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo BASE_URL; ?>student_dashboard.php">
-                            <i class="fas fa-home me-1"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle me-1"></i>
-                            <?php echo $student ? htmlspecialchars($student['name']) : 'Student'; ?>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>student_profile.php">Profile</a></li>
-                            <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>student_logout.php">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
+<!--Main Container Start-->
+<main class="mt-5 pt-3" style="box-sizing:border-box; padding: 20px">
+    <div class="container-fluid">
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-md-12 mt-4 d-flex align-items-center">
+                <h3><span class="fw-bold text-uppercase">Question Bank</span></h3>
+                <div class="ms-auto">
+                    <span class="badge bg-primary me-2">Student ID: <?php echo $student ? htmlspecialchars($student['dept_id']) : 'N/A'; ?></span>
+                    <span class="badge bg-info"><?php echo $student ? htmlspecialchars($student['dept']) : 'N/A'; ?></span>
+                </div>
             </div>
         </div>
-    </nav>
 
-    <!-- Main Content -->
-    <div class="container mt-4">
         <!-- Student Resources Top Row -->
         <div class="row g-3 mb-4">
             <div class="col-md-3">
@@ -175,26 +144,27 @@ if ($student_id) {
             </div>
         </div>
     </div>
+</main>
+<!--Main Container End-->
 
-    <script src="<?php echo BASE_URL; ?>assets/js/jquery-3.5.1.js"></script>
-    <script src="<?php echo BASE_URL; ?>assets/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>assets/js/dataTables.bootstrap5.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>assets/js/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#questionTable').DataTable({
-                "pageLength": 25,
-                "order": [
-                    [4, "desc"]
-                ],
-                "language": {
-                    "search": "Search questions:",
-                    "lengthMenu": "Show _MENU_ questions per page",
-                    "info": "Showing _START_ to _END_ of _TOTAL_ questions"
-                }
-            });
+<script src="<?php echo BASE_URL; ?>assets/js/jquery-3.5.1.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/js/dataTables.bootstrap5.min.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#questionTable').DataTable({
+            "pageLength": 25,
+            "order": [
+                [4, "desc"]
+            ],
+            "language": {
+                "search": "Search questions:",
+                "lengthMenu": "Show _MENU_ questions per page",
+                "info": "Showing _START_ to _END_ of _TOTAL_ questions"
+            }
         });
-    </script>
-</body>
+    });
+</script>
 
-</html>
+<?php include_once(DIR_URL . "include/footer.php"); ?>

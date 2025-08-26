@@ -12,7 +12,7 @@
   --default-color-rgb: 68, 68, 68;
   --heading-color: #191919;
   --heading-color-rgb: 25, 25, 25;
-  --accent-color: #cc1616;
+  --accent-color: #16cc44;
   --accent-color-rgb: 204, 22, 22;
   --contrast-color: #ffffff;
   --contrast-color-rgb: 255, 255, 255;
@@ -21,9 +21,9 @@
 /* Nav Menu Colors */
 :root {
   --nav-color: #ffffff;
-  --nav-hover-color: #cc1616;
+  --nav-hover-color: #59d45f;
   --nav-dropdown-color: #212529;
-  --nav-dropdown-hover-color: #cc1616;
+  --nav-dropdown-hover-color: #46be46;
   --nav-dropdown-background-color: #ffffff;
 }
 
@@ -36,7 +36,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-  background-image: radial-gradient(circle, #ffffff, #f7ecfa, #f9d7ec, #fec1d1, #ffadad);
+  background-image: radial-gradient(circle, #ffffff, #edfaec, #d7f9e2, #c1feda, #adffbf);
 }
 
 a {
@@ -590,7 +590,7 @@ h6 {
 
 .footer .footer-newsletter .error-message {
   display: none;
-  background: #df1529;
+  background: #15df58;
   color: #ffffff;
   text-align: left;
   padding: 15px;
